@@ -1,0 +1,96 @@
+coverImage {
+	background: url('/static/images/background_main.jpg');
+}
+
+.classic-head{
+-webkit-font-smoothing: antialiased;
+text-size-adjust: 100%;
+color: #2b2b2b;
+font-family: "acumin-pro","Acumin Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+line-height: 1.3;
+border: 0;
+font-size: 100%;
+outline: 0;
+list-style: none;
+padding: 0;
+display: flex;
+height: 60px;
+-webkit-box-pack: center;
+justify-content: center;
+margin: 0 auto;
+background:#ede19f;
+}
+
+.classic-button{
+-webkit-font-smoothing: antialiased;
+text-size-adjust: 100%;
+color: #2b2b2b;
+font-family: "acumin-pro","Acumin Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+line-height: 1.3;
+border: 0;
+font-size: 100%;
+outline: 0;
+list-style: none;
+margin: 0;
+padding: 0;
+-webkit-box-align: center;
+align-items: center;
+display: inline-flex;
+height: 60px;
+-webkit-box-pack: center;
+justify-content: center;
+position: relative;
+vertical-align: top;
+}
+
+.classic-inner{
+-webkit-font-smoothing: antialiased;
+text-size-adjust: 100%;
+line-height: 1.3;
+list-style: none;
+border: 0;
+margin: 0;
+outline: 0;
+cursor: pointer;
+font-family: Comic Sans MS;
+font-size: 15px;
+display: block;
+font-weight: bold;
+position: relative;
+box-sizing: border-box;
+padding: 10px 12px;
+color: #fff;
+text-decoration: none;
+transition-duration: 0.1s;
+transition-property: color;
+transition-timing-function: linear;
+}
+.classic-inner:hover{
+
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}

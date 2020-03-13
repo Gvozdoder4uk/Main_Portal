@@ -1,0 +1,12 @@
+color: #000;
+-webkit-font-smoothing: antialiased;
+box-sizing: border-box;
+margin: 0;
+border: 0;
+font: inherit;
+display: inline-block;
+vertical-align: top;
+font-size: initial;
+padding: 0 25px;
+-webkit-box-flex: 1;
+flex-grow: 1;

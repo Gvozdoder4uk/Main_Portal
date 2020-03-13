@@ -1,0 +1,22 @@
+
+
+
+/* Start:/local/templates/main/styles.css?1558127539831*/
+.ul_nummed  {margin: 3px 0 10px}
+	.ul_nummed li {list-style-type:decimal; padding: 0 0 9px 5px; list-style-position: outside; margin-left: 30px; position: relative }
+		.ul_nummed li ul {margin-top: 4px; margin-bottom: 2px}
+			.ul_nummed li ul li {padding-bottom: 4px; }
+				.ul_nummed li ul li:last-child {padding-bottom: 0}
+				.ul_nummed li ul li ul li:last-child {padding-bottom: 0}
+
+.linum {position: absolute; right: 100%; margin-right: 7px; top: -2px; display: inline-block; padding: 1px 4px; min-width: 14px; border: none; border-radius: 15px;  color: #f0f; font-size: inherit; color: #4e4e4e; background: #fff; text-align: center}
+	li li .linum {border-color: #96a7ce; padding: 1px 8px; top: -1px;}
+		li li li .linum {border-color: #c0cae2; padding: 1px 7px;}
+.foo{color: red}
+
+.smo_block img:hover{
+    cursor:pointer;
+}
+	
+/* End */
+/* /local/templates/main/styles.css?1558127539831 */

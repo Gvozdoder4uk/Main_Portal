@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+    <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,700|Roboto:400,900" >
+  <!-- Bootstrap CSS File -->
+  <link type='text/css' href="{% static 'lib/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <!-- Libraries CSS Files -->
+  <link type='text/css' href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <!-- Main Stylesheet File -->
+
+  <link type='text/css' href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  <script src="{% static 'lib/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/superfish/hoverIntent.js' %}"></script>
+  <script src="{% static 'lib/superfish/superfish.min.js' %}"></script>
+  <script src="{% static 'lib/tether/js/tether.min.js' %}"></script>
+  <script src="{% static 'lib/stellar/stellar.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.js' %}"></script>
+  <script src="{% static 'lib/stickyjs/sticky.js' %}"></script>
+  <script src="{% static 'lib/parallax/parallax.js' %}"></script>
+  <script src="{% static 'lib/lockfixed/lockfixed.min.js' %}"></script>
+  <!-- Template Specisifc Custom Javascript File -->
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <script src="{% static 'contactform/contactform.js' %}"></script>
+<head>
+  <meta charset="utf-8">
+  <title>ИТ Портал АО Русагротранс</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
+  <meta property="og:title" content="">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="">
+  <meta property="og:description" content="">
+
+  <!-- Twitter Cards integration: https://dev.twitter.com/cards/  -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+
+  <!-- Favicon -->
+  <link href="{% static 'images/icon_rat.png' %}" rel="icon">
+
+
+
+  <!-- =======================================================
+    Theme Name: Bell
+    Theme URL: https://bootstrapmade.com/bell-free-bootstrap-4-template/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+<body>
+  <!-- Page Content
+    ================================================== -->
+  <!-- Hero -->
+
+  <section class="hero">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+          {% load static %}
+          <a class="hero-brand" href="/" title="Home Page"><img alt="Русагротранс лого" src="{% static 'images/logo_rat.png'%}"></a>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <h1>
+            ИТ портал АО Русагротранс
+          </h1>
+
+        <p class="tagline">
+          This is a powerful project with some great features that you can use.
+        </p>
+        <a class="btn btn-primary" href="#about">Приступить к работе</a>
+      </div>
+    </div>
+
+  </section>
+  <!-- /Hero -->
+
+  <!-- Header -->
+  <header  id="header">
+    <div style="background:black;" class="container">
+
+      <div id="logo" class="pull-left">
+        <a href="/"><img src="{% static 'images/logo_rat.png'%}" alt="" title="" /></img></a>
+        <!-- Uncomment below if you prefer to use a text image -->
+        <!--<h1><a href="#hero">Bell</a></h1>-->
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu" >
+          <li><a href="#about">ИТ Портал</a></li>
+          <li><a href="#features">Возможности</a></li>
+          <li><a href="#portfolio">Примеры</a></li>
+          <li><a href="#team">Команда</a></li>
+          <li class="menu-has-children"><a href="">Выбрать раздел</a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="menu-has-children"><a href="#">Меню 1</a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="#">Drop Down 5</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Свяжитесь с нами</a></li>
+        </ul>
+      </nav>
+      <!-- #nav-menu-container
+
+      <nav class="nav social-nav pull-right d-none d-lg-inline">
+        <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
+      </nav>-->
+    </div>
+  </header>
+  <!-- #header -->
+
+  <!-- About -->
+
+  <section class="about" id="about">
+    <div class="container text-center">
+      <h2>
+        <b>Немного о портале</b>
+        </h2>
+
+      <p>
+        <b>Данный портал повзолит консолидировать наработки и контроллировать сферу ИТ компании централизованно.</b>
+      </p>
+
+      <div class="row stats-row">
+        <div class="stats-col text-center col-md-3 col-sm-6">
+          <div class="circle">
+            <span  class="stats-no" data-toggle="counter-up" ><a href="/">2</a></span>Задач в разработке
+          </div>
+        </div>
+
+        <div class="stats-col text-center col-md-3 col-sm-6">
+          <div class="circle">
+            <span class="stats-no" data-toggle="counter-up">3</span>Завершенные проекты
+          </div>
+        </div>
+
+        <div class="stats-col text-center col-md-3 col-sm-6">
+          <div class="circle">
+            <span class="stats-no" data-toggle="counter-up">24</span>Круглосуточная поддержка
+          </div>
+        </div>
+
+        <div class="stats-col text-center col-md-3 col-sm-6">
+          <div class="circle">
+            <span class="stats-no" data-toggle="counter-up">1</span> Команда разработчиков
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /About -->
+  <!-- Parallax -->
+<div class="block bg-primary block-pd-lg block-bg-overlay text-center" data-bg-img="{% static 'images/parallax-it-img.jpg' %}" data-settings='{"stellar-background-ratio": 0.7}' data-toggle="parallax-bg">
+    <h2>
+      <b>Технологии позволят упростить текущие задачи и привести к оптимизации.</b>
+      </h2>
+
+    <p>
+      Люди не понимают потрясающих возможностей разумного использования технологий
+    </p>
+    <img alt="Технологии" class="gadgets-img hidden-md-down" src="{% static 'images/mac.png'%}">
+  </div>
+    <section class="features" id="features">
+    <div class="container">
+      <h2 class="text-center"><b>
+          Возможности портала
+        </b>
+        </h2>
+
+      <div class="row">
+        <div class="feature-col col-lg-4 col-xs-12">
+          <div class="card card-block text-center">
+            <div>
+              <div class="feature-icon">
+                <span class="fa fa-rocket"></span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                  Инвентаризация
+                </h3>
+
+              <p>
+                Сбор инвентаризационных данных с хранением истории
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-col col-lg-4 col-xs-12">
+          <div class="card card-block text-center">
+            <div>
+              <div class="feature-icon">
+                <span class="fa fa-envelope"></span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                  Учет Электронных подписей
+                </h3>
+
+              <p>
+                Консолидация управления ЭП в обществе
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-col col-lg-4 col-xs-12">
+          <div class="card card-block text-center">
+            <div>
+              <div class="feature-icon">
+                <span class="fa fa-bell"></span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                  Новости ИТ решений
+                </h3>
+
+              <p>
+                Новости текущих ИТ решений и планы развития технологий в компании
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="feature-col col-lg-4 col-xs-12">
+          <div class="card card-block text-center">
+            <div>
+              <div class="feature-icon">
+                <span class="fa fa-database"></span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                  Хранение и управление данными
+                </h3>
+
+              <p>
+                Адаптация хранения документов и данных общества
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-col col-lg-4 col-xs-12">
+          <div class="card card-block text-center">
+            <div>
+              <div class="feature-icon">
+                <span class="fa fa-cutlery"></span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                  Повышение продуктивности
+                </h3>
+
+              <p>
+                Реализация проекта направлена на повышение продуктивности различных отделов
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-col col-lg-4 col-xs-12">
+          <div class="card card-block text-center">
+            <div>
+              <div class="feature-icon">
+                <span class="fa fa-dashboard"></span>
+              </div>
+            </div>
+
+            <div>
+              <h3>
+                  Обеспечение защиты информации
+                </h3>
+
+              <p>
+                Реализация структуры доступов к различным ИС системы
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+  <div class="block bg-primary block-pd-lg block-bg-overlay text-center" data-bg-img="{% static 'images/parallax-bg.jpg' %}" data-settings='{"stellar-background-ratio": 0.1}' data-toggle="parallax-bg">
+    <h2>
+      <b>Добро пожаловать в будущее</b>
+      </h2>
+
+    <p>
+      Технология – это то, чего не было, когда вы родились
+    </p>
+    <img alt="Bell - A perfect theme" class="gadgets-img hidden-md-down" src="{% static '/images/btf.png' %}">
+  </div>
+  </section>
+  <!-- /Parallax -->
+  <!-- Features -->
+
+
+  <!-- /Features -->
+  <!-- Call to Action
+
+  <section class="cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-sm-12 text-lg-left text-center">
+          <h2>
+              Call to Action Section
+            </h2>
+
+          <p>
+            Lorem ipsum dolor sit amet, nec ad nisl mandamus imperdiet, ut corpora cotidieque cum. Et brute iracundia his, est eu idque dictas gubergren
+          </p>
+        </div>
+
+        <div class="col-lg-3 col-sm-12 text-lg-right text-center">
+          <a class="btn btn-ghost" href="#">Buy This Theme</a>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- /Call to Action -->
+  <!-- Portfolio
+
+  <section class="portfolio" id="portfolio">
+    <div class="container text-center">
+      <h2>
+          Portfolio
+        </h2>
+
+      <p>
+        Voluptua scripserit per ad, laudem viderer sit ex. Ex alia corrumpit voluptatibus usu, sed unum convenire id. Ut cum nisl moderatius, Per nihil dicant commodo an.
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-1.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-2.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-3.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-4.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-5.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-6.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-7.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="card card-block">
+            <a href="#"><img alt="" src="img/porf-8.jpg">
+              <div class="portfolio-over">
+                <div>
+                  <h3 class="card-title">
+                    The Dude Rockin'
+                  </h3>
+
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  </p>
+                </div>
+              </div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+  <!-- /Portfolio -->
+  <!-- Team -->
+
+  <section style="" class="team" id="team">
+    <div class="container">
+      <h2 class="text-center">
+        <b>Команда разработчиков</b>
+        </h2>
+      <hr class="my-2">
+      <div class="row">
+        <div class="col-sm-4 col-xs-5">
+        </div>
+        <div class="col-sm-3 col-xs-5">
+          <div class="card card-block">
+            <a href="#"><img alt="" class="team-img" src="{% static 'images/team-0.jpg' %}">
+              <div class="card-title-wrap">
+                <span class="card-title">Олег Фокин</span> <span class="card-text">DevOps Engineer</span>
+              </div>
+
+              <div class="team-over">
+                <h4 class="hidden-md-down">
+                  Написать мне
+                </h4>
+
+                <nav class="social-nav">
+                   <a href="https://vk.com/gvozdoder"><i class="fa fa-vk"></i></a> <a href="mailto:fokin_ok@rusagrotrans.ru"><i class="fa fa-envelope"></i></a>
+            </nav>
+
+            <p>
+              Specialist,
+              DevOps Engineer,
+              Gamer,
+            </p>
+          </div>
+          </a>
+        </div>
+          <hr class="my-2">
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- /Team -->
+  <!-- @component: footer
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="section-title">Contact Us</h2>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-4">
+          <div class="info">
+            <div>
+              <i class="fa fa-map-marker"></i>
+              <p>A108 Adam Street<br>New York, NY 535022</p>
+            </div>
+
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p>info@example.com</p>
+            </div>
+
+            <div>
+              <i class="fa fa-phone"></i>
+              <p>+1 5589 55488 55s</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-8">
+          <div class="form">
+            <div id="sendmessage">Your message has been sent. Thank you!</div>
+            <div id="errormessage"></div>
+            <form action="" method="post" role="form" class="contactForm">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div class="validation"></div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+-->
+  <footer class="site-footer">
+    <div class="bottom">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 col-xs-12 text-lg-left text-center">
+            <p class="copyright-text">
+              © Fokin@LAB
+            </p>
+            <div class="credits">
+              <!--
+                All the links in the footer should remain intact.
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/-->
+             Разработано <a href="https://vk.com/grozdoder/">Fokin@Lab</a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-xs-12 text-lg-right text-center">
+            <ul class="list-inline">
+
+              <li class="list-inline-item">
+                <a href="#about">Главная страница</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="#features">Возможности</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="#team">Команда</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="#contact">Контакты</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a class="scrolltop" href="#"><span class="fa fa-angle-up"></span></a>
+{% block content%}
+{% endblock %}
+</body>
+</html>
+

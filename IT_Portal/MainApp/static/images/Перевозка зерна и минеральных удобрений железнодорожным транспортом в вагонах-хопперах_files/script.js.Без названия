@@ -1,0 +1,79 @@
+$(document).ready(function(){
+    /* Слайдер изображений */
+
+//
+    // FANCYBOX init
+    //
+
+    // fancybox � list of images
+    if (document.getElementsByClassName('astyk_fancyboxWithThumbs') != null)
+    {
+        var pixGroupsIds = new Array();
+
+        $('[data-pix-group-id]').each(function(){
+
+            var id = $(this).attr('data-pix-group-id');
+
+            if($.inArray(id, pixGroupsIds) == -1) {
+               pixGroupsIds.push(id);
+            }
+
+        });
+
+
+        for(var i=0; i<pixGroupsIds.length; i++){
+
+        /* Подключение всех галерей с распределением на группы */
+
+            $('[data-pix-group-id="' + pixGroupsIds[i] + '"]').fancybox({
+                prevEffect : 'none',
+                nextEffect : 'none',
+                padding: '0',
+                helpers : {
+                    overlay: {locked: false},
+                    thumbs : {width  : 125,height : 83},
+                    title : {type : 'outside'}
+                },
+                afterLoad: function() {
+
+                    var pixCount = this.group.length;
+                    this.title = "<b >"+ (this.index+1) +'/' + pixCount + "</b> " + this.title ;
+                }
+            });
+
+        }
+
+    }
+
+    // fancybox — one image
+    $('.astyk_fancyboxAlone').fancybox();
+
+/* Сабмит формы обратной связи */
+    $('#submitFeedbackButton').on('click', function(){
+        $('[name="submit"]').trigger('click');
+
+    });
+
+    /* Сабмит формы отправки резюме */
+    $('#submitJobButton').on('click', function(){
+        $('[name="submit"]').trigger('click');
+
+    });
+
+
+    /* Прикрепление файла в инпут поле */
+
+    //
+    //INPUT FILE-TYPE changer
+    //
+    $('.file_link input[type=file]').change(function() {
+        if ($('.file_link input[type=file]').val() != '') {
+            $(this).parent().addClass('isAttached');
+        } else {
+            $(this).parent().removeClass('isAttached');
+        }
+    });
+
+
+
+});
