@@ -1,0 +1,44 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% load static %}
+
+{% for keys in object_list %}
+<div class="container">
+    <ul style="margin-top:10px;margin-right:100px;"><b>
+        <a>Меню:</a>
+        <div style="float:right;" class="group">
+            <input type="text" required>
+            <span class="bar"></span>
+            <label>Поиск</label>
+        </div>
+    </b>
+    </ul>
+</div>
+
+<div class="container">
+    <table class="table table-bordered" id="myTable">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Ф.И.О</th>
+            <th scope="col">ID</th>
+            <th scope="col">Фото</th>
+            <th scope="col">Департамент</th>
+            <th scope="col">Отдел</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><b><img src="{{keys.user_photo}}"></b></a></td>
+            <td scope="row"><b><a href="/inventory/users/{{keys.id}}">{{keys.user_lastname}} {{keys.user_firstname}}
+                {{keys.user_secondname}}</b></td>
+            <td><b>{{keys.id}}</b></a></td>
+            <td><b>{{keys.user_dep}}</b></td>
+            <td><b>{{keys.user_otdel}}</b></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<hr class="my-4">
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+
+<ul>
+    <div class="container">
+    <a for="container"><b>Таблица инвентаризации за текущую дату</b></a>
+    <li><input style="float:right;" type="text" class="form-control" id="myInput">
+        <button onclick="filterTable()">Жми</button></li>
+</div>
+</ul>
+<table class="table table-bordered" id="myTable">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Номер записи</th>
+        <th scope="col">Владелец ПК</th>
+        <th scope="col">Имя ПК</th>
+        <th scope="col">Операционная система</th>
+        <th scope="col">Процессор</th>
+        <th scope="col">Объем памяти</th>
+        <th scope="col">Тип Памяти</th>
+        <th scope="col">Сетевая карта</th>
+        <th scope="col">Мак адресс</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for keys in object_list %}
+    <tr>
+        <td scope="row"><b>{{keys.id}}</b></td>
+        <td scope="row"><b>{{keys.owner}}</b></td>
+        <td><a href="/inventory/pc_details/{{keys.id}}"><b>{{keys.name_pc}}</b></td>
+        <td><b>{{keys.os}}</b></a></td>
+        <td><b>{{keys.processor}}</b></td>
+        <td><b>{{keys.sum_ram}}</b></td>
+        <td><b>{{keys.ram_type}}</b></td>
+        <td><b>{{keys.network_card}}</b></td>
+        <td><b>{{keys.network_Mac}}</b></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
