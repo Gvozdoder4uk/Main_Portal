@@ -1,0 +1,41 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% load static %}
+<link type='text/css' href="{% static 'css/forms.css' %}" rel="stylesheet">
+<section id="access_request" >
+    <div class="container">
+<form action="#" method="post" name="contact_form">
+    <h2>Заявка на доступ</h2>
+    <ul>
+        <li>
+            <img src="{% static 'images/icon_rat.png' %}" >
+
+             <span class="required_notification">* поля обязательные для заполнения</span>
+        </li>
+        <li>
+            <label for="name">Имя пользователя</label>
+            <input type="text"  id="name" autocomplete="Фокин Олег Константинович" placeholder="ФиО" required />
+        </li>
+        <li>
+            <label for="email">Почтовый адрес</label>
+            <input type="email" name="email" placeholder="fokin_ok@rusagrotrans.ru" required />
+            <span class="form_hint">Proper format "name@something.com"</span>
+        </li>
+        <li>
+            <label for="website">Website:</label>
+            <input type="text" name="website" placeholder="Название сервиса" required pattern=".+"/>
+            <span class="form_hint">Proper format "someaddress.com"</span>
+        </li>
+        <li>
+            <label for="message">Message:</label>
+            <textarea name="message" cols="40" rows="6" required ></textarea>
+        </li>
+        <li>
+        	<button id="button_round" class="submit" type="submit">Отправить заявку</button>
+        </li>
+    </ul>
+</form>
+        </div>
+    </section>
+{% endblock %}

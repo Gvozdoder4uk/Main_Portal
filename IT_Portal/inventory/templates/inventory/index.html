@@ -1,44 +1,83 @@
 {% extends "Main_Templates/main_template.html"%}
 {% block content %}
 {% include "Include_Templates/header.html" %}
+{% load static %}
+<link type='text/css' href="{% static 'css/bootstrap.css'%}" rel="stylesheet">
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
-<ul>
-    <div class="container">
-    <a for="container"><b>Таблица инвентаризации за текущую дату</b></a>
-    <li><input style="float:right;" type="text" class="form-control" id="myInput">
-        <button onclick="filterTable()">Жми</button></li>
-</div>
-</ul>
-<table class="table table-bordered" id="myTable">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Номер записи</th>
-        <th scope="col">Владелец ПК</th>
-        <th scope="col">Имя ПК</th>
-        <th scope="col">Операционная система</th>
-        <th scope="col">Процессор</th>
-        <th scope="col">Объем памяти</th>
-        <th scope="col">Тип Памяти</th>
-        <th scope="col">Сетевая карта</th>
-        <th scope="col">Мак адресс</th>
 
-    </tr>
-    </thead>
-    <tbody>
-    {% for keys in object_list %}
-    <tr>
-        <td scope="row"><b>{{keys.id}}</b></td>
-        <td scope="row"><b>{{keys.owner}}</b></td>
-        <td><a href="/inventory/pc_details/{{keys.id}}"><b>{{keys.name_pc}}</b></td>
-        <td><b>{{keys.os}}</b></a></td>
-        <td><b>{{keys.processor}}</b></td>
-        <td><b>{{keys.sum_ram}}</b></td>
-        <td><b>{{keys.ram_type}}</b></td>
-        <td><b>{{keys.network_card}}</b></td>
-        <td><b>{{keys.network_Mac}}</b></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<input style="float:right;" type="search" id="Input1" onkeyup="SearchTable()" placeholder="Поиск" autofocus>
+
+<div class="w3-sidebar w3-bar w3-gray w3-card" style="width:230px;color:gray;">
+  <h5 class="w3-bar-item"><b>Навигация</b></h5>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Zoom')">Инвентаризация</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade')">История изменений</button>
+  <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Fade2')">Архив</button>
 </div>
+<div style="margin-left:230px;margin-top:30px;">
+
+<div class="w3-container city w3-animate-zoom" id="Zoom">
+        <table class="table table-bordered" id="1">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Владелец ПК</th>
+                <th scope="col">Имя ПК</th>
+                <th scope="col">Операционная система</th>
+                <th scope="col">Процессор</th>
+                <th scope="col">Объем памяти</th>
+                <th scope="col">Тип Памяти</th>
+                <th scope="col">Сетевая карта</th>
+                <th scope="col">Мак адресс</th>
+
+            </tr>
+            </thead>
+            <tbody id="Table1">
+            {% for keys in object_list %}
+            <tr>
+                <td scope="row"><a href="/inventory/pc_details/{{keys.id}}"><b>{{keys.owner}}</b></a></td>
+                <td><a href="/inventory/pc_details/{{keys.id}}"><b>{{keys.name_pc}}</b></a></td>
+                <td><b>{{keys.os}}</b></td>
+                <td><b>{{keys.processor}}</b></td>
+                <td><b>{{keys.sum_ram}}</b></td>
+                <td><b>{{keys.ram_type}}</b></td>
+                <td><b>{{keys.network_card}}</b></td>
+                <td><b>{{keys.network_Mac}}</b></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="Fade" class="w3-container city w3-animate-left" style="display:none">
+        <p>Переходка в разработке</p>
+  </div>
+    <div id="Fade2" class="w3-container city w3-animate-left" style="display:none">
+        <p>Переходец в разработке</p>
+  </div>
+</div>
+
+
+<script>
+  // #product a – селектор, выбирающий элементы a в #product (вкладки, при клике на которые нужно отображать соответствующий блок)
+  $('#prod a').click(function(e){
+    e.preventDefault();
+    $(this).tab('show');
+  });
+</script>
+<script>
+function openLink(evt, animName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(animName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+</script>
+
 {% endblock %}
+

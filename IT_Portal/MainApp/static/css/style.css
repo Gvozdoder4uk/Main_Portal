@@ -52,19 +52,21 @@ a {
 
 .btn {
   background-color: #199EB8;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-weight: 800;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-weight: bold;
   color: #fff;
   padding: 15px 45px;
-  border-radius: 50px;
+  border-radius: 40px;
+  border-color: #199EB8;
 }
 
 .btn:hover {
-  background-color: #E04F00;
+  background-color: orange;
   color: #fff;
 }
 
 .btn:focus {
+  border-color: #199EB8;
   color: #fff;
 }
 
@@ -124,6 +126,7 @@ a:hover {
   display: table;
   position: relative;
   background-image: url(../images/bg2.jpg);
+  opacity: 0.99;
   background-size: cover;
   padding: 150px 0;
   color: #fff;
@@ -259,7 +262,23 @@ a:hover {
 .nav-menu ul li {
   min-width: 180px;
 }
+#header li > a:focus {
+  color:orange;
+  font-weight:bold;
+}
 
+#header li:hover {
+    color:orange;
+    font-size:16px;
+    border-color:orange;
+    border-bottom: 2px solid;
+}
+
+#header li > a:hover {
+    color:orange;
+    font-weight:bold;
+    font-size:16px;
+}
 /* Nav Menu Arrows */
 
 .sf-arrows .sf-with-ul {
@@ -490,6 +509,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   height: 490px;
   overflow: hidden;
   padding-top: 85px;
+  font-family: 'Roboto';
 }
 
 .block h2 {
@@ -661,6 +681,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .team .card > a {
   display: block;
+  margin:0px 0px;
 }
 
 .team .card img {
@@ -1019,4 +1040,30 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 ul {
     margin-top:100px;
+}
+#footer-menu{
+    font-weight: bold;
+    font-family: 'Comic Sans MS';
+}
+#footer-menu a:hover {
+    color: orange;
+    font-size: 17px;
+    border-color: orange;
+    border-bottom: 2px solid;
+
+
+}
+
+#start-btn:hover {
+    font-weight: bold;
+    color: black
+    font-size:20px;
+    border-color:orange;
+}
+#team1{
+ margin:0px 0px 0px 100px
+}
+
+#button_round{
+    border-radius: 50% / 50%
 }

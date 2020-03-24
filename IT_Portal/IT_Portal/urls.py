@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
+
 urlpatterns = [
-    url('^', include('MainApp.urls')),
+    url('^$', include('MainApp.urls')),
     path('admin/', admin.site.urls),
-    path('inventory/',include('inventory.urls'))
+    path('inventory/', include('inventory.urls'))
 
 ]

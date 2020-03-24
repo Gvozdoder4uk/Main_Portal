@@ -24,8 +24,8 @@ SECRET_KEY = 'papnog)lt)7)su@93w3*)(_=uqond%f0)qdx@_hhh=f)at*&_4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_CIDR_NETS = ['10.0.0.0/8']
+ALLOWED_HOSTS = ['192.168.*.*','rusagrotrans.ru','10.10.*.*','0.0.0.0','W00-0027','W00-0002']
 
 
 # Application definition

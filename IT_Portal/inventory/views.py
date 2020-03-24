@@ -6,6 +6,8 @@ from .models import *
 def index(request):
     return render(request, 'inventory/index.html')
 
+def access(request):
+    return render(request, 'inventory/access.html')
 
 def index(request):
     firstname = Ad_users.objects.all().count()
