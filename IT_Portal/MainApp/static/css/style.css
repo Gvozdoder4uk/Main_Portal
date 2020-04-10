@@ -85,6 +85,7 @@ section {
 }
 
 .card {
+  background:transparent;
   position: relative;
   padding: 0;
   border: 0;
@@ -105,7 +106,7 @@ a:hover {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: #199EB8;
+  background: orange;
   color: #fff;
   text-align: center;
   font-size: 24px;
@@ -126,7 +127,7 @@ a:hover {
   display: table;
   position: relative;
   background-image: url(../images/bg2.jpg);
-  opacity: 0.99;
+  opacity: 1;
   background-size: cover;
   padding: 150px 0;
   color: #fff;
@@ -276,8 +277,7 @@ a:hover {
 
 #header li > a:hover {
     color:orange;
-    font-weight:bold;
-    font-size:16px;
+    transform:scale(1.1);
 }
 /* Nav Menu Arrows */
 
@@ -365,7 +365,7 @@ a:hover {
   z-index: 999;
   margin: 8px 10px 0 0;
   border: 0;
-  background: none;
+  background: transparent;
   font-size: 24px;
   display: none;
   transition: all 0.4s;
@@ -385,7 +385,7 @@ a:hover {
   padding-top: 18px;
   bottom: 0;
   z-index: 998;
-  background: rgba(0, 0, 0, 0.9);
+  background: black;
   left: -260px;
   width: 260px;
   overflow-y: auto;
@@ -415,7 +415,8 @@ a:hover {
 }
 
 #mobile-nav ul li a:hover {
-  color: #fff;
+  color: orange;
+  transform:scale(1.1);
 }
 
 #mobile-nav ul li li {
@@ -446,7 +447,7 @@ a:hover {
   top: 0;
   left: 0;
   position: fixed;
-  background: rgba(0, 0, 0, 0.6);
+  background: gray;
   display: none;
 }
 
@@ -479,7 +480,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-family: "Raleway", Helvetica, Arial, sans-serif;
   font-weight: 500;
   color: #666;
-  border: 6px solid #199EB8;
+  border: 6px solid darkgreen;
   border-radius: 50%;
   padding: 55px 25px 0 25px;
   position: relative;
@@ -528,15 +529,19 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .features {
   padding-bottom: 45px;
+  background:#F0F0E8;
 }
 
 .features h2 {
-  color: #199EB8;
+  color: black;
+  font-weight:bold;
 }
 
 .feature-col {
+    background-color:#F0F0E8;
   display: table;
-  padding-bottom: 45px;
+
+  padding-bottom: 15px;
 }
 
 .feature-col > div > div {
@@ -546,13 +551,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .feature-col > div > div:last-child {
   padding-left: 20px;
+
 }
 
 .feature-col .feature-icon {
   width: 70px;
   height: 70px;
   margin-bottom: 15px;
-  background: #199EB8;
+  background: darkgreen;
   color: #fff;
   font-size: 24px;
   text-align: center;
@@ -562,12 +568,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .feature-col h3 {
-  color: #199EB8;
+  color: black;
+  font-color:black;
 }
 
 .feature-col p {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 14px;
+  font-color:black;
   color: #999;
 }
 
@@ -1042,13 +1050,14 @@ ul {
     margin-top:100px;
 }
 #footer-menu{
+    margin-top:15px;
     font-weight: bold;
     font-family: 'Comic Sans MS';
 }
 #footer-menu a:hover {
     color: orange;
-    font-size: 17px;
-    border-color: orange;
+    outline-bottom: orange;
+    font-size:16px;
     border-bottom: 2px solid;
 
 
@@ -1067,3 +1076,60 @@ ul {
 #button_round{
     border-radius: 50% / 50%
 }
+
+
+.container{
+    box-sizing: border-box;
+    padding:25px;
+    text-align:center;
+
+    h2{
+        margin-bottom:40px;
+    }
+
+    p{
+        margin-top:40px;
+    }
+}
+
+/* Checkmark style starts */
+
+@-moz-keyframes dothabottomcheck{
+    0% { height: 0; }
+    100% { height: $checkbox-height/2; }
+}
+
+@-webkit-keyframes dothabottomcheck{
+    0% { height: 0; }
+    100% { height: $checkbox-height/2; }
+}
+
+@keyframes dothabottomcheck{
+    0% { height: 0; }
+    100% { height: $checkbox-height/2;  }
+}
+
+@keyframes dothatopcheck{
+    0% { height: 0; }
+    50% { height: 0; }
+    100% { height: $checkbox-height * 1.2; }
+}
+@-webkit-keyframes dothatopcheck{
+    0% { height: 0; }
+    50% { height: 0; }
+    100% { height: $checkbox-height * 1.2; }
+}
+@-moz-keyframes dothatopcheck{
+    0% { height: 0; }
+    50% { height: 0; }
+    100% { height: $checkbox-height * 1.2; }
+}
+
+input[type=checkbox]{
+    display:none;
+}
+
+
+
+
+

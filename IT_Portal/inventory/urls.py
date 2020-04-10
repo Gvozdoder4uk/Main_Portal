@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 from django.views.generic import ListView, DetailView
 from .models import *
+from django.core.paginator import Paginator
 
 urlpatterns = [
     url(r'^$', ListView.as_view(queryset=inventory_BD.objects.all(), template_name="inventory/index.html")),

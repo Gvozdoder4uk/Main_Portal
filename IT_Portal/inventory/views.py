@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from .models import *
+
+
 # Create your views here.
 
 
 def index(request):
     return render(request, 'inventory/index.html')
 
+
 def access(request):
     return render(request, 'inventory/access.html')
+
 
 def index(request):
     firstname = Ad_users.objects.all().count()

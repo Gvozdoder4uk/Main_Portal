@@ -1,25 +1,27 @@
 {% load static %}
 <!-- Header -->
 <header id="header">
-    <div style="background:black;" class="container">
 
-        <div id="logo" class="pull-left">
+
+        <div id="logo" style="margin-left:10px;" class="pull-left">
             <a href="/#"><img src="{% static 'images/Rat_Logos.png'%}" alt="" title=""/></img></a>
-            <!-- Uncomment below if you prefer to use a text image -->
-            <!--<h1><a href="#hero">Bell</a></h1>-->
         </div>
 
-        <nav id="nav-menu-container">
+        <nav id="nav-menu-container" >
             <ul class="nav-menu">
                 <li><a href="/#about">ИТ Портал</a></li>
-                <li><a href="#features">Возможности</a></li>
-                <li><a href="#team">Команда</a></li>
+                <li><a href="/#features">Возможности</a></li>
+                <li><a href="/inventory">Инвентаризация</a></li>
+                <li><a href="/#team">Управление ЭП</a></li>
+                <li><a href="/inventory/access">Запрос на доступ</a></li>
+                <li><a href="/#team">Wiki</a></li>
+                <li><a href="/relax_portal/panels">ИнфоПанель</a></li>
                 <li class="menu-has-children" id="choice"><a href="#choice">Разделы</a>
                     <ul>
                         <li><a href="/inventory/users">Портал пользователей</a></li>
                         <li><a href="/inventory">Инвентаризация</a></li>
                         <li><a href="/inventory/access">Запрос на доступ</a></li>
-                        <li><a href="#">Тестовая страница</a></li>
+                        <li><a href="/admin">Админка</a></li>
                         <li class="menu-has-children"><a href="#">Тестовое Меню</a>
                             <ul>
                                 <li><a href="#">Deep Drop Down 1</a></li>
@@ -31,7 +33,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#contact">Свяжитесь с нами</a></li>
+                <li><a href="/relax_portal">Полезные ресурсы</a></li>
             </ul>
         </nav>
         <!-- #nav-menu-container

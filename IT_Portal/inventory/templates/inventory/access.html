@@ -1,41 +1,101 @@
 {% extends "Main_Templates/main_template.html"%}
 {% block content %}
 {% include "Include_Templates/header.html" %}
-{% load static %}
-<link type='text/css' href="{% static 'css/forms.css' %}" rel="stylesheet">
-<section id="access_request" >
-    <div class="container">
-<form action="#" method="post" name="contact_form">
-    <h2>Заявка на доступ</h2>
-    <ul>
-        <li>
-            <img src="{% static 'images/icon_rat.png' %}" >
 
-             <span class="required_notification">* поля обязательные для заполнения</span>
-        </li>
-        <li>
-            <label for="name">Имя пользователя</label>
-            <input type="text"  id="name" autocomplete="Фокин Олег Константинович" placeholder="ФиО" required />
-        </li>
-        <li>
-            <label for="email">Почтовый адрес</label>
-            <input type="email" name="email" placeholder="fokin_ok@rusagrotrans.ru" required />
-            <span class="form_hint">Proper format "name@something.com"</span>
-        </li>
-        <li>
-            <label for="website">Website:</label>
-            <input type="text" name="website" placeholder="Название сервиса" required pattern=".+"/>
-            <span class="form_hint">Proper format "someaddress.com"</span>
-        </li>
-        <li>
-            <label for="message">Message:</label>
-            <textarea name="message" cols="40" rows="6" required ></textarea>
-        </li>
-        <li>
-        	<button id="button_round" class="submit" type="submit">Отправить заявку</button>
-        </li>
-    </ul>
-</form>
-        </div>
-    </section>
+<section class="features">
+    <div class="container">
+        <form>
+            <h2 class="text-center">Заявка на доступ к Информационным Ресурсам</h2>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend1">Фамилия</span>
+                        </div>
+                        <input type="text" class="form-control is-valid" id="validation_lastname"
+                               placeholder="Фамилия" value="{{username.lastname}}" required>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend2">Имя</span>
+                        </div>
+                        <input type="text" class="form-control is-valid" id="validation_firstname" placeholder="Имя"
+                               value="{{username.name}}" required>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend3">Отчество</span>
+                        </div>
+                        <input type="text" class="form-control is-valid" id="validationServerUsername"
+                               placeholder="Отчество" aria-describedby="inputGroupPrepend3" required>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-center">Выберите сервис или сервисы для запроса</h3>
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="ServiceChoiceTag">Сервис</span>
+                        </div>
+                        <select type="text" class="form-control is-valid" id="ServiceChoice" placeholder="City"
+                                required>
+                            <option>АСУ ВП</option>
+                            <option>1С Русагротранс</option>
+                            <option>ЭТРАН</option>
+                            <option>Файловое хранилище (Диск G)</option>
+                            <option>Удаленный доступ</option>
+                            <option></option>
+                            <option>1С Русагротранс</option>
+                            <option>1С Русагротранс</option>
+                            <option>1С Русагротранс</option>
+                            <option>1С Русагротранс</option>
+                        </select>
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Пожалуйста укажите корректные данные.
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="ServiceChTag">Уточнение</span>
+                        </div>
+                        <input type="text" class="form-control is-valid" id="validationServer04" placeholder="доп. инфо"
+                               required>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="Portable">Уточнение</span>
+                        </div>
+                        <input type="text" class="form-control is-valid" id="validationServer05" placeholder="Zip"
+                               required>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input is-valid" type="checkbox" value="" id="invalidCheck3" required>
+                    <label class="form-check-label" for="invalidCheck3">
+                        Я принимаю условия обработки данных.
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Отправить на согласование</button>
+        </form>
+    </div>
+
+</section>
 {% endblock %}

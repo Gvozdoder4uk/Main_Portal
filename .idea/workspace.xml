@@ -2,35 +2,94 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2babc1a-0cb5-4723-a841-cc5c5a1616ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/GET_AD.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/test.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/w3.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Rat_Logos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/js/Search.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/access.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/checkboxes.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/panels.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Silicon_Valley (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Silicon_Valley.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/hat-piper.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/laptop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/pied-piper.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/silicon-valley-2382.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/silicon-valley-2382508.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/tech_hand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/title_con.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/js/panels.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/inventory/migrations/0005_auto_20200406_2220.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/inventory/migrations/0006_auto_20200406_2222.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/templates/relax_portal/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/templates/relax_portal/info_panels.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Django_Main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Django_Main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/input.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/head_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/37464cf6cb6fae7280cca00ec56a9838.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/78ad4de370e132942edcf0761baac9f4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/analytics.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/astyk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/astyk.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/ba.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/ca3a9b1c78feb856f2f0a9972b567bd1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/custom-form-elements.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/d9b18dc1b02541515636ff33219e09c9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/en.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/greeters.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/indextop_tria_text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery-ui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery-ui.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.fancybox.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.fancybox.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.form.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.inputmask.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.maphilight.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.ui.datepicker-ru.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/jquery.validate.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/kernel_main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/kernel_main.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/logo_307x49.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/modernizr-2.0.6.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/ru.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/saved_resource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/saved_resource(1).html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/saved_resource(2).html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/saved_resource.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/script.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/slider.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/socket.io-1.4.5.mod.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/swiper.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/swiper.min.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/template_41c0d648c0ed8e960f25611d4c06b0ea.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/tracker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/tracker.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/watch.js.Без названия" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/widget.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/images/Перевозка зерна и минеральных удобрений железнодорожным транспортом в вагонах-хопперах_files/widget.min.js.Без названия" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/main_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/main_template.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/UserPortal.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/UserPortal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/access.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/access.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.4.dist-info/RECORD" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.4.dist-info/RECORD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/easy-install.pth" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/easy-install.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-40.8.0-py3.7.egg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/django-admin.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/django-admin.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install-3.7-script.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install-3.7.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/easy_install-3.7.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install-script.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/easy_install.exe" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,8 +98,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -64,17 +123,29 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\static\images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\static\images" />
       <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\templates\Main_Templates" />
       <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\templates" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\static\images" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
-    <configuration name="GET_AD" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="GET_AD" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Django_Main" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -95,23 +166,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.GET_AD" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -125,6 +179,19 @@
       <updated>1584080806763</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -154,11 +221,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585058654892" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1584687931794">
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1585115858324">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584687931794" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585115858324" />
     <state x="2576" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584686904939" />
+    <state x="639" y="118" width="642" height="804" key="find.popup" timestamp="1585122563270">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="639" y="118" width="642" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585122563270" />
+    <state x="2559" y="118" width="642" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1585119796510" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585044483466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

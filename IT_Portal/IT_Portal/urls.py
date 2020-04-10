@@ -18,8 +18,9 @@ from django.urls import path, include
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url('^$', include('MainApp.urls')),
-    path('admin/', admin.site.urls),
-    path('inventory/', include('inventory.urls'))
+    url('^$', include('MainApp.urls'), name='start_page'),
+    path('admin/', admin.site.urls, name='admin_page'),
+    path('inventory/', include('inventory.urls'), name='inventory'),
+    path('relax_portal/', include('relax_portal.urls'), name='relax_portal')
 
 ]

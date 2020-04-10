@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -25,14 +24,15 @@ SECRET_KEY = 'papnog)lt)7)su@93w3*)(_=uqond%f0)qdx@_hhh=f)at*&_4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_CIDR_NETS = ['10.0.0.0/8']
-ALLOWED_HOSTS = ['192.168.*.*','rusagrotrans.ru','10.10.*.*','0.0.0.0','W00-0027','W00-0002']
-
+ALLOWED_HOSTS = ['192.168.*.*', 'rusagrotrans.ru', '10.10.*.*', '0.0.0.0', 'W00-0027', 'W00-0002', '127.0.0.1',
+                 '192.168.1.70']
 
 # Application definition
 
 INSTALLED_APPS = [
     'inventory',
     'MainApp',
+    'relax_portal',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'IT_Portal.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -81,7 +80,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -101,11 +99,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -114,7 +111,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

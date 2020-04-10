@@ -1,0 +1,171 @@
+.parent {
+display: grid;
+grid-template-columns: repeat(6, 5fr);
+grid-template-rows: repeat(6, 200px);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 1 / 3 / 3; border:none; padding:none;}
+.div2 { grid-area: 1 / 3 / 3 / 5; border:none; padding:none;}
+.div3 { grid-area: 1 / 5 / 3 / 7; border:none; padding:none;}
+.div4 { grid-area: 3 / 1 / 5 / 3;border:none; padding:none;}
+.div5 { grid-area: 3 / 3 / 5 / 5; border:none; padding:none;}
+.div6 { grid-area: 3 / 5 / 5 / 7; border:none; padding:none;}
+.div7 { grid-area: 5 / 1 / 7 / 3; border:none;padding:none;}
+.div8 { grid-area: 5 / 3 / 7 / 5; border:none;padding:none;}
+.div9 { grid-area: 5 / 5 / 7 / 7; border:none;padding:none; }
+
+button{
+    height:30px;
+    width:200px;
+    margin: -20px -50px;
+    position:relative;
+    top:50%;
+    left:40%;
+}
+body{
+    overflow:hidden;
+}
+
+
+.div1:hover > .openbutton{
+    display:inline-block !important;
+}
+.div1:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+.div2:hover > .openbutton{
+    display:inline-block !important;
+    font-weight:bold;
+}
+
+.div2:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+.div3:hover > .openbutton{
+    display:inline-block !important;
+}
+.div3:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+.div4:hover > .openbutton{
+    display:inline-block !important;
+    font-weight:bold;
+}
+
+.div4:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+.div5:hover > .openbutton{
+    display:inline-block !important;
+}
+.div5:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+
+.div6:hover > .openbutton{
+    display:inline-block !important;
+}
+
+.div5:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+
+.div7:hover > .openbutton{
+    display:inline-block !important;
+    font-weight:bold;
+}
+.div7:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+
+.div8:hover > .openbutton{
+    display:inline-block !important;
+    font-weight:bold;
+}
+.div8:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+.div9:hover > .openbutton{
+    display:inline-block !important;
+    font-weight:bold;
+}
+.div9:hover > .openbutton:hover {
+    color:orange;
+    font-weight:bold;
+}
+
+
+
+.frame1{
+    transform:translate(100%,90%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+.frame2{
+    transform:translate(0%,90%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+.frame3{
+    transform:translate(-100%,90%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+
+.frame4{
+    transform:translate(100%,0%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+.frame5{
+    transform:translate(0%,0%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+.frame6{
+    transform:translate(-100%,0%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+.frame7{
+    transform:translate(100%,-80%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+
+.frame8{
+    transform:translate(0%,-80%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
+
+.frame9{
+    transform:translate(-100%,-80%) scale(2);
+    transition: 0.5s ease;
+    background:white;
+}
