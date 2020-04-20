@@ -1,0 +1,65 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+{% include "Include_Templates/requests_sidebar.html"%}
+<H3 class="text-center">Заявки на доступ пользователя: {{user.userprofile.user_last_name}}
+    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{user_requests.count}}</b>
+    </p></H3>
+{% if user_requests.count != 0 %}
+
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="row">Номер заявки</th>
+                <th scope="row">Ф.И.О</th>
+                <th scope="row">Сервис</th>
+                <th scope="row">Владелец Сервиса</th>
+                <th scope="row">Описание запроса</th>
+                <th scope="row">Статус заявки</th>
+            </tr>
+            </thead>
+            {% for ITEM in user_requests %}
+            <tbody id="Table1">
+            <tr>
+                <td style="width:120px;padding:30px 0px 0px 0px;margin:0px 0px 0px 0px;">
+                    <div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron">
+                        #{{ITEM.id}}
+                    </div>
+                </td>
+                <td>
+                    <div class="container"><b><a
+                            href="/inventory/users/{{ITEM.number_access}}">{{ITEM.name_user}}</a></b></div>
+                </td>
+                <td>
+                    <div class="container"><b>{{ITEM.test_service}}</b></div>
+                </td>
+                <td>
+                    <div class="container"><b>{{ITEM.service_owner}}</b></div>
+                </td>
+                <td>
+                    <div class="container"><b>{{ITEM.request_desc}}</b></div>
+                </td>
+                <td>
+                    <div class="container"><b>{{ITEM.request_statuser}}</b></div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% else %}
+<hr class="my-1">
+<div class="container">
+    <h3>Вы еще не оставляли запросов на доступ через ИТ портал</h3>
+    <p>Для создания запроса воспользуйтесь формой по следующей ссылке:<br><a href="/requests/"><b>Создание заявки на
+        доступ</b></a></p>
+</div>
+{% endif %}
+{% endif %}
+
+{% endblock %}

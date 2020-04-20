@@ -1,0 +1,105 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% load static %}
+<script>
+    function func2(){
+    if(document.getElementById('ServiceChoice').value == "АСУ ВП") {
+        document.getElementById('ASUVP').style.display = 'block';
+        document.getElementById('Description').value ="Прошу предоставить доступ к системе АСУ ВП ";
+    }
+    if(document.getElementById('ServiceChoice').value != "АСУ ВП") {
+        document.getElementById('ASUVP').style.display = 'none';
+        if(document.getElementById('Description').value != ""){
+          document.getElementById('Description').value == "";
+        }
+        }
+    if(document.getElementById('ServiceChoice').value == "1С Русагротранс") {
+        document.getElementById('1C').style.display = 'block';
+        document.getElementById('Description').value ="Прошу предоставить доступ к системе 1С Русагротранс \\\n";
+        }
+    if(document.getElementById('ServiceChoice').value != "1С Русагротранс") {
+        document.getElementById('1C').style.display = 'none';
+        if(document.getElementById('Description').value != ""){
+          document.getElementById('Description').value == "";
+        }
+        }
+     if(document.getElementById('ServiceChoice').value == "Файловое Хранилище") {
+        document.getElementById('File').style.display = 'block';
+        document.getElementById('Description').value ="Прошу предоставить доступ к файловому хранилищу Русагротранс (G:) \\\n";
+        }
+      if(document.getElementById('ServiceChoice').value != "Файловое Хранилище") {
+        document.getElementById('File').style.display = 'none';
+        if(document.getElementById('Description').value != ""){
+          document.getElementById('Description').value == "";
+        }
+        }
+      if(document.getElementById('ServiceChoice').value == "Удаленный доступ") {
+        document.getElementById('Description').value ="Прошу предоставить удаленный доступ к Терминальному серверу Русагротранс";
+        }
+
+     }
+
+
+</script>
+<script>
+function func3(){
+	var newDiv = $('<div class="listing listing_ad job"><h4><a>Some text</a></h4> </div>');
+  //newDiv.style.background = "#000";
+  document.getElementById('ServiceChoice').appendChild(newDiv);
+}
+
+</script>
+<script>
+    function func4(){
+        document.getElementById('Description').value +="Информационная база: "+document.getElementById('1C_CHOICER').value;
+}
+
+    function func5(){
+        document.getElementById('Description').value +=document.getElementById('ASU_VB_CHOICER').value;
+    }
+
+
+    function func6(){
+        document.getElementById('Description').value +="Права доступа: "+document.getElementById('RULE_CHOICER').value+"\\\n";
+    }
+    function func7(){
+        document.getElementById('Description').value +="Папка департамента : "+document.getElementById('FILE_CHOICER').value +"\\\n";
+    }
+
+</script>
+{% include "Include_Templates/requests_sidebar.html"%}
+<section class="features" style="min-width:350px;">
+
+    <div style="background-color:gray;outline:12px;border-radius:20px;padding:10px 10px 10px 10px;" class="container"
+         id="Serv">
+        <div class="jumbotron" style="margin-bottom:3px; padding:3px;background-color:white;">
+                <img style="padding-top:20px;width:300px" src="{% static 'images/LOGO.jpg'%}">
+                <h2 class="text-center" style="padding-top:10px;margin-top:0px;margin-bottom:5px;">Заявка на доступ к
+                    Информационным Ресурсам</h2>
+                <p id="date"></p>
+                <img style="width:100%;padding:30px 0px 20px;" src="{% static 'images/line.png'%}">
+
+                <form id="send_request" class="mt-4" method="post">{% csrf_token %}
+
+                {{form_request}}
+                </form>
+                    <script>
+                let currDate =
+                new Date().toLocaleDateString('ru-RU');
+                    document.getElementById("date").innerHTML = currDate;
+
+                    </script>
+                </form>
+            <button form="send_request" class="btn btn-primary" style="background-color:Green;" type="submit">Отправить на
+                    согласование
+                </button>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+
+
+

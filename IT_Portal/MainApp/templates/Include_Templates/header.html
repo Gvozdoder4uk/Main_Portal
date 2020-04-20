@@ -1,46 +1,245 @@
 {% load static %}
 <!-- Header -->
+<script>
+function login() {
+    //открыть модальное окно с id="myModal"
+    document.getElementByID('#login-overlay1').modal('show');
+  };
+
+
+
+
+
+</script>
+<style>
+    .buttoner {
+	display: inline-block;
+	font-family: "Montserrat", "Trebuchet MS", Helvetica, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+	padding: .8em 1.4em;
+	padding-right: 4.7em;
+	background: @button-colour;
+	border: none;
+	color: white;
+	transition: .2s;
+	&:before,
+	&:after {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		padding-top: inherit;
+		padding-bottom: inherit;
+		width: 2.8em;
+		content: "\00a0";
+		font-family: 'FontAwesome', sans-serif;
+		font-size: 1.2em;
+		text-align: center;
+
+		transition: .2s;
+		transform-origin: 50% 60%;
+	}
+	&:before {
+		background: @button-tint;
+	}
+	&:hover {
+		background: darken(@button-colour, 10%);
+	}
+	&:active,
+	&:focus {
+		background: darken(@button-colour, 30%);
+		outline: none;
+	}
+}
+
+.buttoner {
+	min-width: 15em;
+}
+
+.arrower {
+	background: #FE5F55;
+	&:hover {
+		background: darken(#FE5F55, 10%);
+	}
+	&:active,
+	&:focus {
+		background: darken(#FE5F55, 30%);
+	}
+	&:after {
+		content: "\F054";
+	}
+	&:hover:after {
+		-webkit-animation: bounceright .3s alternate ease infinite;
+		animation: bounceright .3s alternate ease infinite;
+	}
+}
+    .search {
+	&:after {
+		content:"\f002";
+	}
+	&:hover:after {
+		-webkit-animation: none;
+		-webkit-transform: scale(1.4);
+		animation: none;
+		transform: scale(1.4);
+	}
+}
+
+
+@-webkit-keyframes bounceright {
+	from { -webkit-transform: translateX(0); }
+	to   { -webkit-transform: translateX(3px); }
+}
+
+@-webkit-keyframes wiggle {
+	from { -webkit-transform: rotate(0deg); }
+	to   { -webkit-transform: rotate(30deg); }
+}
+
+@keyframes bounceright {
+	from { transform: translateX(0); }
+	to   { transform: translateX(3px); }
+}
+
+@keyframes wiggle {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(30deg); }
+}
+
+</style>
 <header id="header">
 
-
-        <div id="logo" style="margin-left:10px;" class="pull-left">
-            <a href="/#"><img src="{% static 'images/Rat_Logos.png'%}" alt="" title=""/></img></a>
-        </div>
-
-        <nav id="nav-menu-container" >
-            <ul class="nav-menu">
-                <li><a href="/#about">ИТ Портал</a></li>
-                <li><a href="/#features">Возможности</a></li>
-                <li><a href="/inventory">Инвентаризация</a></li>
-                <li><a href="/#team">Управление ЭП</a></li>
-                <li><a href="/inventory/access">Запрос на доступ</a></li>
-                <li><a href="/#team">Wiki</a></li>
-                <li><a href="/relax_portal/panels">ИнфоПанель</a></li>
-                <li class="menu-has-children" id="choice"><a href="#choice">Разделы</a>
-                    <ul>
-                        <li><a href="/inventory/users">Портал пользователей</a></li>
-                        <li><a href="/inventory">Инвентаризация</a></li>
-                        <li><a href="/inventory/access">Запрос на доступ</a></li>
-                        <li><a href="/admin">Админка</a></li>
-                        <li class="menu-has-children"><a href="#">Тестовое Меню</a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="/relax_portal">Полезные ресурсы</a></li>
-            </ul>
-        </nav>
-        <!-- #nav-menu-container
-
-        <nav class="nav social-nav pull-right d-none d-lg-inline">
-          <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
-        </nav>-->
+    <div id="logo" style="margin-left:10px;" class="pull-left">
+        <a href="/"><img src="{% static 'images/Rat_Logos.png'%}"></a>
     </div>
+
+    <nav id="nav-menu-container">
+        <ul class="nav-menu">
+            {% url 'index' as url_index %}
+            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/#about">[ Главная ]</a></li>
+            <li><a href="/#features">[ Возможности ]</a></li>
+
+            {% url 'all_requests'  as url_index3 %}
+            {% url 'my_requests' as url_index2 %}
+            {% url 'main' as url_index1 %}
+            <li><a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path  %} active_nav_menu {% endif %}" href="/requests/">[ Запрос на доступ ]</a></li>
+            <li><a href="/#team">[ Wiki ]</a></li>
+            <li class="menu-has-children" id="choice"><a href="#choice">[ ИТ инструменты ]</a>
+                <ul>
+                    <li><a href="/inventory/users">Портал пользователей</a></li>
+                    <li><a href="/inventory">Инвентаризация</a></li>
+                    <li><a href="/requests/">Запрос на доступ</a></li>
+                    <li><a href="/requests/cabinet">Реестр заявок</a></li>
+                    <li><a href="/admin">Админка</a></li>
+                    <li><a href="/relax_portal/panels">ИнфоПанель</a></li>
+                    <ul>
+                        <li><a href="#">Тестовое меню 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            </li>
+            {% url 'relax' as url_index %}
+            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">Полезные ресурсы</a></li>
+            {% if request.user.is_authenticated %}
+            <li style="float:right;"><a href="/logout"> Выход</a></li>
+            <li class="menu-has-children" style="float:right;" id="lkmenu"><a id="LK"
+                                                                              style="font-weight:bold;color:white;">
+                {{ user.userprofile.user_last_name }} {{ user.userprofile.user_first_name }}</a>
+                <ul>
+                    <li><a href="/requests/account">Личный кабинет</a></li>
+                    <li><a href="/requests/personal_cabinet">Мои заявки</a></li>
+                    <li><a href="/requests/">Запрос на доступ</a></li>
+                    <li><a href="/requests/cabinet">Реестр заявок</a></li>
+                    <li><a href="/requests/test_requests/">Тестовые заявки</a></li>
+                    <li><a href="/admin">Админка</a></li>
+                </ul>
+            </li>
+
+
+            {% else %}
+            <li id="open" style="float:right;"><a href="#mymodalBox">Вход</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+    <!-- #nav-menu-container
+
+    <nav class="nav social-nav pull-right d-none d-lg-inline">
+      <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
+    </nav>-->
+    </div>
+
+
 </header>
+
+<div id="myModalBox" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Заголовок модального окна -->
+            <div class="modal-header">
+                    <h4 class="mr-4"id="myModalLabel">Вход в ИТ портал Русагротранс</h4>
+                <button type="button" class="close float-right ml-0"" data-dismiss="modal"><span aria-hidden="true">×
+                        </span></button>
+            </div>
+            <!-- Основное содержимое модального окна -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6">
+
+                                <form id="loginForm" method="POST" action="{% url 'loginpage' %}"
+                                      novalidate="novalidate">{% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="username" class="control-label">Имя пользователя</label>
+                                        <input type="text" class="form-control" id="username" name="username" value=""
+                                               required="" title="Please enter you username" placeholder="fokin_ok">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="control-label">Пароль</label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               value="" required="" title="Введите пароль">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Войти в систему</button>
+                                    <a href="/forgot/" class="btn btn-warning">Восстановление пароля</a>
+                                </form>
+
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="lead">Регистрация для внешних пользователей <span class="text-success"></span></p>
+                            <p><a href="/new-customer/" class="btn btn-info btn-block">Регистрация внешнего
+                                пользователя</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Футер модального окна -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
+<script>
+    $(document).ready(function(){
+
+  $("#open").click(function() {
+    //открыть модальное окно с id="myModal"
+    $("#myModalBox").modal('show');
+  });
+});
+
+
+
+</script>
+
 <!-- #header -->

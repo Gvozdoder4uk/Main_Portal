@@ -1,0 +1,57 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+{% for group in request.user.groups.all %}
+<p>{{group.name}}</p>
+{% endfor %}
+<div class="container-fluid">
+    <table class="table table-bordered text-center">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="row">Номер заявки</th>
+            <th scope="row">Ф.И.О</th>
+            <th scope="row">Сервис</th>
+            <th scope="row">Владелец Сервиса</th>
+            <th scope="row">Описание запроса</th>
+            <th scope="row">Описание запроса</th>
+            <th scope="row">Описание запроса</th>
+
+        </tr>
+        </thead>
+
+        {% for ITEM in object_list %}
+        <tbody id="Table1">
+        <tr>
+            <td style="width:120px;padding:30px 0px 0px 0px;margin:0px 0px 0px 0px;">
+                <div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron">
+                    #{{ITEM.number_access}}
+                </div>
+            </td>
+            <td>
+                <div class="container"><b><a href="/inventory/users/{{ITEM.number_access}}">{{ITEM.name_user}}</a></b>
+                </div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.test_service.service_name}}</b></div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.test_service.service_owner.user_last_name}} {{ITEM.test_service.service_owner.user_first_name}} {{ITEM.test_service.service_owner.user_second_name}}</b></div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.request_desc}}</b></div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.test_service.service_name}}</b></div>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

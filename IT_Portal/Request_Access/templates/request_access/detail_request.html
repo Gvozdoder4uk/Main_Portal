@@ -1,0 +1,13 @@
+{% extends "request_access/test_request.html"%}
+{% block content %}
+    <h1>Статья {{get_request.id}}</h1>
+    <p><a href="/requests/test_requests">Вернуться назад</a></p>
+
+
+    <p><b>Дата создания:</b> {{ get_request.create_date}} </p>
+    <p><b>Название запроса:</b> {{ get_request.name }}</p>
+    <p><b>Cодержание запроса:</b> {{ get_request.text }}</p>
+
+{% endblock %}
+</body>
+</html>

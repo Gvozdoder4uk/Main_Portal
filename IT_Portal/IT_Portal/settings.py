@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['192.168.*.*', 'rusagrotrans.ru', '10.10.*.*', '0.0.0.0', 'W00-
 # Application definition
 
 INSTALLED_APPS = [
+    'Request_Access',
     'inventory',
     'MainApp',
     'relax_portal',
@@ -115,4 +116,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = '/'

@@ -1,0 +1,66 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+{% for group in request.user.groups.all %}
+<p>{{group.name}}</p>
+{% endfor %}
+{% include "Include_Templates/requests_sidebar.html"%}
+<div class="container-fluid">
+    <table class="table table-bordered text-center">
+        <thead class="thead-dark">
+        <tr>
+            <th>Номер заявки</th>
+            <th scope="row">Дата создания заявки</th>
+            <th scope="row">Ф.И.О</th>
+            <th scope="row">Сервис</th>
+            <th scope="row">Владелец Сервиса</th>
+            <th scope="row">Описание запроса</th>
+            <th scope="row">Статус запроса</th>
+        </tr>
+        </thead>
+
+        {% for ITEM in object_list %}
+        <tbody id="Table1">
+        <tr>
+            <td style="width:120px;padding:30px 0px 0px 0px;margin:0px 0px 0px 0px;">
+                <div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron">
+                    #{{ITEM.id}}
+                </div>
+            </td>
+            <td>
+                <div class="container"><b><a href="/inventory/users/{{ITEM.number_access}}">{{ITEM.create_date}}</a></b>
+                </div>
+            </td>
+            <td>
+                <div class="container"><b><a href="/inventory/users/{{ITEM.number_access}}">{{ITEM.name_user}}</a></b>
+                </div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.test_service}}</b></div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.service_owner}}</b></div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.request_desc}}</b></div>
+            </td>
+            <td>
+                <div class="container"><b>{{ITEM.request_statuser}}</b></div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+{% else %}
+<div class="container mt-4">
+    <h2>У вас нет прав доступа для просмотра данной страницы</h2>
+    <p>Обратитесь к вашему системному администратору для предоставления доступа или вернитесь на главную страницу</p>
+    <p><a href="/">Вернуться на главную страницу</a></p>
+</div>
+{% endif %}
+
+
+{% endblock %}

@@ -15,7 +15,7 @@ class Users_Admin(admin.ModelAdmin):
             'fields': ('user_firstname', 'user_lastname', 'user_secondname', 'user_birth')
         }),
         ('Рабочие данные', {
-            'fields': ('user_dep', 'user_otdel','user_email')
+            'fields': ('user_dep', 'user_otdel', 'user_email', 'user_profession')
         }),
         ('Допольнительная информация ', {
             'fields': ('user_photo', 'user_desc')

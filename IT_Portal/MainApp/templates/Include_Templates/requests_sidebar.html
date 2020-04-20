@@ -1,0 +1,11 @@
+<nav class="nav nav-pills nav-fill">
+    {% url 'main' as url_index %}
+  <a class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/">Создание запроса</a>
+    {% if request.user.is_authenticated %}
+    {% url 'all_requests' as url_index %}
+  <a id="#" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/cabinet/">Реестр заявок</a>
+
+    {% url 'my_requests' as url_index %}
+  <a class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/personal_cabinet/">Мои заявки</a>
+    {% endif %}
+</nav>

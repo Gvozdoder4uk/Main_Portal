@@ -47,7 +47,7 @@
 
             <div class="stats-col text-center col-md-3 col-sm-6">
                 <div class="circle">
-                    <span class="stats-no" data-toggle="counter-up">24</span><b>Круглосуточная поддержка</b>
+                    <span class="stats-no" data-toggle="counter-up">{{req_count}}</span><b>Заявок на доступ</b>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
     </p>
     <img alt="Технологии" class="gadgets-img hidden-md-down" src="{% static 'images/silicon-valley-2382.png'%}">
 </div>
-<section class="features" id="features">
+<section class="features" id="features" style="padding-bottom:0px;">
     <div class="container">
         <h2 class="text-center"><b>
             Возможности портала
@@ -99,7 +99,7 @@
                         </h3>
 
                         <p>
-                            Сбор инвентаризационных данных с хранением истории
+                            Сбор и управление инвентаризационными данными
                         </p>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
             <div class="feature-col col-lg-4 col-xs-12">
                 <div class="card card-block text-center">
                     <div>
-                        <a href="/inventory/access">
+                        <a href="/requests">
                             <div class="feature-icon">
                                 <span class="fa fa-laptop"></span>
                             </div>
@@ -139,7 +139,7 @@
 
                     <div>
                         <h3>
-                            <a href="/inventory/access">Управление доступами</a>
+                            <a href="/requests">Управление доступами</a>
                         </h3>
 
                         <p>
@@ -165,7 +165,7 @@
                         </h3>
 
                         <p>
-                            Адаптация хранения документов и данных общества
+                            Адаптация хранения документов и данных
                         </p>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
         </div>
     </div>
 </section>
-<section>
+<section style="padding-top:0px;">
     <div class="block bg-primary block-pd-lg block-bg-overlay text-center"
          data-bg-img="{% static 'images/parallax-bg.jpg' %}" data-settings='{"stellar-background-ratio": 0.1}'
          data-toggle="parallax-bg">
@@ -231,39 +231,34 @@
 </section>
 
 <section style="" class="team" id="team">
-    <div class="container">
         <h2 class="text-center">
             <b>Команда разработчиков</b>
         </h2>
         <hr class="my-2">
-        <div class="row text-center">
-            <div class="col-sm-3 col-xs-4" style="">
-            </div>
-            <div class="col-sm-4 col-xs-4" style="">
-                <div class="card card-block" id="team1">
-                    <a href="#"><img alt="" class="team-img" src="{% static 'images/team-0.jpg' %}">
-                        <div class="card-title-wrap">
-                            <span class="card-title">Фокин Олег</span> <span class="card-text">DevOps Engineer</span>
-                        </div>
+        <div class="container text-center" style="">
+            <div style="width:300px;"class="card card-block" id="team1">
+                <a href="#"><img alt="" class="team-img" src="{% static 'images/team-0.jpg' %}">
+                    <div class="card-title-wrap">
+                        <span class="card-title">Фокин Олег</span> <span class="card-text">DevOps Engineer</span>
+                    </div>
 
-                        <div class="team-over">
-                            <h4 class="hidden-md-down">
-                                Написать мне
-                            </h4>
+                    <div class="team-over">
+                        <h4 class="hidden-md-down">
+                            Написать мне
+                        </h4>
 
-                            <nav class="social-nav">
-                                <a href="https://vk.com/gvozdoder"><i class="fa fa-vk"></i></a> <a
-                                    href="mailto:fokin_ok@rusagrotrans.ru"><i class="fa fa-envelope"></i></a>
-                            </nav>
+                        <nav class="social-nav">
+                            <a href="https://vk.com/gvozdoder"><i class="fa fa-vk"></i></a> <a
+                                href="mailto:fokin_ok@rusagrotrans.ru"><i class="fa fa-envelope"></i></a>
+                        </nav>
 
-                            <p>
-                                Specialist,
-                                DevOps Engineer,
-                                Gamer,
-                            </p>
-                        </div>
-                    </a>
-                </div>
+                        <p>
+                            Specialist,
+                            DevOps Engineer,
+                            Gamer,
+                        </p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 {% block content %}
 {% include "Include_Templates/header.html" %}
 {% load static %}
+
 <link type='text/css' href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
@@ -38,7 +39,7 @@
                 <td><a href="/inventory/pc_details/{{keys.id}}"><b>{{keys.name_pc}}</b></a></td>
                 <td><b>{{keys.os}}</b></td>
                 <td><b>{{keys.processor}}</b></td>
-                <td><b>{{keys.sum_ram}}</b></td>
+                <td><b>{{keys.sum_ram}} GB</b></td>
                 <td><b>{{keys.ram_type}}</b></td>
                 <td><b>{{keys.network_card}}</b></td>
                 <td><b>{{keys.network_Mac}}</b></td>

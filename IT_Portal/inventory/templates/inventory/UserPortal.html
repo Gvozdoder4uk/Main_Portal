@@ -1,39 +1,39 @@
 {% extends "Main_Templates/main_template.html"%}
 {% block content %}
 {% include "Include_Templates/header.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/search.css'%}">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Поиск">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
 
-
-<div class="container">
-    <ul style="margin-top:10px;margin-right:100px;"><b>
-        <a>Меню:</a>
-        <div style="float:right;" class="group">
-            <label>Поиск</label>
-             <input  type="search" onkeyup="SearchTable()" id="Input1">
-
-        </div>
-    </b>
-    </ul>
-</div>
-<div class="container">
-
-    <table class="table table-bordered" >
+<div class="container-fluid">
+    <table class="table table-bordered text-center">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Фото</th>
-            <th scope="col">Ф.И.О</th>
-            <th scope="col">ID</th>
-            <th scope="col">Департамент</th>
-            <th scope="col">Отдел</th>
+            <th scope="row">Фото</th>
+            <th scope="row">Ф.И.О</th>
+            <th scope="row">Департамент</th>
+            <th scope="row">Отдел</th>
+            <th scope="row">Должность</th>
+            <th scope="row">Телефон</th>
+            <th scope="row">Email</th>
         </tr>
         </thead>
         {% for keys in object_list %}
         <tbody id="Table1">
         <tr>
-            <td><img src=""></a></td>
-            <td><b><a href="/inventory/users/{{keys.id}}">{{keys.user_lastname}} {{keys.user_firstname}} {{keys.user_secondname}}</a></b></td>
-            <td><b>{{keys.id}}</b></a></td>
+            <td style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;"><div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron"><img style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;" src="{{MEDIA_URL}}{{keys.user_photo.url}}"></div></td>
+            <td><div class="container"><b><a href="/inventory/users/{{keys.id}}">{{keys.user_lastname}} {{keys.user_firstname}} {{keys.user_secondname}}</a></b></div></td>
             <td><b>{{keys.user_dep}}</b></td>
             <td><b>{{keys.user_otdel}}</b></td>
+            <td><b>{{keys.user_professional}}</b></td>
+            <td></td>
+            <td><b><a href="mailto:{{keys.user_email}}">{{keys.user_email}} <i class="fa fa-envelope"></i></a></b></td>
+
         </tr>
         {% endfor %}
         </tbody>

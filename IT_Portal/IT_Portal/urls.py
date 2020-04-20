@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    url('^$', include('MainApp.urls'), name='start_page'),
-    path('admin/', admin.site.urls, name='admin_page'),
-    path('inventory/', include('inventory.urls'), name='inventory'),
-    path('relax_portal/', include('relax_portal.urls'), name='relax_portal')
+                  url('^', include('MainApp.urls'), name='start_page'),
+                  path('admin/', admin.site.urls, name='admin_page'),
+                  path('inventory/', include('inventory.urls'), name='inventory'),
+                  path('relax_portal/', include('relax_portal.urls'), name='relax_portal'),
+                  path('requests/', include('Request_Access.urls'), name='requests')
 
-]
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

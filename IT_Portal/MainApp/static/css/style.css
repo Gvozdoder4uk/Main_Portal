@@ -51,13 +51,13 @@ a {
   ================================================== */
 
 .btn {
-  background-color: #199EB8;
+  background-color: blue;
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: bold;
   color: #fff;
   padding: 15px 45px;
-  border-radius: 40px;
-  border-color: #199EB8;
+  border-radius: 10px;
+  border-color: transparent;
 }
 
 .btn:hover {
@@ -81,7 +81,7 @@ a {
 }
 
 section {
-  padding: 85px 0;
+  padding: 70px 0px;
 }
 
 .card {
@@ -176,12 +176,12 @@ a:hover {
 ================================================== */
 
 #header {
-  background: #424345;
-  height: 70px;
+  background: #343a40;
+  height: 67px;
 }
 
 #header #logo {
-  margin: 14px 25px 0 0;
+  margin: 10px 25px 0 0;
 }
 
 #header #logo h1 {
@@ -189,7 +189,7 @@ a:hover {
   margin: 0;
   padding: 2px 0;
   line-height: 1;
-  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -243,6 +243,7 @@ a:hover {
 
 .nav-menu li {
   position: relative;
+  margin-top:0px;
   white-space: nowrap;
 }
 
@@ -263,21 +264,23 @@ a:hover {
 .nav-menu ul li {
   min-width: 180px;
 }
-#header li > a:focus {
-  color:orange;
-  font-weight:bold;
-}
+
 
 #header li:hover {
-    color:orange;
-    font-size:16px;
-    border-color:orange;
+    color:#e56607;
+    font-size:15px;
+    border-color:#e56607;
     border-bottom: 2px solid;
 }
 
+.active_nav_menu{
+  color:#e56607 !important;
+  border-bottom: 2px solid;
+  font-weight:bold;
+}
 #header li > a:hover {
-    color:orange;
-    transform:scale(1.1);
+    color:#e56607;
+    transform:scale(1.05);
 }
 /* Nav Menu Arrows */
 
@@ -288,7 +291,7 @@ a:hover {
 .sf-arrows .sf-with-ul:after {
   content: "\f107";
   position: absolute;
-  right: 15px;
+  right: 17px;
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
@@ -338,7 +341,7 @@ a:hover {
 }
 
 .nav-menu ul li:hover {
-  background: #199EB8;
+  background: gray;
   transition: 0.3s;
 }
 
@@ -385,7 +388,7 @@ a:hover {
   padding-top: 18px;
   bottom: 0;
   z-index: 998;
-  background: black;
+  background: #343a40;
   left: -260px;
   width: 260px;
   overflow-y: auto;
@@ -447,7 +450,7 @@ a:hover {
   top: 0;
   left: 0;
   position: fixed;
-  background: gray;
+  background: transparent;
   display: none;
 }
 
@@ -857,7 +860,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   ================================================== */
 
 .site-footer {
-  background-color: #111;
+  background-color: #343a40;
   padding: 0;
 }
 
@@ -886,8 +889,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .site-footer .bottom {
-  background-color: #424345;
-  padding: 20px 0;
+  background-color: #343a40;
+  padding: 0px 0;
 }
 
 .site-footer .bottom .list-inline,
@@ -921,11 +924,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* ==================================================
   Responsive Styling
   ================================================== */
-
-@media (max-width: 768px) {
-  #header {
-    height: 50px;
-    background:black;
+@media (max-width: 1200px) {
+.hero{display:none;}
+        #header {
+    height: 60px;
+    background:#343a40;
+    width:100%;
   }
 
   #header #logo {
@@ -946,22 +950,52 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 
   #mobile-nav-toggle {
-    display: inline;
+    display: inline-block;
+  }
+}
+@media (max-width: 700px) {
+.hero{display:none;}
+  #header {
+    height: 60px;
+    background:#424345;
+    width:100%;
+  }
+
+  #header #logo {
+    margin: 10px 0 0 0;
+  }
+
+  #header #logo h1 {
+    padding: 2px 0;
+    font-size: 26px;
+  }
+
+  #header #logo img {
+    max-height: 30px;
+  }
+
+  #nav-menu-container {
+    display: none;
+  }
+
+  #mobile-nav-toggle {
+    display: inline-block;
   }
 }
 
 @media (max-width: 767px) {
   .block {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
-@media (max-width: 61.9em) {
+@media (max-width: 60.9em) {
   section,
   .block,
   .cta {
     padding: 35px 0;
+    padding-top:0px;
   }
 
   .features {
@@ -1008,7 +1042,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 
   .block {
-    height: auto;
+    height: 550px;
   }
 
   .feature-col {
@@ -1125,10 +1159,36 @@ ul {
     100% { height: $checkbox-height * 1.2; }
 }
 
-input[type=checkbox]{
-    display:none;
-}
 
+
+
+.modalbtn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid $red;
+  border-radius: 0.6em;
+  color: $red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    outline: 0;
+  }
+}
 
 
 

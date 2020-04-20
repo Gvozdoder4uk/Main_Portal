@@ -1,0 +1,199 @@
+
+<script>
+    window.onload = function() {
+    var input = document.getElementById("Structure").focus();
+}
+</script>
+<!-- Скрипт для скрытия блока -->
+<script type="text/javascript">
+   function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+   }
+
+
+
+</script>
+
+<style>
+.navbar {
+overflow:;
+display: flex;
+    font-family: Segoe UI, sans-serif;
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(161, 164, 167);
+    text-align: center;
+    padding: 12px 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    width: 238px;
+    height: 25px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    border:none;
+
+}
+
+.navbar a:focus {
+    background-color:rgb(245, 130, 32);
+    border:none;
+    outline: 0;
+}
+
+.navbar1 {
+    overflow: hidden;
+    margin-top:2px;
+    font-family:  font-family: Segoe UI, sans-serif;
+}
+
+.navbar1 a {
+   float: left;
+   font-family: Segoe UI, sans-serif;
+    color: rgb(255, 255, 255);
+    background-color: rgb(180,190,192);
+    text-align: center;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    padding: 10px 10px;
+    text-decoration: none;
+    border: none;
+    width: 375px;
+    height: 25px;
+    line-height: 30px;
+}
+
+.navbar1 a:focus {
+    background-color:rgb(245, 130, 32) !important;
+}
+
+
+
+
+
+.dropbtn {
+  float: center;
+  font-weight:bold;
+  text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(161, 164, 167);
+  font-family: Segoe UI, sans-serif;
+  width: 250px;
+      height: 49px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+}
+
+.dropbtn:focus {
+  background-color:rgb(245, 130, 32);
+  border:none;
+  outline: 0;
+}
+
+.dropdown {
+  position: relative;
+  font-weight:bold;
+  display: inline-block;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+}
+
+.dropdown-content {
+  display: none;
+  border:none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 260px;
+  overflow: none;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+
+
+
+.dropdown-content a {
+  overflow:hidden;
+  width:300px;
+  padding:none;
+  font-size: 14px;
+  display: block;
+  outline: 0;
+}
+
+.dropdown-content a:-ms{
+    background-color:red;
+
+}
+
+.dropdown a:hover {
+    background-color: background-color:rgb(245, 130, 32);
+    }
+
+.show {
+display: block;
+}
+
+
+
+
+</style>
+
+
+<script>
+function DropDowner() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
+
+</script>
+<!-- <html> -->
+<meta charset='utf-8'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+<div class="navbar">
+    <a id="Structure" href="http://portal/bi/Lists/reports/view.aspx" autofocus >Структурные подразделения</a>
+    <a id="Business" href="http://portal/bi/Lists/reports/view2.aspx">Бизнес-процессы</a>
+
+    <div class="box" id="myDiv">
+
+        <div class="dropdown">
+            <button onclick="DropDowner()" class="dropbtn">Получатели отчетов <i class="fa fa-angle-down"
+                                                                                 aria-hidden="true"></i></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="http://portal/bi/Lists/reports/view1.aspx">Генеральный директор</a>
+                <a href="http://portal/bi/Lists/reports/view1.aspx">Заместитель Генерального директора</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- </html> -->
+
+<!-- Панель 2 -->
+<div class="navbar1">
+    <a href="http://portal/bi/Lists/reports/view.aspx"
+       style="background-color:rgb(254, 207, 163); font-weight: bold; font-size: 15px;"><b>Информационные панели и
+        отчеты</b></a>
+    <a href="http://portal/bi/Lists/reports/OLAP.aspx" style="font-size:14px; line-height: 15px;"><b>OLAP кубы</b><br>Система
+        многомерного интерактивного анализа данных</a>
+</div>

@@ -8,9 +8,10 @@ class Ad_users(models.Model):
     user_secondname = models.CharField('Отчество', max_length=200, help_text="Фамилия пользователя")
     user_email = models.EmailField(verbose_name='Email пользователя')
     user_birth = models.DateField('Дата рождения', help_text="Дата рождения")
-    user_photo = models.ImageField('Фото', help_text="Фото пользователя")
+    user_photo = models.ImageField('Фото', upload_to='users/photos', help_text="Фото пользователя")
     user_dep = models.CharField('Департамент', max_length=500, help_text="Департамент")
     user_otdel = models.CharField('Отдел', max_length=500, help_text="Отдел пользователя")
+    user_profession = models.CharField('Должность', max_length=500, help_text="Должность пользователя")
     user_desc = models.TextField('Коментарии', max_length=1000, help_text="Дополнительная информация")
 
     class Meta:
