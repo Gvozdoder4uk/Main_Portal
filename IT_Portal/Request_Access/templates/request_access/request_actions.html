@@ -1,0 +1,87 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+{% include "Include_Templates/requests_sidebar.html"%}
+<H3 class="text-center">Заявки на согласование: {{user.userprofile.user_last_name}}
+    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{requests.count}}</b>
+    </p></H3>
+{% if requests.count != 0 %}
+<style>
+
+</style>
+<div style="font-size:13px;"class="container-fluid">
+    <div class="table-responsive" >
+        <table  class="table table-bordered text-center">
+            <thead class="thead-dark" >
+            <tr>
+                <th scope="row">Номер заявки</th>
+                <th scope="row">Заявитель</th>
+                <th scope="row">Сервис</th>
+                <th scope="row">Владелец Сервиса</th>
+                <th scope="row">Статус согласования Владельца сервиса</th>
+                <th scope="row">Руководитель Заявителя</th>
+                <th scope="row">Статус согласования Руководителя</th>
+                <th scope="row">Специалист ИБ</th>
+                <th scope="row">Статус согласования ИБ</th>
+                <th scope="row">Описание запроса</th>
+                <th scope="row">Статус заявки</th>
+            </tr>
+            </thead>
+            {% for ITEM in requests %}
+            <tbody id="Table1">
+            <tr>
+                <td style="vertical-align: inherit;padding:0px 0px 0px 0px;width:120px; font-size:18px;">
+                    <div style="width:130px;margin:2px 2px 2px 2px;" class="jumbotron">
+                        <a href="/requests/detail/{{ITEM.id}}">#{{ITEM.id}}</a>
+                    </div>
+                </td>
+                <td style="vertical-align: inherit;">
+                        <b><a
+                            href="/requests/detail/{{ITEM.id}}">{{ITEM.name_user}}</a></b>
+                </td>
+                <td style="vertical-align: inherit;">
+
+                    <b>{{ITEM.approve_list.approve_service}}</b>
+
+                </td>
+                <td style="vertical-align: inherit;">
+                    <b>{{ITEM.approve_list.service_owner}}</b>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <b>{{ITEM.approve_list.approve_status_owner}}</b>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <b>{{ITEM.approve_list.user_boss}}</b>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <div class="container"><b>{{ITEM.approve_list.approve_status_boss}}</b></div>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <div class="container"><b>{{ITEM.approve_list.ib_spec}}</b></div>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <div class="container"><b>{{ITEM.approve_list.approve_status_ib}}</b></div>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <div class="container"><b>{{ITEM.request_desc}}</b></div>
+                </td>
+                <td style="vertical-align: inherit;">
+                    <div class="container"><b>{{ITEM.approve_list.full_status_request}}</b></div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% else %}
+<hr class="my-1">
+<div class="container">
+    <h3>На данный момент нет заявок для согласования.</h3>
+</div>
+{% endif %}
+{% endif %}
+
+{% endblock %}

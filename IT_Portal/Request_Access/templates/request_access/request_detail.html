@@ -1,0 +1,25 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+{% include "Include_Templates/requests_sidebar.html"%}
+<div class="container">
+    <div class="form-control">
+        <p>{{ get_request.name_user }}</p>
+        <div clas="container">
+            <div class="row">
+                <div class="form-control">{{ get_request.approve_list.service_owner }}
+                {{ get_request.approve_list.email_service_owner }}</div>
+                <p>{{ get_request.approve_list.approve_status_owner }}</p>
+                </div>
+            </div>
+        </div>
+        {{ get_request.approve_list.service_owner }}
+        {{ get_request.approve_list.email_service_owner }}
+        {{user_requests.id}}
+        {{owner_requests}},
+        {{boss_requests}}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
