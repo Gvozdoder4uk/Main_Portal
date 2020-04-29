@@ -1190,6 +1190,10 @@ ul {
   }
 }
 
+.disabled_side{
+    display:none;
+}
+
 
 
 

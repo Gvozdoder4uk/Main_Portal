@@ -3,23 +3,92 @@
 {% include "Include_Templates/header.html" %}
 {% if request.user.is_authenticated %}
 {% include "Include_Templates/requests_sidebar.html"%}
+{% load static %}
 <div class="container">
-    <div class="form-control">
-        <p>{{ get_request.name_user }}</p>
-        <div clas="container">
+    <div style="background-color:#343a40;outline:12px;border-radius:20px;padding:10px 10px 10px 10px;" class="container text-center"
+         id="Serv">
+        <img style="background:#343a40;padding:20px 0px 15px 0px;width:300px" src="{% static 'images/Rat_Logos.png'%}">
+
+        <div class="jumbotron" style="margin-bottom:3px; padding:3px;background-color:white;">
+            <h3 class="text-center"style="font-family:Arial;">Заявка на доступ №{{get_request.id}} от
+                {{get_request.create_date|date:'d.m.Y'}}</h3>
+            <b>Заявитель</b> <a class="form-control" style="font-size:24px">{{ get_request.author.userprofile }}</a>
+            <hr>
             <div class="row">
-                <div class="form-control">{{ get_request.approve_list.service_owner }}
-                {{ get_request.approve_list.email_service_owner }}</div>
-                <p>{{ get_request.approve_list.approve_status_owner }}</p>
+                <div class="col-8 my-2">
+                    <b>Департамент</b> <a class="form-control">{{ get_request.author.userprofile.user_dep }}</a>
+                    <b>Отдел</b> <a class="form-control">{{ get_request.author.userprofile.user_otdel }}</a>
+                    <b>Должность</b> <a class="form-control">{{ get_request.author.userprofile.user_position }}</a>
+                </div>
+                <div class="col-4 my-2">
+                    <b>Телефон</b> <a class="form-control">{{ get_request.author.userprofile.user_position }}</a>
+                    <b>Email</b> <a class="form-control" href="mailto:{{ get_request.author.userprofile.user_email }}">
+                    {{get_request.author.userprofile.user_email }}</a>
+                    {% if get_request.author.userprofile.user_mobile != null %}
+                    <b>Мобильный</b> <a class="form-control">{{ get_request.author.userprofile.user_mobile }}</a>
+                    {% endif %}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 my-2">
+                    <b>Описание запроса</b> <a class="form-control">{{ get_request.request_desc }}</a>
+                </div>
+            </div>
+            <hr>
+            <h3>Раздел согласования</h3>
+            <div class="row">
+                <div class="col-8 my-2">
+                    <b>Руководитель заявителя</b> <a class="form-control"><b>
+                    {{ get_request.approve_list.user_boss }}</b>
+                    {% if get_request.approve_list.user_boss in user.userprofile.user_full_name %} |
+                    <button class="btn-success" value="Accepted"><b>Согласовано</b></button>
+                    <button class="btn-danger" value="Decline"><b>Не согласовано</b></button>
+                    {% endif %}
+                </a>
+                </div>
+                <div class="col-4 my-2">
+                    <b>Статус</b> <a class="form-control">
+                    {{ get_request.approve_list.approve_status_boss }}
+                </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 my-2">
+                    <b>Владелец сервиса</b> <a class="form-control"><b>{{ get_request.approve_list.service_owner }}</b>
+                    {% if get_request.approve_list.service_owner in user.userprofile.user_full_name %}|
+                    <button class="btn-success" value="Accepted"><b>Согласовано</b></button>
+                    <button class="btn-danger" value="Decline"><b>Не согласовано</b></button>
+                    {% endif %}
+                </a>
+                </div>
+                <div class="col-4 my-2">
+                    <b>Статус</b> <a class="form-control">
+                    {{ get_request.approve_list.approve_status_owner }}
+                </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 my-2">
+                    <b>Руководитель ДБ</b> <a class="form-control"><b>{{ get_request.approve_list.ib_spec }}</b>
+                    {% if get_request.approve_list.ib_spec in user.userprofile.user_full_name %} |
+                    <button class="btn-success" value="Accepted"><b>Согласовано</b></button>
+                    <button class="btn-danger" value="Decline"><b>Не согласовано</b></button>
+                    {% endif %}
+                </a>
+                </div>
+                <div class="col-4 my-2">
+                    <b>Статус</b> <a class="form-control">
+                    {{ get_request.approve_list.approve_status_ib}}
+                </a>
+                </div>
+            </div>
+
+            <p></p>
+
         </div>
-        {{ get_request.approve_list.service_owner }}
-        {{ get_request.approve_list.email_service_owner }}
-        {{user_requests.id}}
-        {{owner_requests}},
-        {{boss_requests}}
     </div>
 </div>
+</div>
+
 {% endif %}
 {% endblock %}

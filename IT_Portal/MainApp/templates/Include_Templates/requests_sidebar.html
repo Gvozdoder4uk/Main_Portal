@@ -11,3 +11,8 @@
 
     {% endif %}
 </nav>
+{% if 'detail' in request.path  %}
+<nav class="nav nav-pills nav-fill">
+   <p class="nav-item nav-link active">Детализация заявки № {{get_request.id}}</p>
+</nav>
+{% endif %}

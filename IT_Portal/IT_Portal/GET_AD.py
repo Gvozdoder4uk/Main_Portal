@@ -27,7 +27,7 @@ conn.search(AD_SEARCH_TREE,
             '(&(objectCategory=Person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2))(givenName=*)(sn=*))',
             SUBTREE,
             attributes=['cn', 'proxyAddresses', 'department', 'sAMAccountName', 'displayName', 'telephoneNumber',
-                        'ipPhone', 'streetAddress', 'mail',
+                        'ipPhone', 'mail',
                         'title', 'manager', 'objectGUID', 'company', 'lastLogon']
             )
 # после этого запроса в ответ должно быть - True

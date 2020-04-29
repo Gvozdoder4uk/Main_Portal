@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 urlpatterns = [
     path('', views.index, name='main'),
-    path('cabinet/', ListView.as_view(queryset=Access.objects.all(), template_name="request_access/cabinet.html"),
+    path('cabinet/', views.cabinet,
          name='all_requests'),
     path('personal_cabinet/', views.personal_cabinet, name="my_requests"),
     path('request_actions/', views.request_actions, name="request_actions"),

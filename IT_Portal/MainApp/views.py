@@ -3,6 +3,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from Request_Access.models import *
+from django.template import RequestContext
+
+
+def handler404(request, *args, **argv):
+    response = render(request, 'Main_Templates/404.html',
+                      context=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler500(request, *args, **argv):
+    response = render(request, 'Main_Templates/404.html',
+                      context=RequestContext(request))
+    response.status_code = 500
+    return response
 
 
 # Create your views here.

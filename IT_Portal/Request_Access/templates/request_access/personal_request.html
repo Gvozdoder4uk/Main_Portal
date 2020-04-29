@@ -24,14 +24,15 @@
             {% for ITEM in user_requests %}
             <tbody id="Table1">
             <tr>
-                <td style="width:120px;padding:30px 0px 0px 0px;margin:0px 0px 0px 0px;">
-                    <div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron">
-                        #{{ITEM.id}}
+                <td style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;">
+                    <div style="width:130px;margin:3px 3px 3px 3px;" class="jumbotron">
+                          <a href="/requests/detail/{{ITEM.id}}">
+                              <b> #{{ITEM.id}}</b></a>
                     </div>
                 </td>
                 <td>
-                    <div class="container"><b><a
-                            href="/inventory/users/{{ITEM.number_access}}">{{ITEM.name_user}}</a></b></div>
+                    <div class="container"><b><a href="/requests/detail/{{ITEM.id}}">{{ITEM.author.userprofile.user_full_name}}</a></b>
+                    </div>
                 </td>
                 <td>
                     <div class="container"><b>{{ITEM.approve_list.approve_service}}</b></div>

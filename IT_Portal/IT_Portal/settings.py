@@ -24,7 +24,7 @@ SECRET_KEY = 'papnog)lt)7)su@93w3*)(_=uqond%f0)qdx@_hhh=f)at*&_4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_CIDR_NETS = ['10.0.0.0/8']
-ALLOWED_HOSTS = ['192.168.*.*', 'rusagrotrans.ru', '10.10.*.*', '0.0.0.0', 'W00-0027', 'W00-0002', '127.0.0.1',
+ALLOWED_HOSTS = ['192.168.*.*', '10.10.*.*', '0.0.0.0', 'W00-0027', 'W00-0002', '127.0.0.1',
                  '192.168.1.70']
 
 # Application definition
@@ -103,12 +103,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
-123
+
 USE_L10N = True
 
 USE_TZ = True
@@ -122,7 +122,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/#about'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

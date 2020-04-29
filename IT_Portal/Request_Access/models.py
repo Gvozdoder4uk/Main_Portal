@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from multiselectfield import MultiSelectField
 
+# Селектор статусов Согласования
 STATUS_CHOICES = (
     ('На согласовании у Руководителя', 'На согласовании у Руководителя'),
     ('Согласовано', 'Согласовано'),
@@ -13,17 +14,23 @@ STATUS_CHOICES = (
 )
 
 
+# Определение модели пользователя.
+# Связка один к одному к модели Пользователь Django
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_last_name = models.CharField(max_length=200, help_text="Фамилия", verbose_name="Фамилия")
-    user_first_name = models.CharField(max_length=200, help_text="Имя", verbose_name="Имя")
-    user_second_name = models.CharField(max_length=200, help_text="Отчество", verbose_name="Отчество")
-    user_full_name = models.CharField(max_length=1000, verbose_name="Полное имя", null=True)
-    user_dep = models.CharField(max_length=200, help_text="Департамент", verbose_name="Департамент")
-    user_otdel = models.CharField(max_length=200, help_text="Отдел", verbose_name="Отдел")
-    user_email = models.EmailField(help_text="Email", verbose_name="Почтовый адрес")
-    user_boss = models.CharField(max_length=200, help_text="Руководитель пользователя",
-                                 verbose_name="Руководитель пользователя", blank=True, null=True)
+    user_last_name = models.CharField(max_length=200, help_text="Фамилия", verbose_name="Фамилия", blank=True)
+    user_first_name = models.CharField(max_length=200, help_text="Имя", verbose_name="Имя", blank=True)
+    user_second_name = models.CharField(max_length=200, help_text="Отчество", verbose_name="Отчество", blank=True)
+    user_full_name = models.CharField(max_length=1000, verbose_name="Полное имя", null=True, blank=True)
+    user_position = models.CharField(max_length=300, verbose_name="Должность", null=True, blank=True)
+    user_dep = models.CharField(max_length=200, help_text="Департамент", verbose_name="Департамент", blank=True)
+    user_otdel = models.CharField(max_length=200, help_text="Отдел", verbose_name="Отдел", blank=True)
+    user_email = models.EmailField(help_text="Email", verbose_name="Почтовый адрес", blank=True)
+    user_telephone = models.CharField(max_length=30, verbose_name="Внутренний телефон", null=True, blank=True)
+    user_mobile = models.CharField(max_length=30, verbose_name="Мобильный телефон", null=True, blank=True)
+    user_boss = models.ForeignKey(User, related_name="boss", on_delete=models.CASCADE,
+                                   help_text="Руководитель пользователя",
+                                   verbose_name="Руководитель пользователя", blank=True, null=True)
 
     class Meta:
         verbose_name = 'Профиль Пользователя'
@@ -32,7 +39,22 @@ class UserProfile(models.Model):
     def __str__(self):
         return "%s " % self.user_full_name
 
+    def save(self):
+        full_name = str(f"{self.user_last_name} {self.user_first_name} {self.user_second_name}").title()
+        self.user_full_name = full_name
+        super(UserProfile, self).save()
 
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            UserProfile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.userprofile.save()
+
+
+# Модель сотрудника информационной безопасности. И установка его активным согласующим.
 class InformationSecurity(models.Model):
     specialist_ib = models.ForeignKey(UserProfile, verbose_name="Специалист Информационной Безопасности",
                                       on_delete=models.CASCADE)
@@ -49,6 +71,7 @@ class InformationSecurity(models.Model):
         return str(self.specialist_ib)
 
 
+# Хранение списка ервисов и ответственных за сервис.
 class Service(models.Model):
     service_name = models.CharField(max_length=200, help_text="Название Сервиса", verbose_name="Название Сервиса")
     service_owner = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
@@ -87,14 +110,16 @@ class ApproveList(models.Model):
 
 
 # Create your models here.
+# Main table for Access Request. On This table based ModelForm and Forms.
 class Access(models.Model):
-    approve_list = models.ForeignKey(ApproveList, on_delete=models.CASCADE, verbose_name="Номер заявки",null=True,blank=True)
+    approve_list = models.ForeignKey(ApproveList, on_delete=models.CASCADE, verbose_name="Лист Согласования", null=True,
+                                     blank=True)
     create_date = models.DateTimeField(auto_now=True, verbose_name="Дата создания", null=True)
-    name_user = models.CharField(max_length=200, verbose_name="Имя Заявителя")
-    user_dep = models.CharField(max_length=200,
-                                verbose_name="Департамент пользователя", blank=True, null=True)
-    user_otdel = models.CharField(max_length=200, help_text="Отдел пользователя",
-                                  verbose_name="Отдел пользователя", blank=True, null=True)
+    author = models.ForeignKey(User, max_length=200, verbose_name="Имя Заявителя", on_delete=models.CASCADE, blank=True,
+                               null=True)
+    user_dep = models.CharField(max_length=200, verbose_name="Департамент пользователя", blank=True, null=True)
+    user_otdel = models.CharField(max_length=200, help_text="Отдел пользователя", verbose_name="Отдел пользователя",
+                                  blank=True, null=True)
     request_statuser = models.CharField(max_length=100, choices=STATUS_CHOICES,
                                         default='На согласовании у Руководителя')
     request_desc = models.TextField(verbose_name="Описание Запроса")
@@ -104,7 +129,7 @@ class Access(models.Model):
         verbose_name_plural = 'Реестр запросов'
 
     def __str__(self):
-        return "%s %s " % (str(self.id), self.name_user)
+        return "%s %s " % (str(self.id), self.author)
 
 
 class Requests(models.Model):
@@ -122,6 +147,7 @@ class Requests(models.Model):
         return str(self.name)
 
 
+# Таблица хранения отправленных писем.
 class Mails(models.Model):
     email_address = models.EmailField(verbose_name="Получатель")
     subject = models.CharField(max_length=1000, verbose_name="Тема письма")
@@ -131,6 +157,9 @@ class Mails(models.Model):
         return self.email
 
 
+# TEST BLOCK
+# FOR EXAMPLES !!!!
+# YOU CAN ERASE THAT SHIT
 class Address(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
@@ -144,5 +173,6 @@ class Store(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=140, blank=True)
     address = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
+
     def __str__(self):
         return str(self.id)

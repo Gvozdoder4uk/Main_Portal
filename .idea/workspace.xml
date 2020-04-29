@@ -2,56 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2babc1a-0cb5-4723-a841-cc5c5a1616ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0019_auto_20200420_1601.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0020_access_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0021_remove_access_services.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0022_auto_20200420_1633.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0023_auto_20200420_1746.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0024_auto_20200421_1104.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0025_mails.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0026_remove_mails_document.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0027_auto_20200421_1311.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0028_auto_20200421_1327.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0029_service_service_owner_mail.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0030_remove_service_service_owner_mail.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0031_auto_20200421_1421.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0032_bosses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0033_delete_bosses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0034_userprofile_user_full_name.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0035_informationsecurity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0036_informationsecurity_active.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0037_auto_20200421_1758.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0038_auto_20200421_1941.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0039_auto_20200421_1948.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0040_auto_20200421_2025.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0041_auto_20200421_2049.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0042_auto_20200421_2142.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0043_auto_20200422_0920.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0044_auto_20200422_0947.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0045_auto_20200422_0955.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0046_address_store.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0047_auto_20200422_1108.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/sendmail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/test_inline.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/media/media/RESTART_SERVICES.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/media/media/RESTART_SERVICES_lxq37We.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0048_auto_20200426_1523.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0049_auto_20200426_1525.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0050_auto_20200427_0923.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0051_auto_20200427_1147.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0052_auto_20200427_1310.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0053_userprofile_user_boss2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0054_remove_userprofile_user_boss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0055_auto_20200428_1605.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/GET_AD.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/GET_AD.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/access.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/access.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/relax_portal/templates/relax_portal/info_panels.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/relax_portal/templates/relax_portal/info_panels.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

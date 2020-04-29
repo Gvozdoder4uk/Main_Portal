@@ -119,11 +119,13 @@ function login() {
             {% url 'index' as url_index %}
             <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/#about">[ Главная ]</a></li>
             <li><a href="/#features">[ Возможности ]</a></li>
-
+            {% if request.user.is_authenticated %}
             {% url 'all_requests'  as url_index3 %}
             {% url 'my_requests' as url_index2 %}
             {% url 'main' as url_index1 %}
-            <li><a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path  %} active_nav_menu {% endif %}" href="/requests/">[ Запрос на доступ ]</a></li>
+            {% url 'request_actions' as url_index4 %}
+            <li><a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}" href="/requests/">[ Запрос на доступ ]</a></li>
+           {% endif %}
             <li><a href="/#team">[ Wiki ]</a></li>
             <li class="menu-has-children" id="choice"><a href="#choice">[ ИТ инструменты ]</a>
                 <ul>

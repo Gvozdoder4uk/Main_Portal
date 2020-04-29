@@ -14,6 +14,9 @@ SERVICES = (
 
 
 class AccessForm(forms.ModelForm):
+    user_name = forms.CharField(max_length=200)
+
+
     class Meta:
         model = Access
         exclude = ('number_task',)
@@ -21,10 +24,17 @@ class AccessForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields['name_user'].widget.attrs['class'] = 'form-control'
+
+            self.fields['request_statuser'].widget = forms.HiddenInput()
+            self.fields['approve_list'].widget = forms.HiddenInput()
+            self.fields['author'].widget = forms.HiddenInput()
+            self.fields['user_name'].widget.attrs['class'] = 'form-control'
+            self.fields['user_name'].widget.attrs['id'] = 'userfield'
             self.fields['user_dep'].widget.attrs['class'] = 'form-control'
             self.fields['user_otdel'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['class'] = 'form-control'
+            self.fields['request_desc'].widget.attrs['id'] = 'Description'
+
 
 
 from .models import Mails
@@ -42,11 +52,16 @@ class EmailForm(forms.ModelForm):
 
 
 class ApproveForm(forms.ModelForm):
-    email_service_owner = forms.EmailField(max_length=200)
-    email_boss = forms.EmailField(max_length=200)
-    email_ib = forms.EmailField(max_length=200)
-    email_fileserver = forms.EmailField(max_length=200, required=False)
-    fileserver_owner = forms.EmailField(required=False)
+    email_service_owner = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
+    email_boss = forms.EmailField(max_length=200, required=False)
+    email_ib = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
+    email_fileserver = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
+    fileserver_owner = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
+    service_owner = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
+    user_boss = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
+
+    full_status_request = forms.CharField(max_length=200, required=False)
+    change_date = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
 
     class Meta:
         model = ApproveList
@@ -57,6 +72,13 @@ class ApproveForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
+            self.fields['email_boss'].widget = forms.HiddenInput()
+            self.fields['approve_status_owner'].widget = forms.HiddenInput()
+            self.fields['approve_status_boss'].widget = forms.HiddenInput()
+            self.fields['approve_status_ib'].widget = forms.HiddenInput()
+            self.fields['full_status_request'].widget = forms.HiddenInput()
+            self.fields['ib_spec'].widget = forms.HiddenInput()
+            self.fields['approve_service'].widget.attrs['id'] = 'service_choicer'
             self.fields[field].widget.attrs['class'] = 'form-control'
             self.fields['service_owner'].widget.attrs['class'] = 'form-control'
             self.fields['email_boss'].widget.attrs['class'] = 'form-control'
@@ -65,12 +87,14 @@ class ApproveForm(forms.ModelForm):
             self.fields['email_ib'].widget.attrs['readonly'] = True
             self.fields['email_service_owner'].widget.attrs['readonly'] = True
             self.fields['email_fileserver'].widget.attrs['readonly'] = True
+            self.fields['approve_service'].widget.attrs['onchange'] = 'func2()'
 
 
 class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = '__all__'
+
 
 class StoreForm(forms.ModelForm):
     class Meta:

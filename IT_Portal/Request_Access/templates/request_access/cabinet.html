@@ -3,7 +3,6 @@
 {% include "Include_Templates/header.html" %}
 {% if request.user.is_authenticated %}
 {% for group in request.user.groups.all %}
-<p>{{group.name}}</p>
 {% endfor %}
 {% include "Include_Templates/requests_sidebar.html"%}
 <div class="container-fluid mt-3">
@@ -20,7 +19,7 @@
         </tr>
         </thead>
 
-        {% for ITEM in object_list %}
+        {% for ITEM in all_requests %}
         <tbody id="Table1">
         <tr>
             <td style="vertical-align: inherit;padding:0px 0px 0px 0px;width:120px; font-size:18px;">
@@ -33,7 +32,7 @@
                 </div>
             </td>
             <td>
-                <div class="container"><b><a>{{ITEM.name_user}}</a></b>
+                <div class="container"><b><a>{{ITEM.author.userprofile.user_full_name}}</a></b>
                 </div>
             </td>
             <td>

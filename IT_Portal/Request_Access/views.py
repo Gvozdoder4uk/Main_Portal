@@ -5,26 +5,40 @@ from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import *
 from IT_Portal import settings
 from datetime import *
 from django.forms.models import inlineformset_factory
 from django.db.models import Q
 
+
+def is_member(user):
+    return user.groups.filter(name='Admin Reestr').exists()
+
+
 @login_required
 def cabinet(request):
-    return render(request, 'request_access/cabinet.html')
+    if request.user.groups.filter(name='Admin Reestr').exists():
+        all_requests = Access.objects.all()
+        context = {
+            'all_requests': all_requests
+        }
+        return render(request, 'request_access/cabinet.html', context)
+    else:
+        return render(request, 'Main_templates/404.html')
 
 
+@login_required
 def personal_cabinet(request):
-    user_requests = Access.objects.filter(name_user__contains=request.user.userprofile.user_last_name) | Access.objects.filter(name_user__contains=request.user.userprofile.user_last_name)
+    user_requests = Access.objects.filter(author=request.user)
     context = {
         'user_requests': user_requests,
     }
     return render(request, 'request_access/personal_request.html', context)
 
 
+@login_required
 def account(request):
     return render(request, 'request_access/account.html')
 
@@ -57,26 +71,27 @@ def edit_request(request):
     return render(request, template, context)
 
 
+@login_required
 def request_actions(request):
-
-    user_requests = ApproveList.objects.filter(service_owner__contains=request.user.userprofile.user_last_name)
-    requests = Access.objects.filter(approve_list__service_owner__contains=request.user.userprofile.user_last_name)
-    boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss)
+    requests = Access.objects.filter(
+        approve_list__service_owner__contains=request.user.userprofile.user_last_name) | Access.objects.filter(
+        approve_list__user_boss__contains=request.user.userprofile.user_full_name)
+    boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     approve_request = ApproveList.objects.all()
     context = {
-        'requests':requests,
+        'requests': requests,
         'approve_request': approve_request,
-        'user_requests': user_requests,
         'boss_requests ': boss_requests
     }
     return render(request, 'request_access/request_actions.html', context)
 
 
+@login_required
 def RequestActionDetail(request, id):
     get_request = Access.objects.get(id=id)
-    user_requests = Access.objects.filter(name_user__contains=request.user.userprofile.user_last_name)
+    user_requests = Access.objects.filter(author=request.user)
     owner_requests = ApproveList.objects.filter(service_owner__contains=request.user.userprofile.user_last_name)
-    boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss)
+    boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     context = {
         'get_request': get_request,
         'user_requests': user_requests,
@@ -103,6 +118,10 @@ def index(request):
             model_cs = form_cs.save()
             print(model_cs)
             model_mn = form_mn.save(commit=False)
+            if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
+                model_mn.author = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
+            else:
+                model_mn.author = request.user
             model_mn.approve_list = model_cs
             model_mn.save()
             return render(request, 'request_access/test_inline.html')
@@ -111,22 +130,20 @@ def index(request):
     form_approve = ApproveForm(
         initial={
             'email_service_owner': Service.objects.get(id=1).service_owner.user_email,
-
             'email_ib': InformationSecurity.objects.get(active=True).specialist_ib_email,
             'number_task': '',
             'ib_spec': InformationSecurity.objects.get(id=1),
-            'user_boss': request.user.userprofile.user_boss,
+            'user_boss': request.user.userprofile.user_boss.userprofile.user_full_name,
             'service_owner': 'Чаленко Анатолий Юрьевич',
             'change_date': datetime.now(),
             'fileserver_owner': "",
-
 
         }
     )
     form_sendmail = EmailForm(
         initial={'email': request.user.userprofile.user_email, 'subject': "Запрос на доступ №", 'message': '1'})
     form_request = AccessForm(initial={
-        'name_user': request.user.userprofile.user_last_name + " " + request.user.userprofile.user_first_name + " " + request.user.userprofile.user_second_name,
+        'user_name': request.user.userprofile.user_full_name,
         'user_dep': request.user.userprofile.user_dep,
         'user_otdel': request.user.userprofile.user_otdel,
         'approve_list': ApproveList.objects.get(id=1)
@@ -140,6 +157,7 @@ def index(request):
     return render(request, template, context)
 
 
+@login_required
 def email(request):
     if request.method == "POST":
         form = EmailForm(request.POST)
