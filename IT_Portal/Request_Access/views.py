@@ -20,7 +20,7 @@ def is_member(user):
 @login_required
 def cabinet(request):
     if request.user.groups.filter(name='Admin Reestr').exists():
-        all_requests = Access.objects.all()
+        all_requests = Access.objects.all().order_by('-create_date')
         context = {
             'all_requests': all_requests
         }
@@ -75,8 +75,10 @@ def edit_request(request):
 def request_actions(request):
     requests = Access.objects.filter(
         approve_list__service_owner__contains=request.user.userprofile.user_last_name) | Access.objects.filter(
-        approve_list__user_boss__contains=request.user.userprofile.user_full_name)
-    boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
+        approve_list__user_boss__contains=request.user.userprofile.user_full_name) | Access.objects.filter(
+        approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name)
+    boss_requests = ApproveList.objects.filter(
+        user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     approve_request = ApproveList.objects.all()
     context = {
         'requests': requests,
@@ -88,17 +90,53 @@ def request_actions(request):
 
 @login_required
 def RequestActionDetail(request, id):
+    approver = ApproveChanger()
     get_request = Access.objects.get(id=id)
     user_requests = Access.objects.filter(author=request.user)
     owner_requests = ApproveList.objects.filter(service_owner__contains=request.user.userprofile.user_last_name)
-    boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
+    boss_requests = ApproveList.objects.filter(
+        user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     context = {
+        'approver': approver,
         'get_request': get_request,
         'user_requests': user_requests,
         'owner_requests': owner_requests,
         'boss_requests': boss_requests,
     }
     template = 'request_access/request_detail.html'
+    if request.method == 'POST':
+        main_access_task = Access.objects.get(id=id)
+        task = Access.objects.get(id=id).approve_list
+        print(task)
+        print(request.user.userprofile.user_full_name)
+        if request.user.userprofile.user_full_name == task.user_boss:
+            print(f"{task.user_boss} BOSS")
+            task.approve_status_boss = request.POST.get('approve_choicer')
+            if request.POST.get('approve_choicer') == "Не согласовано":
+                task.approve_status_owner = request.POST.get('approve_choicer')
+                task.approve_status_ib = request.POST.get('approve_choicer')
+                main_access_task.request_statuser = request.POST.get('approve_choicer')
+                task.save(update_fields=["approve_status_boss", "approve_status_owner", "approve_status_ib"])
+                main_access_task.save(update_fields=["request_statuser"])
+            else:
+                task.approve_status_owner = "Ожидание согласования"
+                task.approve_status_ib = "Ожидание согласования"
+                main_access_task.request_statuser = "Ожидание согласования Сервиса и ИБ"
+                task.save(update_fields=["approve_status_boss", "approve_status_owner", "approve_status_ib"])
+                main_access_task.save(update_fields=["request_statuser"])
+        if request.user.userprofile.user_full_name == task.service_owner:
+            print(f"{task.service_owner} SERVICE")
+            task.approve_status_owner = request.POST.get('approve_choicer')
+            main_access_task.request_statuser = "Ожидание согласования отдела ИБ"
+            task.save(update_fields=["approve_status_owner"])
+            main_access_task.save(update_fields=["request_statuser"])
+        if request.user.userprofile.user_full_name == task.ib_spec.specialist_ib.userprofile.user_full_name:
+            main_access_task.request_statuser = request.POST.get('approve_choicer')
+            task.approve_status_ib = request.POST.get('approve_choicer')
+            task.save(update_fields=["approve_status_ib"])
+            main_access_task.save(update_fields=["request_statuser"])
+        return render(request, template, context)
+
     return render(request, template, context)
 
 
@@ -115,13 +153,20 @@ def index(request):
         form_mn = AccessForm(request.POST)
         form_cs = ApproveForm(request.POST)
         if form_mn.is_valid() and form_cs.is_valid():
-            model_cs = form_cs.save()
+            model_cs = form_cs.save(commit=False)
+            model_cs.user_boss = UserProfile.objects.get(
+                user_full_name=request.POST.get('user_name')).user_boss.userprofile.user_full_name
+            model_cs.email_boss = UserProfile.objects.get(
+                user_full_name=request.POST.get('user_name')).user_boss.userprofile.user_email
+            print(model_cs.user_boss)
             print(model_cs)
+            model_cs.save()
             model_mn = form_mn.save(commit=False)
             if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
                 model_mn.author = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
             else:
                 model_mn.author = request.user
+            model_mn.creator = request.user
             model_mn.approve_list = model_cs
             model_mn.save()
             return render(request, 'request_access/test_inline.html')
@@ -146,7 +191,7 @@ def index(request):
         'user_name': request.user.userprofile.user_full_name,
         'user_dep': request.user.userprofile.user_dep,
         'user_otdel': request.user.userprofile.user_otdel,
-        'approve_list': ApproveList.objects.get(id=1)
+        'approve_list': ApproveList.objects.get(id=60)
     })
     context = {
         'form_approve': form_approve,

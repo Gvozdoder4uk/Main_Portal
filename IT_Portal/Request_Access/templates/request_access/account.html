@@ -15,7 +15,12 @@
 
     <script>
 
-'use strict';function loadFonts(U,t,c){var args=Array.prototype.slice.call(arguments,3),xhr=new XMLHttpRequest();xhr.ontimeout=function(){console.error('The request for '+U+' timed out.')};xhr.onload=function(){if(xhr.readyState===4){if(xhr.status===200){c.apply(xhr,args);console.log('Fonts Loaded!')}else{console.error(xhr.statusText)};console.timeEnd("Process")}};xhr.open('GET',U,true);xhr.timeout=t;xhr.send(null)}function inject(){var e=this.responseText,h=document.getElementsByTagName('head')[0],a=document.getElementsByTagName('link')[0],s=document.createElement('style');s.media='only screen';s.innerHTML=e;if('undefined'!=typeof s){h.insertBefore(h.appendChild(s),a)}}
+'use strict';
+function loadFonts(U,t,c){var args=Array.prototype.slice.call(arguments,3),xhr=new XMLHttpRequest();
+xhr.ontimeout=function(){console.error('The request for '+U+' timed out.')};
+xhr.onload=function(){if(xhr.readyState===4){if(xhr.status===200){c.apply(xhr,args);
+console.log('Fonts Loaded!')}else{console.error(xhr.statusText)};console.timeEnd("Process")}};
+xhr.open('GET',U,true);xhr.timeout=t;xhr.send(null)}function inject(){var e=this.responseText,h=document.getElementsByTagName('head')[0],a=document.getElementsByTagName('link')[0],s=document.createElement('style');s.media='only screen';s.innerHTML=e;if('undefined'!=typeof s){h.insertBefore(h.appendChild(s),a)}}
 
 loadFonts('https://fonts.googleapis.com/css?family=Noto+Sans|Open+Sans+Condensed:300&subset=latin', 9500, inject);
 
@@ -25,15 +30,7 @@ loadFonts('https://fonts.googleapis.com/css?family=Noto+Sans|Open+Sans+Condensed
     <link rel="stylesheet" href="{% static 'css/modal/custom.min.css' %}" media="screen">
 
     <style>
-/*! ============================
-    CSS rules for this page demo
-*/
 
-
-
-/**
- * Waiting for Google font loader: hide the entire page
- */
 .wf-loading {
 	opacity: 0;
 	visibility: hidden;
@@ -41,9 +38,6 @@ loadFonts('https://fonts.googleapis.com/css?family=Noto+Sans|Open+Sans+Condensed
 	overflow: hidden
 }
 
-/**
- * All is fine: display the document
- */
 .wf-active {
 	opacity: 1;
 	visibility: visible
@@ -67,7 +61,6 @@ p.first-line {
     width: 96%
 }
 
-/* Custom fonts */
 @media only screen and (min-width: 720px) {
 
     .header-modal {font-family: 'Noto Sans', sans-serif}
@@ -168,7 +161,7 @@ html .visible .modal {-ms-transform: none;transform: none}
 html .modal-dialog .modal .ss-container {
 	overflow: hidden;
 	max-height: 47vh;
-	height: 9.766em
+
 }
 
 .ss-container:hover .ss-scroll {
@@ -219,20 +212,15 @@ input:placeholder-shown + label {
 
     <div role="document" class="modal">
 
-        <span class="close-span"><strong>Закрыть</strong> <a href="#close" title="Close"
-                                                             class="close push__left no__select bounceInUp"
-                                                             id="close-modal"
-                                                             onclick="document.getElementById('openModal').style.display='none';return true;">×</a></span>
+            <a href="#close" title="Close" style="background:" class="close push__right no__select bounceInUp" id="close-modal"
+               onclick="document.getElementById('openModal').style.display='none';return true;">x</a></span>
 
         <div class="header-modal no__select">
-            <span><strong class="static">†☸†</strong> Параметры</span>
+            <span><strong class="static">IMAGE lOGO</strong><b style="color:black;margin-left:auto;margin-right:auto;">  Авторизация ИТ портала</b></span>
         </div>
 
-        <div class="inner-dialog">
-
-
-            <h2 id="dialog-description">Модальное окно</h2>
-
+        <div class="inner-dialog" style="text-align:center;">
+            <h1 id="dialog-description">Введите логин и пароль</h1>
             <div class="row">
                 <div class="col-xs-6">
                     <div class="well">
@@ -250,28 +238,23 @@ input:placeholder-shown + label {
                                        required="" title="Введите пароль">
                                 <span class="help-block"></span>
                             </div>
-                            <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+
                             <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="remember" id="remember"> Запомнить
-                                </label>
                                 <p class="help-block"></p>
                             </div>
-                            <button type="submit" class="buttoner arrower ">Войти в систему</button>
-                            <a href="/forgot/" class="btn btn-default btn-block">Восстановление пароля</a>
+                            <button type="submit" class="btn-success">Войти в систему</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <p class="lead">Регистрация для внешних пользователей <span class="text-success"></span></p>
-                    <p><a href="/new-customer/" class="btn btn-info btn-block">Регистрация внешнего пользователя</a></p>
+                    <p>
                 </div>
             </div>
 
 
         </div> <!-- /inner-dialog -->
 
-        <div class="footer-modal footer-push__left no__select">
+        <div class="footer-modal footer-push__right no__select">
             <a href="#close" class="" id="footer-close"
                onclick="document.getElementById('openModal').style.display='none';return true;">Закрыть</a>
         </div>
@@ -280,43 +263,12 @@ input:placeholder-shown + label {
 </div> <!-- /modal-dialog -->
 
 
-<div role="dialog" aria-modal="true" aria-haspopup="true" tabindex="-1" aria-live="assertive"
-     aria-describedby="dialog-description" class="modal-dialog dialog" id="openMessage">
-
-    <div role="document" class="modal modal-message">
-
-        <span class="close-span"><strong>Close</strong> <a href="demo.html" title="Close" class="close no__select"
-                                                           id="close-msg"
-                                                           onclick="document.getElementById('openMessage').style.display='none';return true;">×</a></span>
-
-        <div class="inner-dialog">
-
-            <strong id="dialog-dscription">Message Box</strong>
-            <p><!--
-				<span class="info-sign"><strong>&#8505;</strong></span>
-				<span class="warning-sign"><strong>⚠</strong></span>
-				-->
-                <span class="success-sign"><strong>✔</strong></span>
-                <!--
-                <span class="error-sign"><strong>✕</strong></span>
-                -->
-                This is a sample modal message box suitable for infos. ✌
-            </p>
-
-        </div> <!-- /inner-dialog -->
-
-    </div> <!-- /modal -->
-
-</div> <!-- /modal-dialog -->
 
 <div class="wrapper">
 
     <p class="first-line">
-        <a href="#open" class="button">A simple link</a>
         <a href="#openModal" class="button" id="link1"
            onclick="document.getElementById('openModal').style.display='block';return true;">Open Modal Box</a>
-        <a href="#openMessage" class="button" id="link2"
-           onclick="document.getElementById('openMessage').style.display='block';return true;">Open Modal Message</a>
     </p>
 
 </div> <!-- /wrapper -->
@@ -328,6 +280,10 @@ var el = document.querySelector('.inner-dialog');
 SimpleScrollbar.initEl(el);
 
 </script>
+</script>
 
 </body>
 </html>
+
+
+

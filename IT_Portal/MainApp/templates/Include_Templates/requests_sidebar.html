@@ -1,13 +1,19 @@
-<nav class="nav nav-pills nav-fill">
-    {% url 'main' as url_index %}
-  <a class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/">Создание запроса</a>
+<nav class="nav nav-pills nav-fill my-1">
     {% if request.user.is_authenticated %}
+    {% url 'main' as url_index %}
+  <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/">Создание запроса</a>
+        {% for group in request.user.groups.all %}
+    {% if group.name == 'Admin Reestr' %}
     {% url 'all_requests' as url_index %}
-  <a id="#" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/cabinet/">Реестр заявок</a>
+    <a id="#" style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/cabinet/">Реестр заявок</a>
+    {% endif %}
+        {% endfor %}
     {% url 'request_actions' as url_index %}
-  <a class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/request_actions/">Заявки на исполнение</a>
+  <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/request_actions/">Заявки на исполнение</a>
+    {% url 'completed_requests' as url_index %}
+  <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/personal_cabinet/">Выполненные заявки</a>
     {% url 'my_requests' as url_index %}
-  <a class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/personal_cabinet/">Мои заявки</a>
+  <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/personal_cabinet/">Мои заявки</a>
 
     {% endif %}
 </nav>
