@@ -10,6 +10,8 @@ function login() {
 
 
 
+
+
 </script>
 <style>
     .buttoner {
@@ -107,6 +109,8 @@ function login() {
 	to   { transform: rotate(30deg); }
 }
 
+
+
 </style>
 <header id="header">
 
@@ -117,15 +121,18 @@ function login() {
     <nav id="nav-menu-container">
         <ul class="nav-menu">
             {% url 'index' as url_index %}
-            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/#about">[ Главная ]</a></li>
+            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/#about">[ Главная ]</a>
+            </li>
             <li><a href="/#features">[ Возможности ]</a></li>
             {% if request.user.is_authenticated %}
-            {% url 'all_requests'  as url_index3 %}
+            {% url 'all_requests' as url_index3 %}
             {% url 'my_requests' as url_index2 %}
             {% url 'main' as url_index1 %}
             {% url 'request_actions' as url_index4 %}
-            <li><a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}" href="/requests/">[ Запрос на доступ ]</a></li>
-           {% endif %}
+            <li>
+                <a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}"
+                   href="/requests/">[ Запрос на доступ ]</a></li>
+            {% endif %}
             <li><a href="/#team">[ Wiki ]</a></li>
             <li class="menu-has-children" id="choice"><a href="#choice">[ ИТ инструменты ]</a>
                 <ul>
@@ -146,7 +153,8 @@ function login() {
                 </ul>
             </li>
             {% url 'relax' as url_index %}
-            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">Полезные ресурсы</a></li>
+            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">Полезные
+                ресурсы</a></li>
             {% if request.user.is_authenticated %}
             <li style="float:right;"><a href="/logout"> Выход</a></li>
             <li class="menu-has-children" style="float:right;" id="lkmenu"><a id="LK"
@@ -164,7 +172,9 @@ function login() {
 
 
             {% else %}
-            <li id="open" style="float:right;"><a href="#mymodalBox">Вход</a></li>
+            <li id="open" style="float:right;"><a href="#openModal" class="button" id="link1"
+                                                  onclick="document.getElementById('myModalBox').style.display='block';return true;">Войти
+                в систему</a></li>
             {% endif %}
 
         </ul>
@@ -174,25 +184,24 @@ function login() {
     <nav class="nav social-nav pull-right d-none d-lg-inline">
       <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
     </nav>-->
-    </div>
-
 
 </header>
-
-<div id="myModalBox" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Заголовок модального окна -->
-            <div class="modal-header">
-                    <h4 class="mr-4"id="myModalLabel">Вход в ИТ портал Русагротранс</h4>
-                <button type="button" class="close float-right ml-0"" data-dismiss="modal"><span aria-hidden="true">×
+</div>
+    <div id="myModalBox" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Заголовок модального окна -->
+                <div class="modal-header">
+                    <h4 class="mr-4" id="myModalLabel">Вход в ИТ портал Русагротранс</h4>
+                    <button type="button" class="close float-right ml-0"
+                     data-dismiss="modal"><span aria-hidden="true">×
                         </span></button>
-            </div>
-            <!-- Основное содержимое модального окна -->
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-6">
+                </div>
+                <!-- Основное содержимое модального окна -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
 
                                 <form id="loginForm" method="POST" action="{% url 'loginpage' %}"
                                       novalidate="novalidate">{% csrf_token %}
@@ -212,23 +221,25 @@ function login() {
                                     <a href="/forgot/" class="btn btn-warning">Восстановление пароля</a>
                                 </form>
 
-                        </div>
-                        <div class="col-xs-6">
-                            <p class="lead">Регистрация для внешних пользователей <span class="text-success"></span></p>
-                            <p><a href="/new-customer/" class="btn btn-info btn-block">Регистрация внешнего
-                                пользователя</a></p>
+                            </div>
+                            <div class="col-xs-6">
+                                <p class="lead">Регистрация для внешних пользователей <span class="text-success"></span>
+                                </p>
+                                <p><a href="/new-customer/" class="btn btn-info btn-block">Регистрация внешнего
+                                    пользователя</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Футер модального окна -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                <!-- Футер модального окна -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
 <script>
@@ -239,6 +250,8 @@ function login() {
     $("#myModalBox").modal('show');
   });
 });
+
+
 
 
 

@@ -5,12 +5,13 @@
 {% include "Include_Templates/requests_sidebar.html"%}
 {% load static %}
 <div class="container">
-    <div style="background-color:#343a40;outline:12px;border-radius:20px;padding:10px 10px 10px 10px;" class="container text-center"
+    <div style="background-color:#343a40;outline:12px;border-radius:20px;padding:10px 10px 10px 10px;"
+         class="container text-center"
          id="Serv">
         <img style="background:#343a40;padding:20px 0px 15px 0px;width:300px" src="{% static 'images/Rat_Logos.png'%}">
 
         <div class="jumbotron" style="margin-bottom:3px; padding:3px;background-color:white;">
-            <h3 class="text-center"style="font-family:Arial;">Заявка на доступ №{{get_request.id}} от
+            <h3 class="text-center" style="font-family:Arial;">Заявка на доступ №{{get_request.id}} от
                 {{get_request.create_date|date:'d.m.Y'}}</h3>
             <b>Заявитель</b> <a class="form-control" style="font-size:24px">{{ get_request.author.userprofile }}</a>
             <hr>
@@ -38,46 +39,75 @@
             <h3>Раздел согласования</h3>
             <div class="row">
                 <div class="col-8 my-2">
-                    <b>Руководитель заявителя</b> <a class="form-control"><b>
+                    <b>Руководитель заявителя</b>
+                    <form name="approver_boss" id="approver_boss">{% csrf_token %}
+                    <a class="form-control"><b>
                     {{ get_request.approve_list.user_boss }}</b>
-                    {% if get_request.approve_list.user_boss in user.userprofile.user_full_name %} |
-                    <button class="btn-success" value="Accepted"><b>Согласовано</b></button>
-                    <button class="btn-danger" value="Decline"><b>Не согласовано</b></button>
-                    {% endif %}
-                </a>
+                    {% if get_request.approve_list.user_boss in user.userprofile.user_full_name and get_request.approve_list.approve_status_boss == "Ожидание согласования" %} |
+
+                        {{approver.approve_choicer}}
+
+                    <button form="approver_boss" formmethod="POST" class="btn-success" type="submit" value="Accepted">
+                        <b>Отправить</b></button>
+                        {% endif %}
+                    </a>
+                    </form>
+
+
                 </div>
                 <div class="col-4 my-2">
-                    <b>Статус</b> <a class="form-control">
+                    <b>Статус</b> <a class="form-control"
+                    style="{% if get_request.approve_list.approve_status_boss in 'Согласовано' %} color:green; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_boss in '*' %} color:Red; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_boss in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
                     {{ get_request.approve_list.approve_status_boss }}
                 </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-8 my-2">
-                    <b>Владелец сервиса</b> <a class="form-control"><b>{{ get_request.approve_list.service_owner }}</b>
-                    {% if get_request.approve_list.service_owner in user.userprofile.user_full_name %}|
-                    <button class="btn-success" value="Accepted"><b>Согласовано</b></button>
-                    <button class="btn-danger" value="Decline"><b>Не согласовано</b></button>
-                    {% endif %}
-                </a>
+                    <b>Владелец сервиса</b>
+                    <form name="approver_owner" id="approver_owner">{% csrf_token %}
+                        <a class="form-control">
+                            <b>{{ get_request.approve_list.service_owner }}</b>
+                            {% if get_request.approve_list.service_owner in user.userprofile.user_full_name and get_request.approve_list.approve_status_owner == "Ожидание согласования" %}
+                            {{approver.approve_choicer}}
+                            <button form="approver_owner" formmethod="POST" type="submit" class="btn-success" ><b>Отправить</b></button>
+                        {% endif %}
+                        </a>
+                    </form>
+
+
+
                 </div>
                 <div class="col-4 my-2">
-                    <b>Статус</b> <a class="form-control">
+                    <b>Статус</b> <a class="form-control"
+                    style="{% if get_request.approve_list.approve_status_owner in 'Согласовано' %} color:green; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_owner in 'Не согласовано' %} color:Red; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_owner in 'Ожидание'%} color:#e56607; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_owner in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
                     {{ get_request.approve_list.approve_status_owner }}
                 </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-8 my-2">
+                    <form name="approver_ib" id="approver_ib">{% csrf_token %}
                     <b>Руководитель ДБ</b> <a class="form-control"><b>{{ get_request.approve_list.ib_spec }}</b>
-                    {% if get_request.approve_list.ib_spec in user.userprofile.user_full_name %} |
-                    <button class="btn-success" value="Accepted"><b>Согласовано</b></button>
-                    <button class="btn-danger" value="Decline"><b>Не согласовано</b></button>
+                    {% if get_request.approve_list.ib_spec.specialist_ib.userprofile == user.userprofile and get_request.approve_list.approve_status_ib == "Ожидание согласования" %} |
+                    {{approver.approve_choicer}}
+
+                     <button form="approver_ib" formmethod="POST" type="submit" class="btn-success" ><b>Отправить</b></button>
                     {% endif %}
                 </a>
+                        </form>
                 </div>
                 <div class="col-4 my-2">
-                    <b>Статус</b> <a class="form-control">
+                    <b>Статус</b> <a class="form-control"
+                    style="{% if get_request.approve_list.approve_status_ib in 'Согласовано' %} color:green; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_ib in 'Не согласовано' %} color:Red; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_ib in 'Ожидание'%} color:#e56607; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_ib in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
                     {{ get_request.approve_list.approve_status_ib}}
                 </a>
                 </div>

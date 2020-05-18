@@ -29,8 +29,8 @@ class UserProfile(models.Model):
     user_telephone = models.CharField(max_length=30, verbose_name="Внутренний телефон", null=True, blank=True)
     user_mobile = models.CharField(max_length=30, verbose_name="Мобильный телефон", null=True, blank=True)
     user_boss = models.ForeignKey(User, related_name="boss", on_delete=models.CASCADE,
-                                   help_text="Руководитель пользователя",
-                                   verbose_name="Руководитель пользователя", blank=True, null=True)
+                                  help_text="Руководитель пользователя",
+                                  verbose_name="Руководитель пользователя", blank=True, null=True)
 
     class Meta:
         verbose_name = 'Профиль Пользователя'
@@ -56,10 +56,10 @@ class UserProfile(models.Model):
 
 # Модель сотрудника информационной безопасности. И установка его активным согласующим.
 class InformationSecurity(models.Model):
-    specialist_ib = models.ForeignKey(UserProfile, verbose_name="Специалист Информационной Безопасности",
-                                      on_delete=models.CASCADE)
+    specialist_ib = models.ForeignKey(User, verbose_name="Специалист Информационной Безопасности",
+                                      on_delete=models.CASCADE, null=True, blank=True)
     specialist_ib_email = models.EmailField(verbose_name="Email Специалиста по ИБ")
-    spec_ib_podmena = models.ForeignKey(UserProfile, verbose_name="Заместитель специалиста по ИБ",
+    spec_ib_podmena = models.ForeignKey(User, verbose_name="Заместитель специалиста по ИБ",
                                         on_delete=models.CASCADE, related_name="Zam")
     active = models.BooleanField(verbose_name="Присвоение")
 
@@ -68,7 +68,7 @@ class InformationSecurity(models.Model):
         verbose_name = "Специалисты Информационной Безопасности"
 
     def __str__(self):
-        return str(self.specialist_ib)
+        return str(self.specialist_ib.userprofile.user_full_name)
 
 
 # Хранение списка ервисов и ответственных за сервис.
@@ -86,7 +86,7 @@ class Service(models.Model):
 
 
 class ApproveList(models.Model):
-    approve_service = models.ForeignKey(Service, verbose_name="Сервис", on_delete=models.CASCADE)
+    approve_service = models.ForeignKey(Service, verbose_name="Сервис", on_delete=models.CASCADE,null=True,blank=True)
     service_owner = models.CharField(max_length=200, verbose_name="Владелец Сервиса")
     email_service_owner = models.EmailField(verbose_name="Почта владельца сервиса")
     approve_status_owner = models.CharField(max_length=200, verbose_name="Статус согласования Сервис",
@@ -123,6 +123,8 @@ class Access(models.Model):
     request_statuser = models.CharField(max_length=100, choices=STATUS_CHOICES,
                                         default='На согласовании у Руководителя')
     request_desc = models.TextField(verbose_name="Описание Запроса")
+    creator = models.ForeignKey(User, related_name="Creator", verbose_name="Создатель заявки", on_delete=models.CASCADE,
+                                null=True, blank=True)
 
     class Meta:
         verbose_name = 'Реестр запросов'

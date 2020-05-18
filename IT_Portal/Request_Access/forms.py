@@ -12,10 +12,18 @@ SERVICES = (
 
 )
 
+STATUS_SELECTOR = (
+    ("Согласовано", "Согласовано"),
+    ("Не согласовано", "Не согласовано")
+)
+
+
+class ApproveChanger(forms.Form):
+    approve_choicer = forms.ChoiceField(choices=STATUS_SELECTOR)
+
 
 class AccessForm(forms.ModelForm):
     user_name = forms.CharField(max_length=200)
-
 
     class Meta:
         model = Access
@@ -24,8 +32,8 @@ class AccessForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-
             self.fields['request_statuser'].widget = forms.HiddenInput()
+            self.fields['creator'].widget = forms.HiddenInput()
             self.fields['approve_list'].widget = forms.HiddenInput()
             self.fields['author'].widget = forms.HiddenInput()
             self.fields['user_name'].widget.attrs['class'] = 'form-control'
@@ -34,7 +42,6 @@ class AccessForm(forms.ModelForm):
             self.fields['user_otdel'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['id'] = 'Description'
-
 
 
 from .models import Mails
