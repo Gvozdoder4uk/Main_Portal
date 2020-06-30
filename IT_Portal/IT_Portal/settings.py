@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['192.168.*.*', '10.10.*.*', '0.0.0.0', 'W00-0027', 'W00-0002', 
 # Application definition
 
 INSTALLED_APPS = [
+    'TEST_ACCESS',
     'Request_Access',
     'inventory',
     'MainApp',

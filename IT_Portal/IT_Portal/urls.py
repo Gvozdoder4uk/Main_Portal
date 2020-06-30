@@ -25,7 +25,8 @@ urlpatterns = [
                   path('admin/', admin.site.urls, name='admin_page'),
                   path('inventory/', include('inventory.urls'), name='inventory'),
                   path('relax_portal/', include('relax_portal.urls'), name='relax_portal'),
-                  path('requests/', include('Request_Access.urls'), name='requests')
+                  path('requests/', include('Request_Access.urls'), name='requests'),
+                  path('tester/', include('TEST_ACCESS.urls'), name="test_access"),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

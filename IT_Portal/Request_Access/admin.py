@@ -12,3 +12,5 @@ admin.site.register(ApproveList)
 
 admin.site.register(Address)
 admin.site.register(Store)
+admin.site.register(Service_Group)
+admin.site.register(List_of_Accept)

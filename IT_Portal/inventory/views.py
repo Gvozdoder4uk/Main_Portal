@@ -10,7 +10,7 @@ def index(request):
 
 
 def access(request):
-    return render(request, 'inventory/access.html')
+    return render(request, 'inventory/index.html')
 
 
 def portal_test(request):

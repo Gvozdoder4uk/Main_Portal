@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from django.forms import inlineformset_factory
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 SERVICES = (
     (1, "АСУ ВП"),
@@ -107,3 +108,21 @@ class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
         exclude = ('address',)
+
+
+class AccepterForm(forms.ModelForm):
+    Cool_Story = forms.MultipleChoiceField(choices=SERVICES,
+                                           widget=forms.CheckboxSelectMultiple())
+
+    class Meta:
+        model = List_of_Accept
+        fields = '__all__'
+        widgets = {
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # for field in self.fields:
+        #    self.fields['Accepted_Service'].widget = forms.CheckboxSelectMultiple(
+        #    )

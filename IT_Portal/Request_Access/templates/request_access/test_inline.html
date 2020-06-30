@@ -1,2 +1,12 @@
-<H2>Вы успешно создали заявку на доступ</H2>
-<h5>Отслеживание заявки доступно по следующей ссылке:<a>Ссылка</a></h5>
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+<div class="container">
+    <H2>Вы успешно создали заявку на доступ {{created_task.id}}</H2>
+    <h5 style="color:blue;">Отслеживание заявки доступно по следующей ссылке:
+        <button><a href="/requests/detail/{{created_task.id}}">Заявка на доступ {{created_task.id}}</a></button>
+    </h5>
+</div>
+{% endif %}
+{% endblock %}

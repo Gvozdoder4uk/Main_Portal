@@ -72,10 +72,25 @@ class InformationSecurity(models.Model):
 
 
 # Хранение списка ервисов и ответственных за сервис.
+# Service Group для хранения ответственного за группу сервисов
+
+class Service_Group(models.Model):
+    group_name = models.CharField(max_length=200)
+    group_sowner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Сервисная группа'
+        verbose_name_plural = 'Сервисные группы'
+
+    def __str__(self):
+        return self.group_name
+
+
 class Service(models.Model):
     service_name = models.CharField(max_length=200, help_text="Название Сервиса", verbose_name="Название Сервиса")
     service_owner = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, blank=True, null=True)
     main_owner = models.BooleanField(verbose_name="Главный владелец", default=True)
+    service_group = models.ForeignKey(Service_Group, null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Сервис'
@@ -85,8 +100,9 @@ class Service(models.Model):
         return self.service_name
 
 
+# Модель согласования текущая с учетом 1го сервиса.
 class ApproveList(models.Model):
-    approve_service = models.ForeignKey(Service, verbose_name="Сервис", on_delete=models.CASCADE,null=True,blank=True)
+    approve_service = models.ForeignKey(Service, verbose_name="Сервис", on_delete=models.CASCADE, null=True, blank=True)
     service_owner = models.CharField(max_length=200, verbose_name="Владелец Сервиса")
     email_service_owner = models.EmailField(verbose_name="Почта владельца сервиса")
     approve_status_owner = models.CharField(max_length=200, verbose_name="Статус согласования Сервис",
@@ -106,10 +122,9 @@ class ApproveList(models.Model):
     change_date = models.DateTimeField(verbose_name="Дата изменения", blank=True, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return '%s %s' % (self.id, self.full_status_request)
 
 
-# Create your models here.
 # Main table for Access Request. On This table based ModelForm and Forms.
 class Access(models.Model):
     approve_list = models.ForeignKey(ApproveList, on_delete=models.CASCADE, verbose_name="Лист Согласования", null=True,
@@ -132,6 +147,20 @@ class Access(models.Model):
 
     def __str__(self):
         return "%s %s " % (str(self.id), self.author)
+
+
+# Проектная модель листа согласования
+class List_of_Accept(models.Model):
+    Access_ID = models.ForeignKey(Access, verbose_name="Номер Заявки", on_delete=models.CASCADE, null=True, blank=True)
+    Accepter_FIO = models.CharField(max_length=200, verbose_name="Согласующее лицо")
+    Accepted_Service = models.ForeignKey(Service, null=True, on_delete=models.CASCADE,
+                                         verbose_name="Сервис для согласования",default=1)
+    Email_Accepter = models.EmailField(verbose_name="Почта согласующего")
+    Accepter_Status = models.CharField(max_length=200, verbose_name="Статус согласования Сервис",
+                                       default="Ожидание")
+
+    def __str__(self):
+        return str(self.id)
 
 
 class Requests(models.Model):
