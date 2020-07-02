@@ -1,7 +1,8 @@
 <nav class="nav nav-pills nav-fill my-1">
     {% if request.user.is_authenticated %}
-    {% url 'multi' as url_index %}
-  <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/">Создание запроса</a>
+    {% url 'index' as url_index %}
+    {% url 'multi' as url_index1 %}
+  <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path or url_index1 == request.path %} active {% endif %}" href="/requests/">Создание запроса</a>
         {% for group in request.user.groups.all %}
     {% if group.name == 'Admin Reestr' %}
     {% url 'all_requests' as url_index %}

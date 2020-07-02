@@ -60,15 +60,10 @@ class EmailForm(forms.ModelForm):
 
 
 class ApproveForm(forms.ModelForm):
-    email_service_owner = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
     email_boss = forms.EmailField(max_length=200, required=False)
     email_ib = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
-    email_fileserver = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
-    fileserver_owner = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
-    service_owner = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
     user_boss = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
-
-    full_status_request = forms.CharField(max_length=200, required=False)
+    full_status_request = forms.CharField(max_length=200, required=False,initial="Ожидание согласования руководителя")
     change_date = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
 
     class Meta:
@@ -80,22 +75,16 @@ class ApproveForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields['email_boss'].widget = forms.HiddenInput()
-            self.fields['approve_status_owner'].widget = forms.HiddenInput()
-            self.fields['approve_status_boss'].widget = forms.HiddenInput()
-            self.fields['approve_status_ib'].widget = forms.HiddenInput()
-            self.fields['full_status_request'].widget = forms.HiddenInput()
-            self.fields['ib_spec'].widget = forms.HiddenInput()
-            self.fields['approve_service'].widget.attrs['id'] = 'service_choicer'
+            #self.fields['email_boss'].widget = forms.HiddenInput()
+            #self.fields['approve_status_boss'].widget = forms.HiddenInput()
+            #self.fields['approve_status_ib'].widget = forms.HiddenInput()
+            #self.fields['full_status_request'].widget = forms.HiddenInput()
+            #self.fields['ib_spec'].widget = forms.HiddenInput()
             self.fields[field].widget.attrs['class'] = 'form-control'
-            self.fields['service_owner'].widget.attrs['class'] = 'form-control'
-            self.fields['email_boss'].widget.attrs['class'] = 'form-control'
-            self.fields['email_service_owner'].widget.attrs['class'] = 'form-control'
-            self.fields['email_boss'].widget.attrs['readonly'] = False
-            self.fields['email_ib'].widget.attrs['readonly'] = True
-            self.fields['email_service_owner'].widget.attrs['readonly'] = True
-            self.fields['email_fileserver'].widget.attrs['readonly'] = True
-            self.fields['approve_service'].widget.attrs['onchange'] = 'func2()'
+            #self.fields['email_boss'].widget.attrs['class'] = 'form-control'
+            #self.fields['email_boss'].widget.attrs['readonly'] = False
+            #self.fields['email_ib'].widget.attrs['readonly'] = True
+
 
 
 class AddressForm(forms.ModelForm):
@@ -112,17 +101,31 @@ class StoreForm(forms.ModelForm):
 
 class AccepterForm(forms.ModelForm):
     Cool_Story = forms.MultipleChoiceField(choices=SERVICES,
-                                           widget=forms.CheckboxSelectMultiple())
+                                           widget=forms.CheckboxSelectMultiple(), required=False)
+
+    # Access_ID = forms.ChoiceField(required=False, initial=Access.objects.get(id=40))
+    Accepter_FIO = forms.CharField(max_length=100, required=False, widget=forms.HiddenInput, initial="Access_ID")
+    # Accepted_Service = forms.ChoiceField( required=False,initial=Service.objects.get(id=1))
+    Email_Accepter = forms.EmailField(required=False, widget=forms.HiddenInput,initial="Access_ID@mail.rus")
+    Accepter_Status = forms.CharField(max_length=100, widget=forms.HiddenInput, required=False, initial="Ожидание")
 
     class Meta:
         model = List_of_Accept
         fields = '__all__'
         widgets = {
-
+            'Acceter_FIO': forms.HiddenInput,
+            'Access_ID': forms.HiddenInput,
+            'Accepted_Service': forms.HiddenInput,
+            'Email_Accepter': forms.HiddenInput,
+            'Accepter_Status': forms.HiddenInput,
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # for field in self.fields:
-        #    self.fields['Accepted_Service'].widget = forms.CheckboxSelectMultiple(
-        #    )
+        # self.fields['Accepted_Service'].widget = forms.CheckboxSelectMultiple()
+        # self.fields['Cool_Story'].widget.attrs['required'] = 'True'
+
+
+class Additional_Service(forms.Form):
+    rulechoicer = forms.ChoiceField(choices=SERVICES, required=False)

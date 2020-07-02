@@ -64,7 +64,7 @@
                 </a>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-8 my-2">
                     <b>Владелец сервиса</b>
                     <form name="approver_owner" id="approver_owner">{% csrf_token %}
@@ -89,7 +89,58 @@
                     {{ get_request.approve_list.approve_status_owner }}
                 </a>
                 </div>
-            </div>
+            </div>-->
+
+                {% for service in services_request %}
+            <div class="row">
+                <div class="col-4 my-2">
+                    <b>Владелец сервиса</b>
+                        <a class="form-control">
+                             <b>{{ service.Accepter_FIO }}</b>
+                        </a>
+                </div>
+                {% if service.Accepter_FIO == request.user.userprofile.user_full_name and service.Accepter_Status == "Ожидание" %}
+                <div class="col-2 my-2" style="margin-left:0px;padding-left:0px;">
+                    <b>Сервис</b>
+                        <a class="form-control" style="align-text:left;padding-left:1px;margin-left:0px;">
+                             <b> {{ service.Accepted_Service }}</b>
+                        </a>
+                </div>
+                <div class="col-3 my-2">
+                    <b>Согласование</b>
+                        <a class="form-control" style="align-text:left;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;">
+                            <form name="accept_service" id="accept_service_{{service.Accepted_Service}}">{% csrf_token %}
+                                <button formmethod="POST" form="accept_service_{{service.Accepted_Service}}" type='submit' value="ACCEPT" style="background-color:#33cc33;border-radius: 7px; color:#262626;"><b>Согласовать</b></button>
+                                <button formmethod="POST" form="accept_service_{{service.Accepted_Service}}" type='submit' value="DECLINE" style="background-color:#ff3333;border-radius: 7px;color:#262626;"><b>Отклонить</b></button>
+                            </form>
+                        </a>
+                </div>
+
+                <div class="col-3 my-2">
+                    <b>Статус</b>
+                    <a class="form-control"
+                    style="">
+                    {{ service.Accepter_Status }}
+                    </a>
+                </div>
+                {% else %}
+                <div class="col-4 my-2" style="margin-left:0px;padding-left:0px;">
+                    <b>Сервис</b>
+                        <a class="form-control" style="align-text:left;padding-left:1px;margin-left:0px;">
+                             <b> {{ service.Accepted_Service }}</b>
+                        </a>
+                </div>
+                <div class="col-4 my-2">
+                    <b>Статус</b>
+                    <a class="form-control"
+                    style="">
+                    {{ service.Accepter_Status }}
+                    </a>
+                </div>
+                {% endif %}
+             </div>
+                {% endfor %}
+
             <div class="row">
                 <div class="col-8 my-2">
                     <form name="approver_ib" id="approver_ib">{% csrf_token %}
@@ -114,11 +165,10 @@
             </div>
 
             <p></p>
-
         </div>
     </div>
 </div>
-</div>
+
 
 {% endif %}
 {% endblock %}

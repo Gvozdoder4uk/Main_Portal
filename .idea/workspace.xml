@@ -2,46 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2babc1a-0cb5-4723-a841-cc5c5a1616ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/button.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0060_service_group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0061_auto_20200629_1550.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0062_auto_20200629_1600.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0063_auto_20200629_1631.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0064_list_of_accept.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0065_auto_20200629_1842.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0066_auto_20200629_1859.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0067_auto_20200629_1906.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0068_auto_20200629_1931.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/TEST_ACCESS/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0069_auto_20200702_1117.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0070_list_of_accept_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0071_auto_20200702_1225.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0072_auto_20200702_1333.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0073_auto_20200702_1516.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0074_approvelist_full_status_request.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/IT_Portal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/IT_Portal/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/static.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/static.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/bootstrap/css/bootstrap.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/main_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/main_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/test_inline.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/test_inline.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/views.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,18 +67,6 @@
       <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\static\images" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="GET_AD" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Django_Main" />
@@ -122,6 +89,18 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -153,10 +132,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="555" y="370" key="FileChooserDialogImpl" timestamp="1584687857812">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="555" y="370" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1584687857812" />
     <state width="1882" height="279" key="GridCell.Tab.0.bottom" timestamp="1585061321248">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -181,15 +156,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585115858324" />
-    <state x="2576" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1584686904939" />
     <state x="639" y="118" width="642" height="804" key="find.popup" timestamp="1585122563270">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="639" y="118" width="642" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585122563270" />
     <state x="2559" y="118" width="642" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1585119796510" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585044483466">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593699448778">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585044483466" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593699448778" />
   </component>
 </project>

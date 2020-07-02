@@ -77,7 +77,6 @@ def edit_request(request):
 @login_required
 def request_actions(request):
     requests = Access.objects.filter(
-        approve_list__service_owner__contains=request.user.userprofile.user_last_name) | Access.objects.filter(
         approve_list__user_boss__contains=request.user.userprofile.user_full_name) | Access.objects.filter(
         approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name)
     boss_requests = ApproveList.objects.filter(
@@ -96,58 +95,65 @@ def RequestActionDetail(request, id):
     approver = ApproveChanger()
     get_request = Access.objects.get(id=id)
     user_requests = Access.objects.filter(author=request.user)
-    owner_requests = ApproveList.objects.filter(service_owner__contains=request.user.userprofile.user_last_name)
+    # owner_requests = ApproveList.objects.filter(service_owner__contains=request.user.userprofile.user_last_name)
+    services_request = List_of_Accept.objects.filter(Access_ID=id)
     boss_requests = ApproveList.objects.filter(
         user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     context = {
         'approver': approver,
         'get_request': get_request,
         'user_requests': user_requests,
-        'owner_requests': owner_requests,
+        'services_request': services_request,
+        # 'owner_requests': owner_requests,
         'boss_requests': boss_requests,
     }
     template = 'request_access/request_detail.html'
+    print("ПОШЛА1")
     if request.method == 'POST':
+        print("ПОШЛА2")
         main_access_task = Access.objects.get(id=id)
         task = Access.objects.get(id=id).approve_list
-        print(task)
-        print(request.user.userprofile.user_full_name)
+        print(id)
+        service_approve = List_of_Accept.objects.filter(Access_ID=id)
+        print(service_approve)
+        print(f" Пользователь {request.user.userprofile.user_full_name}")
         if request.user.userprofile.user_full_name == task.user_boss:
             print(f"{task.user_boss} BOSS")
             task.approve_status_boss = request.POST.get('approve_choicer')
             if request.POST.get('approve_choicer') == "Не согласовано":
-                task.approve_status_owner = request.POST.get('approve_choicer')
+                #task.approve_status_owner = request.POST.get('approve_choicer')
                 task.approve_status_ib = request.POST.get('approve_choicer')
                 main_access_task.request_statuser = "Не согласовано руководителем"
-                task.save(update_fields=["approve_status_boss", "approve_status_owner", "approve_status_ib"])
+                task.save(update_fields=["approve_status_boss", "approve_status_ib"])
                 main_access_task.save(update_fields=["request_statuser"])
             else:
-                task.approve_status_owner = "Ожидание согласования"
+                #task.approve_status_owner = "Ожидание согласования"
                 task.approve_status_ib = "Ожидание согласования"
-                main_access_task.request_statuser = "Ожидание согласования Владельца Сервиса и ИБ"
-                task.save(update_fields=["approve_status_boss", "approve_status_owner", "approve_status_ib"])
+                main_access_task.request_statuser = "Ожидание согласования Владельцев Сервисов и ИБ"
+                task.save(update_fields=["approve_status_boss", "approve_status_ib"])
                 main_access_task.save(update_fields=["request_statuser"])
-        if request.user.userprofile.user_full_name == task.service_owner:
-            print(f"{task.service_owner} SERVICE")
-            task.approve_status_owner = request.POST.get('approve_choicer')
-            if request.POST.get('approve_choicer') == "Не согласовано":
-                task.approve_status_boss = request.POST.get('approve_choicer')
+        if request.user.userprofile.user_full_name == service_approve.Accepter_FIO:
+            if 'ACCEPT' in request.POST:
+                print(f"{service_approve.Accepter_FIO} SERVICE")
+                service.Accepter_Status = "Cогласовано"
+            if 'DECLINE' in request.POST:
+               '''task.approve_status_boss = request.POST.get('approve_choicer')
                 task.approve_status_ib = request.POST.get('approve_choicer')
                 main_access_task.request_statuser = "Не согласовано владельцем сервиса"
-                task.save(update_fields=["approve_status_boss", "approve_status_owner", "approve_status_ib"])
-                main_access_task.save(update_fields=["request_statuser"])
+                task.save(update_fields=["approve_status_boss", "approve_status_ib"])
+                main_access_task.save(update_fields=["request_statuser"])'''
             else:
-                main_access_task.request_statuser = "Ожидание согласования отдела ИБ"
-                task.save(update_fields=["approve_status_owner"])
-                main_access_task.save(update_fields=["request_statuser"])
+                #main_access_task.request_statuser = "Ожидание согласования отдела ИБ"
+                service_approve.save(update_fields=["Accepter_Status"])
+                #main_access_task.save(update_fields=["request_statuser"])'''
         if request.user.userprofile.user_full_name == task.ib_spec.specialist_ib.userprofile.user_full_name:
             main_access_task.request_statuser = request.POST.get('approve_choicer')
             task.approve_status_ib = request.POST.get('approve_choicer')
             if request.POST.get('approve_choicer') == "Не согласовано":
                 task.approve_status_boss = request.POST.get('approve_choicer')
-                task.approve_status_owner = request.POST.get('approve_choicer')
+                #task.approve_status_owner = request.POST.get('approve_choicer')
                 main_access_task.request_statuser = "Не согласовано отделом ИБ"
-                task.save(update_fields=["approve_status_boss", "approve_status_owner", "approve_status_ib"])
+                task.save(update_fields=["approve_status_boss", "approve_status_ib"])
                 main_access_task.save(update_fields=["request_statuser"])
             else:
                 task.save(update_fields=["approve_status_ib"])
@@ -169,9 +175,30 @@ from django.core.mail import EmailMessage
 def m_access(request):
     template = 'request_access/m_access.html'
     if request.method == 'POST':
-        # form_mn = AccessForm(request.POST)
+        form_mn = AccessForm(request.POST)
         form_cs = AccepterForm(request.POST)
-        if form_cs.is_valid():  # and form_cs.is_valid():
+        form_ap = ApproveForm(request.POST)
+        if form_cs.is_valid() and form_mn.is_valid() and form_ap.is_valid():  # and form_cs.is_valid():
+            model_ap = form_ap.save(commit=False)
+            if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
+                creator_boss = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
+                model_ap.user_boss = creator_boss.userprofile.user_boss.userprofile.user_full_name
+                model_ap.email_boss = creator_boss.userprofile.user_boss.userprofile.user_email
+            else:
+                model_ap.user_boss = request.user.userprofile.user_boss.userprofile.user_full_name
+                model_ap.email_boss = request.user.userprofile.user_boss.userprofile.user_email
+            model_ap.save()
+            model_mn = form_mn.save(commit=False)
+            if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
+                model_mn.author = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
+            else:
+                model_mn.author = request.user
+            model_mn.creator = request.user
+            model_mn.approve_list = model_ap
+            model_mn.save()
+            context = {
+                "created_task": model_mn
+            }
             print(f"{form_cs.cleaned_data['Cool_Story']} Получили вот что")
 
             for pickers in form_cs.cleaned_data['Cool_Story']:
@@ -183,41 +210,28 @@ def m_access(request):
                 print(service.service_group.group_sowner.userprofile.user_email)
                 print("============================================")
                 model_cs = form_cs.save(commit=False)
-                model_cs.Access_ID = Access.objects.get(id=request.POST.get('Access_ID'))
+                print(model_mn.id)
+                model_cs.Access_ID = model_mn
                 model_cs.Accepter_FIO = service.service_group.group_sowner.userprofile.user_full_name
                 model_cs.Accepted_Service = service
                 model_cs.Email_Accepter = service.service_group.group_sowner.userprofile.user_email
                 model_cs.pk = None
                 model_cs.save()
-                #return render(request, 'request_access/m_access.html')
+            model_mn = AccessForm()
+            model_cs = AccepterForm()
+            model_ap = ApproveForm()
+            return render(request, 'request_access/test_inline.html', context)
         else:
             print("Не Пошла!")
-            # model_cs = form_cs.save(commit=False)
-            # model_cs.user_boss = UserProfile.objects.get(
-            #    user_full_name=request.POST.get('user_name')).user_boss.userprofile.user_full_name
-            # model_cs.email_boss = UserProfile.objects.get(
-            #    user_full_name=request.POST.get('user_name')).user_boss.userprofile.user_email
-            # print(model_cs.user_boss)
-            # print(model_cs)
-            # model_cs.save()
-            # model_mn = form_mn.save(commit=False)
-            # if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
-            #    model_mn.author = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
-            # else:
-            #    model_mn.author = request.user
-            # model_mn.creator = request.user
-            # model_mn.approve_list = model_cs
-            # model_mn.save()
-            #    "created_task": model_mn
-            # }
-            model_mn = AccessForm()
-            model_cs = ApproveForm()
+
         context = {}
-        return render(request, 'request_access/m_access.html')
-            # Form2
+
+        # Form2
     services_bd = Service.objects.all()
     # Инициализация формы Форма Согласования
-    form_approve = AccepterForm()
+    form_approve = AccepterForm(
+
+    )
     # Инициализация формы Отправки письма.
     form_sendmail = EmailForm(
         initial={'email': request.user.userprofile.user_email, 'subject': "Запрос на доступ №", 'message': '1'})
@@ -227,11 +241,25 @@ def m_access(request):
         'user_otdel': request.user.userprofile.user_otdel,
         'approve_list': ApproveList.objects.get(id=60)
     })
+    form_bosslist = ApproveForm(
+        initial={
+            'email_ib': InformationSecurity.objects.get(active=True).specialist_ib_email,
+            'number_task': '',
+            'ib_spec': InformationSecurity.objects.get(id=1),
+            'user_boss': request.user.userprofile.user_boss.userprofile.user_full_name,
+            'email_boss': request.user.userprofile.user_boss.userprofile.user_email,
+            'change_date': datetime.now(),
+        }
+    )
+    advanced_form = Additional_Service()
     context = {
         'form_approve': form_approve,
         'form_sendmail': form_sendmail,
         'form_request': form_request,
-        'services_bd': services_bd
+        'form_bosslist': form_bosslist,
+        'services_bd': services_bd,
+        'rangered': range(2),
+        'advanced_form': advanced_form
     }
     return render(request, template, context)
 

@@ -94,3 +94,12 @@ li a {
 li a:hover {
   background-color: #111;
 }
+
+.form-check-initial{
+    display:-ms-inline-flexbox;
+    display:initial;
+    -ms-flex-align:center;
+    align-text:left;
+    padding-left:0;
+    margin-right:.75rem
+}

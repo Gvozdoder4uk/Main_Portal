@@ -102,11 +102,6 @@ class Service(models.Model):
 
 # Модель согласования текущая с учетом 1го сервиса.
 class ApproveList(models.Model):
-    approve_service = models.ForeignKey(Service, verbose_name="Сервис", on_delete=models.CASCADE, null=True, blank=True)
-    service_owner = models.CharField(max_length=200, verbose_name="Владелец Сервиса")
-    email_service_owner = models.EmailField(verbose_name="Почта владельца сервиса")
-    approve_status_owner = models.CharField(max_length=200, verbose_name="Статус согласования Сервис",
-                                            default="Ожидание")
     user_boss = models.CharField(max_length=200, verbose_name="Руководитель пользователя", null=True)
     email_boss = models.EmailField(verbose_name="Почта руководителя")
     approve_status_boss = models.CharField(max_length=200, verbose_name="Статус согласования руководителя",
@@ -115,14 +110,12 @@ class ApproveList(models.Model):
     email_ib = models.EmailField(verbose_name="Почта специалиста IB")
     approve_status_ib = models.CharField(max_length=200, verbose_name="Статус согласования руководителя",
                                          default="Ожидание")
-    fileserver_owner = models.CharField(max_length=200, verbose_name="Владелец Файловой помойки", blank=True, null=True)
-    email_fileserver = models.EmailField(verbose_name="Почта Владельца Файлового хранилища", blank=True, null=True)
     full_status_request = models.CharField(max_length=200, verbose_name="Статус согласования",
                                            default="Ожидание согласования руководителя")
     change_date = models.DateTimeField(verbose_name="Дата изменения", blank=True, null=True)
 
     def __str__(self):
-        return '%s %s' % (self.id, self.full_status_request)
+        return 'Номер листа:%s Статус заявки: %s' % (self.id, self.full_status_request)
 
 
 # Main table for Access Request. On This table based ModelForm and Forms.
@@ -151,11 +144,13 @@ class Access(models.Model):
 
 # Проектная модель листа согласования
 class List_of_Accept(models.Model):
-    Access_ID = models.ForeignKey(Access, verbose_name="Номер Заявки", on_delete=models.CASCADE, null=True, blank=True)
-    Accepter_FIO = models.CharField(max_length=200, verbose_name="Согласующее лицо")
-    Accepted_Service = models.ForeignKey(Service, null=True, on_delete=models.CASCADE,
-                                         verbose_name="Сервис для согласования",default=1)
-    Email_Accepter = models.EmailField(verbose_name="Почта согласующего")
+    # Модель создания множественных листов согласования по каждому сервису.
+    Access_ID = models.ForeignKey(Access, verbose_name="Номер Заявки", on_delete=models.CASCADE, null=True, blank=True,
+                                  default=40)
+    Accepter_FIO = models.CharField(max_length=200, verbose_name="Согласующее лицо", default="Иванов Иван Иванович")
+    Accepted_Service = models.ForeignKey(Service, on_delete=models.CASCADE,
+                                         verbose_name="Сервис для согласования", default=1)
+    Email_Accepter = models.EmailField(verbose_name="Почта согласующего", default="123@mail.rus")
     Accepter_Status = models.CharField(max_length=200, verbose_name="Статус согласования Сервис",
                                        default="Ожидание")
 
