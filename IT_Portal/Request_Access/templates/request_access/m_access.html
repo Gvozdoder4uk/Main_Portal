@@ -39,16 +39,6 @@
         }
 
      }
-
-
-
-
-
-
-
-
-
-
 </script>
 <script>
 function CheckServices(event){
@@ -136,16 +126,36 @@ return result;
                 document.getElementById('ASU_TK').style.display = 'none';
                     }
     });
-    $('#id_Cool_Story_3').change(function() {
+   $('#id_Cool_Story_3').change(function() {
           var checkBox = document.getElementById('id_Cool_Story_3');
           if (checkBox.checked == true){
                  console.log("ПОШЛА");
                 document.getElementById('File_ADD').style.display = 'block';
+                var Desc = document.getElementById('Description');
+                if(Desc.value == ""){
+                        document.getElementById('Description').value += "Прошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ";
+                        }
+                    else{
+                        document.getElementById('Description').value += "\nПрошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ";
+                        }
             } else {
                 console.log("УШЛА");
                 document.getElementById('File_ADD').style.display = 'none';
+                    var Desc = document.getElementById('Description');
+                    if(Desc.value == ""){
+                        }
+                    else{
+                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ','');
+                        Desc.value = Desc.value.replace('Прошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ','');
+                        }
                     }
     });
+     $(contains('deps')).change(function() {
+     var file_share = document.getElementById(contains('deps')).value;
+      var Desc = document.getElementById('Description').value;
+     console.log(File_Share);
+      Desc.value += file_share;
+     });
     $('#id_Cool_Story_4').change(function() {
           var checkBox = document.getElementById('id_Cool_Story_4');
           if (checkBox.checked == true){
@@ -270,6 +280,8 @@ function func3(){
                     <div class="row" style="display:none;" id="File_ADD">
                         <hr class="my-2">
                         <p><b>Дополнительные опции сервиса Файловое хранилище</b></p>
+                        <h5>Выберите Корневую папку:</h5>
+                        {{file_deps}}
                         <hr class="my-1">
                     </div>
                     <div class="row" style="display:none;" id="Remote_ADD">

@@ -32,7 +32,10 @@
             </div>
             <div class="row">
                 <div class="col-12 my-2">
-                    <b>Описание запроса</b> <a class="form-control">{{ get_request.request_desc }}</a>
+                    <b>Описание запроса</b>
+
+                    <a class="form-control">
+                        <textarea readonly style="overflow:hidden;border: none;height:150px;display:inline-block;resize: none;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;width:100%;">{{ get_request.request_desc }}</textarea></a>
                 </div>
             </div>
             <hr>
@@ -91,7 +94,7 @@
                 </div>
             </div>-->
 
-                {% for service in services_request %}
+            {% for service in services_request %}
             <div class="row">
                 <div class="col-4 my-2">
                     <b>Владелец сервиса</b>
@@ -99,7 +102,7 @@
                              <b>{{ service.Accepter_FIO }}</b>
                         </a>
                 </div>
-                {% if service.Accepter_FIO == request.user.userprofile.user_full_name and service.Accepter_Status == "Ожидание" %}
+                {% if service.Accepter_FIO == request.user.userprofile.user_full_name and service.Accepter_Status == "Ожидание согласования" %}
                 <div class="col-2 my-2" style="margin-left:0px;padding-left:0px;">
                     <b>Сервис</b>
                         <a class="form-control" style="align-text:left;padding-left:1px;margin-left:0px;">
@@ -110,8 +113,8 @@
                     <b>Согласование</b>
                         <a class="form-control" style="align-text:left;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;">
                             <form name="accept_service" id="accept_service_{{service.Accepted_Service}}">{% csrf_token %}
-                                <button formmethod="POST" form="accept_service_{{service.Accepted_Service}}" type='submit' value="ACCEPT" style="background-color:#33cc33;border-radius: 7px; color:#262626;"><b>Согласовать</b></button>
-                                <button formmethod="POST" form="accept_service_{{service.Accepted_Service}}" type='submit' value="DECLINE" style="background-color:#ff3333;border-radius: 7px;color:#262626;"><b>Отклонить</b></button>
+                                <button formmethod="POST" name="ACCEPTED_{{service.Accepted_Service}}" form="accept_service_{{service.Accepted_Service}}" type='submit' value="{{service.Accepted_Service}}" style="background-color:#33cc33;border-radius: 7px; color:#262626;"><b>Согласовать</b></button>
+                                <button formmethod="POST" name="DECLINED_{{service.Accepted_Service}}" form="accept_service_{{service.Accepted_Service}}" type='submit' value="{{service.Accepted_Service}}" style="background-color:#ff3333;border-radius: 7px;color:#262626;"><b>Отклонить</b></button>
                             </form>
                         </a>
                 </div>
@@ -119,7 +122,9 @@
                 <div class="col-3 my-2">
                     <b>Статус</b>
                     <a class="form-control"
-                    style="">
+                    style="{% if service.Accepter_Status in 'Согласовано' %} color:green; font-weight:bold; {% endif %}
+                    {% if service.Accepter_Status in 'Не согласовано' %} color:Red; font-weight:bold; {% endif %}
+                    {% if service.Accepter_Status in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
                     {{ service.Accepter_Status }}
                     </a>
                 </div>
@@ -133,7 +138,9 @@
                 <div class="col-4 my-2">
                     <b>Статус</b>
                     <a class="form-control"
-                    style="">
+                    style="{% if service.Accepter_Status in 'Согласовано' %} color:green; font-weight:bold; {% endif %}
+                    {% if service.Accepter_Status in 'Не согласовано' %} color:Red; font-weight:bold; {% endif %}
+                    {% if service.Accepter_Status in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
                     {{ service.Accepter_Status }}
                     </a>
                 </div>
@@ -144,7 +151,7 @@
             <div class="row">
                 <div class="col-8 my-2">
                     <form name="approver_ib" id="approver_ib">{% csrf_token %}
-                    <b>Руководитель ДБ</b> <a class="form-control"><b>{{ get_request.approve_list.ib_spec }}</b>
+                    <b>Специалист ИБ</b> <a class="form-control"><b>{{ get_request.approve_list.ib_spec }}</b>
                     {% if get_request.approve_list.ib_spec.specialist_ib.userprofile == user.userprofile and get_request.approve_list.approve_status_ib == "Ожидание согласования" %} |
                     {{approver.approve_choicer}}
 

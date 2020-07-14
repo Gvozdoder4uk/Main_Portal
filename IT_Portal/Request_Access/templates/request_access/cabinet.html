@@ -29,15 +29,18 @@
             <td style="vertical-align: inherit;">
                 <a href="/requests/detail/{{ITEM.id}}">{{ITEM.create_date|date:"d.m.Y"}}</a></b>
             </td>
-            <td style="vertical-align: inherit; padding:2px 2px;">
+            <td style="vertical-align: inherit; padding:0px 0px; width:15%;">
                 <b><a>{{ITEM.author.userprofile.user_full_name}}</a></b>
-
             </td>
             <td style="vertical-align: inherit;">
                 <b>{{ITEM.request_statuser}}</b>
             </td>
-            <td style="vertical-align: inherit; padding:2px 2px;">
-                <b><a>{{ITEM.approve_list.approve_service}}</a></b>
+            <td style="vertical-align: inherit; padding:2px 2px; width:15%;">
+                {% for service in service_requests %}
+                {% if service.Access_ID.id == ITEM.id %}
+                <b><a>{{service.Accepted_Service}}</a></b><br>
+                {% endif %}
+                {% endfor %}
 
             </td>
             <td style="vertical-align: inherit;">

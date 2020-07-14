@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2babc1a-0cb5-4723-a841-cc5c5a1616ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0069_auto_20200702_1117.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0070_list_of_accept_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0071_auto_20200702_1225.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0072_auto_20200702_1333.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0073_auto_20200702_1516.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0074_approvelist_full_status_request.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/static.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/static.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/db.sqlite3" afterDir="false" />
     </list>
@@ -132,38 +124,13 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1882" height="279" key="GridCell.Tab.0.bottom" timestamp="1585061321248">
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1593713386803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585061321248" />
-    <state width="1882" height="279" key="GridCell.Tab.0.center" timestamp="1585061321248">
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593713386803" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594711369949">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585061321248" />
-    <state width="1882" height="279" key="GridCell.Tab.0.left" timestamp="1585061321248">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585061321248" />
-    <state width="1882" height="279" key="GridCell.Tab.0.right" timestamp="1585061321248">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585061321248" />
-    <state x="461" y="163" key="SettingsEditor" timestamp="1585058654892">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585058654892" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1585115858324">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585115858324" />
-    <state x="639" y="118" width="642" height="804" key="find.popup" timestamp="1585122563270">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="639" y="118" width="642" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1585122563270" />
-    <state x="2559" y="118" width="642" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1585119796510" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593699448778">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593699448778" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594711369949" />
   </component>
 </project>

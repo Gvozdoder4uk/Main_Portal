@@ -60,10 +60,11 @@ class EmailForm(forms.ModelForm):
 
 
 class ApproveForm(forms.ModelForm):
-    email_boss = forms.EmailField(max_length=200, required=False)
+    email_boss = forms.EmailField(max_length=200, required=False, widget=forms.HiddenInput)
     email_ib = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
     user_boss = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
-    full_status_request = forms.CharField(max_length=200, required=False,initial="Ожидание согласования руководителя")
+    full_status_request = forms.CharField(max_length=200, required=False, initial="Ожидание согласования руководителя",
+                                          widget=forms.HiddenInput)
     change_date = forms.CharField(max_length=200, widget=forms.HiddenInput, required=False)
 
     class Meta:
@@ -75,16 +76,15 @@ class ApproveForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            #self.fields['email_boss'].widget = forms.HiddenInput()
-            #self.fields['approve_status_boss'].widget = forms.HiddenInput()
-            #self.fields['approve_status_ib'].widget = forms.HiddenInput()
-            #self.fields['full_status_request'].widget = forms.HiddenInput()
-            #self.fields['ib_spec'].widget = forms.HiddenInput()
+            self.fields['email_boss'].widget = forms.HiddenInput()
+            self.fields['approve_status_boss'].widget = forms.HiddenInput()
+            self.fields['approve_status_ib'].widget = forms.HiddenInput()
+            self.fields['full_status_request'].widget = forms.HiddenInput()
+            self.fields['ib_spec'].widget = forms.HiddenInput()
             self.fields[field].widget.attrs['class'] = 'form-control'
-            #self.fields['email_boss'].widget.attrs['class'] = 'form-control'
-            #self.fields['email_boss'].widget.attrs['readonly'] = False
-            #self.fields['email_ib'].widget.attrs['readonly'] = True
-
+            # self.fields['email_boss'].widget.attrs['class'] = 'form-control'
+            # self.fields['email_boss'].widget.attrs['readonly'] = False
+            # self.fields['email_ib'].widget.attrs['readonly'] = True
 
 
 class AddressForm(forms.ModelForm):
@@ -106,7 +106,7 @@ class AccepterForm(forms.ModelForm):
     # Access_ID = forms.ChoiceField(required=False, initial=Access.objects.get(id=40))
     Accepter_FIO = forms.CharField(max_length=100, required=False, widget=forms.HiddenInput, initial="Access_ID")
     # Accepted_Service = forms.ChoiceField( required=False,initial=Service.objects.get(id=1))
-    Email_Accepter = forms.EmailField(required=False, widget=forms.HiddenInput,initial="Access_ID@mail.rus")
+    Email_Accepter = forms.EmailField(required=False, widget=forms.HiddenInput, initial="Access_ID@mail.rus")
     Accepter_Status = forms.CharField(max_length=100, widget=forms.HiddenInput, required=False, initial="Ожидание")
 
     class Meta:
@@ -129,3 +129,27 @@ class AccepterForm(forms.ModelForm):
 
 class Additional_Service(forms.Form):
     rulechoicer = forms.ChoiceField(choices=SERVICES, required=False)
+
+
+class File_Deps_Form(forms.Form):
+    FILE_DEPS = (
+        (1, "Выберите корневую папку"),
+        ("Департамент анализа эффективности перевозок", "Департамент анализа эффективности перевозок"),
+        ("Департамент безопасности", "Департамент безопасности"),
+        ("Департамент вагонного хозяйства", "Департамент вагонного хозяйства"),
+        (4, "Департамент взаиморасчетов"),
+        (5, "Департамент внешних связей"),
+        (6, "Департамент информационных технологий"),
+        (7, "Департамент корпоративного управления"),
+        (8, "Департамент по управлению персоналом"),
+        (9, "Департамент правового сопровождения"),
+        (10, "Департамент продаж"),
+        (11, "Департамент стратегического маркетинга"),
+        (12, "Департамент стратегического развития"),
+        (13, "Департамент транспортно-экспедиционного обслуживания"),
+        (14, "Департамент финансов и казначейства"),
+        (15, "Департамент экономики и финансов")
+
+    )
+    selector_deps = forms.ChoiceField(choices=FILE_DEPS, required=False, label='Выбор корневой папки',
+                                      widget=forms.CheckboxSelectMultiple())

@@ -155,7 +155,7 @@ class List_of_Accept(models.Model):
                                        default="Ожидание")
 
     def __str__(self):
-        return str(self.id)
+        return "id: %s Номер заявок: %s Согласующее лицо: %s" % (str(self.id), self.Access_ID, self.Accepted_Service)
 
 
 class Requests(models.Model):

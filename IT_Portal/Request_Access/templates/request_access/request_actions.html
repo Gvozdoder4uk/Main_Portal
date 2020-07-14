@@ -10,16 +10,14 @@
 <style>
 
 </style>
-<div style="font-size:13px;"class="container-fluid">
-    <div class="table-responsive" >
-        <table  class="table table-bordered text-center">
-            <thead class="thead-dark" >
+<div style="font-size:13px;" class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
             <tr>
                 <th scope="row">Номер заявки</th>
                 <th scope="row">Заявитель</th>
-                <th scope="row">Сервис</th>
-                <th scope="row">Владелец Сервиса</th>
-                <th scope="row">Статус согласования Владельца сервиса</th>
+                <th scope="row">Сервисы</th>
                 <th scope="row">Руководитель Заявителя</th>
                 <th scope="row">Статус согласования Руководителя</th>
                 <th scope="row">Специалист ИБ</th>
@@ -28,8 +26,20 @@
                 <th scope="row">Статус заявки</th>
             </tr>
             </thead>
-            {% for ITEM in requests %}
             <tbody id="Table1">
+
+            {% for task in all_req %}
+            {% if task.id not in accepter_services and task in requests %}
+            {{requests}}<br>
+            {% else %}
+            {% with accepter_services|list_item:forloop.counter+1 as service %}
+            {{service.Access_ID}}<br>
+
+            {% endif %}
+            {% endfor %}
+             {% for ITEM in all_req %}
+             {% for boss_ib_task in requests %}
+                {% if ITEM.id == boss_ib_task.id %}
             <tr>
                 <td style="vertical-align: inherit;padding:0px 0px 0px 0px;width:120px; font-size:18px;">
                     <div style="width:130px;margin:2px 2px 2px 2px;" class="jumbotron">
@@ -37,16 +47,23 @@
                     </div>
                 </td>
                 <td style="vertical-align: inherit;">
-                        <b><a
+                    <b><a
                             href="/requests/detail/{{ITEM.id}}">{{ITEM.author.userprofile.user_full_name}}</a></b>
                 </td>
                 <td style="vertical-align: inherit;">
-
-                    <b>{{ITEM.approve_list.approve_service}}</b>
-
+                    {% for service in service_requests %}
+                    {% if ITEM.id == service.Access_ID.id %}
+                    <b>{{service.Accepted_Service}}</b><br>
+                    {% endif %}
+                    {% endfor %}
                 </td>
-                <!--<td style="vertical-align: inherit;">
-                    <b>{{ITEM.approve_list.service_owner}}</b>
+                <!--<td style="vertical-align: inherit; width:15%">
+                    {% for service in service_requests %}
+                    {% if ITEM.id == service.Access_ID.id %}
+                    <b>{{service.Accepter_FIO}}</b><br>
+                    {% endif %}
+                    {% endfor %}
+
                 </td>
                 <td style="vertical-align: inherit;">
                     <b>{{ITEM.approve_list.approve_status_owner}}</b>
@@ -70,7 +87,11 @@
                     <div class="container"><b>{{ITEM.request_statuser}}</b></div>
                 </td>
             </tr>
+             {% endif %}
+
             {% endfor %}
+            {% endfor %}
+
             </tbody>
 
         </table>
