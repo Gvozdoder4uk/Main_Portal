@@ -2,6 +2,7 @@
 {% block content %}
 {% include "Include_Templates/header.html" %}
 {% load static %}
+<script src="{% static 'lib/jquery/custom-jquery.js'%}"></script>
 <script>
     function func2(){
     if(document.getElementById('service_choicer').value == 1) {
@@ -66,119 +67,8 @@ return result;
 
 
 </script>
-<script>
-    $(document).ready(function() {
-    $('#id_Cool_Story_0').change(function() {
-          var checkBox = document.getElementById('id_Cool_Story_0');
-          if (checkBox.checked == true){
-                console.log("ПОШЛА");
-                document.getElementById('ASU_VP').style.display = 'block';
-                    var Desc = document.getElementById('Description');
-                    if(Desc.value == ""){
-                        document.getElementById('Description').value += "Прошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ";
-                        }
-                    else{
-                        document.getElementById('Description').value += "\nПрошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ";
-                        }
-            } else {
-                console.log("УШЛА");
-                document.getElementById('ASU_VP').style.display = 'none';
-                var Desc = document.getElementById('Description');
-                    if(Desc.value == ""){
-                        }
-                    else{
-                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ','');
-                        Desc.value = Desc.value.replace('Прошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ','');
-                        }
-                    }
-    });
-    $('#id_Cool_Story_1').change(function() {
-          var checkBox = document.getElementById('id_Cool_Story_1');
-          if (checkBox.checked == true){
-                 console.log("ПОШЛА");
-                document.getElementById('1C_ADD').style.display = 'block';
-                var Desc = document.getElementById('Description');
-                if(Desc.value == ""){
-                        document.getElementById('Description').value += "Прошу предоставить доступ к системе 1C Русагротранс.\nИнформационные базы: ";
-                        }
-                    else{
-                        document.getElementById('Description').value += "\nПрошу предоставить доступ к системе 1C Русагротранс.\nИнформационные базы: ";
-                        }
-            } else {
-                console.log("УШЛА");
-                document.getElementById('1C_ADD').style.display = 'none';
-                    var Desc = document.getElementById('Description');
-                    if(Desc.value == ""){
-                        }
-                    else{
-                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к системе 1C Русагротранс.\nИнформационные базы: ','');
-                        Desc.value = Desc.value.replace('Прошу предоставить доступ к системе 1C Русагротранс.\nИнформационные базы: ','');
-                        }
-                    }
-    });
-    $('#id_Cool_Story_2').change(function() {
-          var checkBox = document.getElementById('id_Cool_Story_2');
-          if (checkBox.checked == true){
-                 console.log("ПОШЛА");
-                document.getElementById('ASU_TK').style.display = 'block';
-            } else {
-                console.log("УШЛА");
-                document.getElementById('ASU_TK').style.display = 'none';
-                    }
-    });
-   $('#id_Cool_Story_3').change(function() {
-          var checkBox = document.getElementById('id_Cool_Story_3');
-          if (checkBox.checked == true){
-                 console.log("ПОШЛА");
-                document.getElementById('File_ADD').style.display = 'block';
-                var Desc = document.getElementById('Description');
-                if(Desc.value == ""){
-                        document.getElementById('Description').value += "Прошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ";
-                        }
-                    else{
-                        document.getElementById('Description').value += "\nПрошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ";
-                        }
-            } else {
-                console.log("УШЛА");
-                document.getElementById('File_ADD').style.display = 'none';
-                    var Desc = document.getElementById('Description');
-                    if(Desc.value == ""){
-                        }
-                    else{
-                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ','');
-                        Desc.value = Desc.value.replace('Прошу предоставить доступ к файловому хранилищу Русагротранс.\nПапка: ','');
-                        }
-                    }
-    });
-     $(contains('deps')).change(function() {
-     var file_share = document.getElementById(contains('deps')).value;
-      var Desc = document.getElementById('Description').value;
-     console.log(File_Share);
-      Desc.value += file_share;
-     });
-    $('#id_Cool_Story_4').change(function() {
-          var checkBox = document.getElementById('id_Cool_Story_4');
-          if (checkBox.checked == true){
-                 console.log("ПОШЛА");
-                document.getElementById('Remote_ADD').style.display = 'block';
-            } else {
-                console.log("УШЛА");
-                document.getElementById('Remote_ADD').style.display = 'none';
-                    }
-    });
-    $('#id_Cool_Story_5').change(function() {
-          var checkBox = document.getElementById('id_Cool_Story_5');
-          if (checkBox.checked == true){
-                 console.log("ПОШЛА");
-                document.getElementById('RAT_Online_ADD').style.display = 'block';
-            } else {
-                console.log("УШЛА");
-                document.getElementById('RAT_Online_ADD').style.display = 'none';
-                    }
-    });
-});
+<!-- SCRIPT FOR ACCESS PAGE-->
 
-</script>
 <script>
 function func3(){
 	var newDiv = $('<div class="listing listing_ad job"><h4><a>Some text</a></h4> </div>');
@@ -233,22 +123,23 @@ function func3(){
                 <form id="send_request" class="mt-3" method="post">{% csrf_token %}
                     <!--{{form_request}}-->
                     <!--{{form_approve.as_p}}-->
-                    <h6>Ф.И.О Заявителя</h6>
+                    <h6><b>Ф.И.О Заявителя</b></h6>
                     {{form_request.user_name}}
                     <div class="row">
                         <div class="col-md-6">
-                            <h6>Департамент заявителя</h6>
+                            <h6><b>Департамент заявителя</b></h6>
                             {{form_request.user_dep}}
                         </div>
                         <div class="col-md-6">
-                            <h6>Отдел заявителя</h6>
+                            <h6><b>Отдел заявителя</b></h6>
                             {{form_request.user_otdel}}
                         </div>
                     </div>
-                    <hr class="my-2">
+                    <hr class="my-3" style="border-top: 1px solid black">
+                    <div class="container-fluid">
                     <div class="row">
+                        <b class="form-control"><h5>Раздел выбора сервиса</h5></b>
                         <div class="col-md-4">
-                            <h6><b>Выбор сервиса</b></h6>
                             <div class="container" style="display:inline-grid;text-align:left;">
                                 {% for item in form_approve.Cool_Story %}
                                 {{ item }}
@@ -262,32 +153,39 @@ function func3(){
                             {{form_bosslist}}
                         </div>
                     </div>
+                        </div>
                     <div class="row" style="display:none;" id="ASU_VP">
-                        <hr class="my-2">
+                        <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса АСУ ВП</b></p>
-                        <hr class="my-1">
+                        <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="1C_ADD">
-                        <hr class="my-2">
+                        <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса 1C</b></p>
-                        <hr class="my-1">
+                        <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="ASU_TK">
-                        <hr class="my-2">
+                        <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса АСУ ТК</b></p>
-                        <hr class="my-1">
+                        <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="File_ADD">
-                        <hr class="my-2">
+                        <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса Файловое хранилище</b></p>
                         <h5>Выберите Корневую папку:</h5>
                         {{file_deps}}
-                        <hr class="my-1">
+                        <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="Remote_ADD">
-                        <hr class="my-2">
+                        <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса Удаленный Доступ</b></p>
-                        <hr class="my-1">
+                        <div class="container-fluid">
+                            <div class="form-control">
+                                <label for="RDP_TERMINAL" style="display:table-cell;"><input checked type="checkbox" id="RDP_TERMINAL" name="RDP_TERMINAL"> Терминальный сервер</label></div>
+                            <div class="form-control">
+                                <label for="RDP_PC" style="display:table-cell;"><input type="checkbox" id="RDP_PC" name="RDP_PC"> Рабочий ПК<br></label><label id='computername' for="compname" style="display:none;padding-left: 150px;">Имя вашего ПК:<input id='compname' name='compname' placeholder="w00-*" style="height: 22px;" value="{{name_pc}}"></label></div>
+                                </div>
+                        <hr class="my-3" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="RAT_Online_ADD">
                         <hr class="my-2">

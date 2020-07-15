@@ -14,6 +14,7 @@ from django.forms.models import inlineformset_factory
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.messages import get_messages
+import platform
 
 
 def is_member(user):
@@ -62,36 +63,66 @@ class RequestDetailView(DetailView):
     context_object_name = 'get_request'
 
 
-def edit_request(request):
-    if request.method == 'POST':
-        form = RequestForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-    list_requests = Requests.objects.all()
-    form = RequestForm()
-    context = {
-        'list_requests': list_requests,
-        'form': form
-    }
-    template = 'request_access/edit_request.html'
-    return render(request, template, context)
-
-
 @login_required
-def request_actions(request):
+def accepted_requests(request):
     all_req = Access.objects.all().order_by('-create_date')
+    request_for_accept = List_of_Accept.objects.filter(
+        Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(
+        Access_ID__approve_list__approve_status_boss="Ожидание").values("Access_ID").distinct() \
+                         & List_of_Accept.objects.filter(
+        Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(
+        Access_ID__approve_list__approve_status_boss="Ожидание согласования").values("Access_ID").distinct() \
+                         | List_of_Accept.objects.filter(
+        Access_ID__approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name).values(
+        "Access_ID").distinct() \
+                         | List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(
+        Accepter_Status="Ожидание").values("Access_ID").distinct() \
+                         & List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(
+        Accepter_Status="Ожидание согласования").values("Access_ID").distinct()
+
     requests = Access.objects.filter(
         approve_list__user_boss__contains=request.user.userprofile.user_full_name) | Access.objects.filter(
         approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name)
     boss_requests = ApproveList.objects.filter(
         user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     service_requests = List_of_Accept.objects.all()
-    accepter_services = List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).values("Access_ID").distinct()
+    accepter_services = List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).values(
+        "Access_ID").distinct()
     approve_request = ApproveList.objects.all()
     context = {
+        'request_for_accept': request_for_accept,
         'all_req': all_req,
-        'accepter_services':accepter_services,
+        'accepter_services': accepter_services,
+        'requests': requests,
+        'approve_request': approve_request,
+        'boss_requests ': boss_requests,
+        'service_requests': service_requests
+    }
+    return render(request, 'request_access/request_actions.html', context)
+
+@login_required
+def request_actions(request):
+    all_req = Access.objects.all().order_by('-create_date')
+    request_for_accept = List_of_Accept.objects.filter(Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(Access_ID__approve_list__approve_status_boss="Согласовано").values("Access_ID").distinct() \
+    & List_of_Accept.objects.filter(Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(Access_ID__approve_list__approve_status_boss="Не согласовано").values("Access_ID").distinct() \
+    | List_of_Accept.objects.filter(Access_ID__approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name).values("Access_ID").distinct() \
+    | List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(Accepter_Status="Согласовано").values("Access_ID").distinct() \
+    & List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(Accepter_Status="Не согласовано").values("Access_ID").distinct()
+
+
+    requests = Access.objects.filter(
+        approve_list__user_boss__contains=request.user.userprofile.user_full_name) | Access.objects.filter(
+        approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name)
+    boss_requests = ApproveList.objects.filter(
+        user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
+    service_requests = List_of_Accept.objects.all()
+    accepter_services = List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).values(
+        "Access_ID").distinct()
+    approve_request = ApproveList.objects.all()
+    context = {
+        'request_for_accept': request_for_accept,
+        'all_req': all_req,
+        'accepter_services': accepter_services,
         'requests': requests,
         'approve_request': approve_request,
         'boss_requests ': boss_requests,
@@ -129,6 +160,9 @@ def RequestActionDetail(request, id):
             task.approve_status_boss = request.POST.get('approve_choicer')
             if request.POST.get('approve_choicer') == "Не согласовано":
                 # task.approve_status_owner = request.POST.get('approve_choicer')
+                for service in all_services_on_task:
+                    service.Accepter_Status = request.POST.get('approve_choicer')
+                    service.save(update_fields=["Accepter_Status"])
                 task.approve_status_ib = request.POST.get('approve_choicer')
                 main_access_task.request_statuser = "Не согласовано руководителем"
                 task.save(update_fields=["approve_status_boss", "approve_status_ib"])
@@ -229,6 +263,7 @@ from django.core.mail import EmailMessage
 @login_required()
 def m_access(request):
     template = 'request_access/m_access.html'
+    name_pc = platform.node()
     if request.method == 'POST':
         form_mn = AccessForm(request.POST)
         form_cs = AccepterForm(request.POST)
@@ -309,6 +344,7 @@ def m_access(request):
     advanced_form = Additional_Service()
     file_deps = File_Deps_Form()
     context = {
+        'name_pc': name_pc,
         'form_approve': form_approve,
         'form_sendmail': form_sendmail,
         'form_request': form_request,

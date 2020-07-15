@@ -4,7 +4,7 @@
 {% if request.user.is_authenticated %}
 {% include "Include_Templates/requests_sidebar.html"%}
 <H3 class="text-center">Заявки на согласование: {{user.userprofile.user_last_name}}
-    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{requests.count}}</b>
+    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{request_for_accept.count}}</b>
     </p></H3>
 {% if requests.count != 0 %}
 <style>
@@ -27,19 +27,9 @@
             </tr>
             </thead>
             <tbody id="Table1">
-
-            {% for task in all_req %}
-            {% if task.id not in accepter_services and task in requests %}
-            {{requests}}<br>
-            {% else %}
-            {% with accepter_services|list_item:forloop.counter+1 as service %}
-            {{service.Access_ID}}<br>
-
-            {% endif %}
-            {% endfor %}
              {% for ITEM in all_req %}
-             {% for boss_ib_task in requests %}
-                {% if ITEM.id == boss_ib_task.id %}
+               {% for accept_task in request_for_accept %}
+                {% if accept_task.Access_ID == ITEM.id %}
             <tr>
                 <td style="vertical-align: inherit;padding:0px 0px 0px 0px;width:120px; font-size:18px;">
                     <div style="width:130px;margin:2px 2px 2px 2px;" class="jumbotron">
@@ -87,8 +77,7 @@
                     <div class="container"><b>{{ITEM.request_statuser}}</b></div>
                 </td>
             </tr>
-             {% endif %}
-
+            {% endif %}
             {% endfor %}
             {% endfor %}
 
