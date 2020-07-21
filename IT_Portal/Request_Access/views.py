@@ -9,12 +9,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import *
 from IT_Portal import settings
 from datetime import *
-from django.http import HttpResponseRedirect
-from django.forms.models import inlineformset_factory
-from django.db.models import Q
-from django.contrib import messages
-from django.contrib.messages import get_messages
 import platform
+from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import time
 
 
 def is_member(user):
@@ -100,15 +99,25 @@ def accepted_requests(request):
     }
     return render(request, 'request_access/request_actions.html', context)
 
+
 @login_required
 def request_actions(request):
     all_req = Access.objects.all().order_by('-create_date')
-    request_for_accept = List_of_Accept.objects.filter(Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(Access_ID__approve_list__approve_status_boss="Согласовано").values("Access_ID").distinct() \
-    & List_of_Accept.objects.filter(Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(Access_ID__approve_list__approve_status_boss="Не согласовано").values("Access_ID").distinct() \
-    | List_of_Accept.objects.filter(Access_ID__approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name).values("Access_ID").distinct() \
-    | List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(Accepter_Status="Согласовано").values("Access_ID").distinct() \
-    & List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(Accepter_Status="Не согласовано").values("Access_ID").distinct()
-
+    request_for_accept = List_of_Accept.objects.filter(
+        Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(
+        Access_ID__approve_list__approve_status_boss="Согласовано").values("Access_ID").distinct() \
+                         & List_of_Accept.objects.filter(
+        Access_ID__approve_list__user_boss__contains=request.user.userprofile.user_full_name).exclude(
+        Access_ID__approve_list__approve_status_boss="Не согласовано").values("Access_ID").distinct() \
+                         | List_of_Accept.objects.filter(
+        Access_ID__approve_list__ib_spec__specialist_ib__userprofile__user_full_name__contains=request.user.userprofile.user_full_name).values(
+        "Access_ID").distinct() \
+                         | List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(
+        Accepter_Status="Согласовано").values("Access_ID").distinct() \
+                         & List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(
+        Accepter_Status="Не согласовано").values("Access_ID").distinct() \
+                         & List_of_Accept.objects.filter(Accepter_FIO=request.user.userprofile.user_full_name).exclude(
+        Accepter_Status="Ожидание").values("Access_ID").distinct()
 
     requests = Access.objects.filter(
         approve_list__user_boss__contains=request.user.userprofile.user_full_name) | Access.objects.filter(
@@ -155,7 +164,7 @@ def RequestActionDetail(request, id):
         service_approve = List_of_Accept.objects.filter(Access_ID=id) & List_of_Accept.objects.filter(
             Accepter_FIO=request.user.userprofile.user_full_name)
         print(f" Пользователь {request.user.userprofile.user_full_name}")
-        if request.user.userprofile.user_full_name == task.user_boss:
+        if request.user.userprofile.user_full_name == task.user_boss and task.approve_status_boss != "Согласовано":
             print(f"{task.user_boss} BOSS")
             task.approve_status_boss = request.POST.get('approve_choicer')
             if request.POST.get('approve_choicer') == "Не согласовано":
@@ -175,80 +184,74 @@ def RequestActionDetail(request, id):
                 main_access_task.request_statuser = "Ожидание согласования сервисов"
                 task.save(update_fields=["approve_status_boss", "approve_status_ib"])
                 main_access_task.save(update_fields=["request_statuser"])
-        for service in service_approve:
-            if service.Accepter_FIO == request.user.userprofile.user_full_name:
-                print(request.POST.get(f"ACCEPTED_{service.Accepted_Service.service_name}"))
-                print(f"ID = {service.id}")
-                if service.Accepted_Service.service_name == request.POST.get(
-                        f"ACCEPTED_{service.Accepted_Service.service_name}"):
-                    if request.user.userprofile.user_full_name == service.Accepter_FIO:
-                        print("Пытаемся согласовать сервис")
-                        print("СОГЛАСОВЫВАЕМ")
-                        print(f"{service.Accepted_Service.service_name} SERVICE")
-                        service.Accepter_Status = "Согласовано"
-                        service.save(update_fields=["Accepter_Status"])
-                    else:
-                        # main_access_task.request_statuser = "Ожидание согласования отдела ИБ"
-                        # service_approve.save(update_fields=["Accepter_Status"])
-                        print("Что то пошло не так")
-                        # main_access_task.save(update_fields=["request_statuser"])'''
-                if service.Accepted_Service.service_name == request.POST.get(
-                        f"DECLINED_{service.Accepted_Service.service_name}"):
-                    if request.user.userprofile.user_full_name == service.Accepter_FIO:
-                        '''task.approve_status_boss = request.POST.get('approve_choicer')
-                         task.approve_status_ib = request.POST.get('approve_choicer')
-                        main_access_task.request_statuser = "Не согласовано владельцем сервиса"
-                        task.save(update_fields=["approve_status_boss", "approve_status_ib"])
-                        main_access_task.save(update_fields=["request_statuser"])'''
-                        print("ОТБОЙ")
-                        print(f"{service.Accepted_Service.service_name} SERVICE")
-                        service.Accepter_Status = "Не согласовано"
-                        service.save(update_fields=["Accepter_Status"])
-                    else:
-                        # main_access_task.request_statuser = "Ожидание согласования отдела ИБ"
-                        # service_approve.save(update_fields=["Accepter_Status"])
-                        print("Что то пошло не так")
-                        # main_access_task.save(update_fields=["request_statuser"])'''
-                count_services = all_services_on_task.count()
-                accepted = 0
-                declined = 0
-                for serv in all_services_on_task:
-                    if serv.Accepter_Status == "Согласовано":
-                        accepted += 1
-                    if serv.Accepter_Status == "Не согласовано":
-                        declined += 1
-
-                print(f"Согласовано сервисов {accepted} из {count_services}")
-                print(f"Несогласовано сервисов: {declined} из {count_services}")
-                if accepted + declined == count_services and declined == count_services:
-                    print("Круг согласования сервисов завершен, отмена заявки")
-                    task.approve_status_ib = "Не согласовано"
-                    task.save(update_fields=["approve_status_ib"])
-                    main_access_task.request_statuser = "Не согласовано"
-                    main_access_task.save(update_fields=["request_statuser"])
-                elif accepted + declined == count_services and declined != count_services or accepted == count_services:
-                    print("Круг согласования сервисов завершен, передача в ИБ")
-                    task.approve_status_ib = "Ожидание согласования"
-                    task.save(update_fields=["approve_status_ib"])
-                    main_access_task.request_statuser = "Ожидание согласования ИБ"
-                    main_access_task.save(update_fields=["request_statuser"])
-                else:
-                    print("Круг согласования сервисов не завершен.")
-        if request.user.userprofile.user_full_name == task.ib_spec.specialist_ib.userprofile.user_full_name:
-            main_access_task.request_statuser = request.POST.get('approve_choicer')
-            task.approve_status_ib = request.POST.get('approve_choicer')
-            if request.POST.get('approve_choicer') == "Не согласовано":
-                task.approve_status_boss = request.POST.get('approve_choicer')
-                # task.approve_status_owner = request.POST.get('approve_choicer')
-                main_access_task.request_statuser = "Не согласовано отделом ИБ"
-                task.save(update_fields=["approve_status_boss", "approve_status_ib"])
+        elif request.user.userprofile.user_full_name != task.ib_spec.specialist_ib.userprofile.user_full_name:
+            for service in service_approve:
+                if service.Accepter_FIO == request.user.userprofile.user_full_name:
+                    print(request.POST.get(f"ACCEPTED_{service.Accepted_Service.service_name}"))
+                    print(f"ID = {service.id}")
+                    if service.Accepted_Service.service_name == request.POST.get(
+                            f"ACCEPTED_{service.Accepted_Service.service_name}"):
+                        if request.user.userprofile.user_full_name == service.Accepter_FIO:
+                            print("Пытаемся согласовать сервис")
+                            print("СОГЛАСОВЫВАЕМ")
+                            print(f"{service.Accepted_Service.service_name} SERVICE")
+                            service.Accepter_Status = "Согласовано"
+                            service.save(update_fields=["Accepter_Status"])
+                        else:
+                            # main_access_task.request_statuser = "Ожидание согласования отдела ИБ"
+                            # service_approve.save(update_fields=["Accepter_Status"])
+                            print("Что то пошло не так")
+                            # main_access_task.save(update_fields=["request_statuser"])'''
+                    if service.Accepted_Service.service_name == request.POST.get(
+                            f"DECLINED_{service.Accepted_Service.service_name}"):
+                        if request.user.userprofile.user_full_name == service.Accepter_FIO:
+                            print("ОТБОЙ")
+                            print(f"{service.Accepted_Service.service_name} SERVICE")
+                            service.Accepter_Status = "Не согласовано"
+                            service.save(update_fields=["Accepter_Status"])
+                        else:
+                            print("Что то пошло не так")
+            count_services = all_services_on_task.count()
+            accepted = 0
+            declined = 0
+            for serv in all_services_on_task:
+                if serv.Accepter_Status == "Согласовано":
+                    accepted += 1
+                if serv.Accepter_Status == "Не согласовано":
+                    declined += 1
+            print(f"Согласовано сервисов {accepted} из {count_services}")
+            print(f"Несогласовано сервисов: {declined} из {count_services}")
+            if accepted + declined == count_services and declined == count_services:
+                print("Круг согласования сервисов завершен, отмена заявки")
+                task.approve_status_ib = "Не согласовано"
+                task.save(update_fields=["approve_status_ib"])
+                main_access_task.request_statuser = "Не согласовано"
+                main_access_task.save(update_fields=["request_statuser"])
+            elif accepted + declined == count_services and declined != count_services or accepted == count_services:
+                print("Круг согласования сервисов завершен, передача в ИБ")
+                task.approve_status_ib = "Ожидание согласования"
+                task.save(update_fields=["approve_status_ib"])
+                main_access_task.request_statuser = "Ожидание согласования ИБ"
                 main_access_task.save(update_fields=["request_statuser"])
             else:
-                task.approve_status_ib = "Согласовано"
-                task.save(update_fields=["approve_status_ib"])
-                main_access_task.request_statuser = "Заявка согласована"
-                main_access_task.save(update_fields=["request_statuser"])
-        return render(request, template, context)
+                print("Круг согласования сервисов не завершен.")
+        else:
+            if request.user.userprofile.user_full_name == task.ib_spec.specialist_ib.userprofile.user_full_name:
+                main_access_task.request_statuser = request.POST.get('approve_choicer')
+                task.approve_status_ib = request.POST.get('approve_choicer')
+                if request.POST.get('approve_choicer') == "Не согласовано":
+                    task.approve_status_boss = request.POST.get('approve_choicer')
+                    # task.approve_status_owner = request.POST.get('approve_choicer')
+                    main_access_task.request_statuser = "Не согласовано отделом ИБ"
+                    task.save(update_fields=["approve_status_boss", "approve_status_ib"])
+                    main_access_task.save(update_fields=["request_statuser"])
+                else:
+                    task.approve_status_ib = "Согласовано"
+                    task.save(update_fields=["approve_status_ib"])
+                    main_access_task.request_statuser = "Заявка согласована"
+                    main_access_task.save(update_fields=["request_statuser"])
+            # return render(request, template, context)
+            return HttpResponseRedirect(reverse('request_detail', kwargs={'id': id}))
 
     return render(request, template, context)
 
@@ -310,7 +313,9 @@ def m_access(request):
             model_mn = AccessForm()
             model_cs = AccepterForm()
             model_ap = ApproveForm()
+
             return render(request, 'request_access/test_inline.html', context)
+            #return HttpResponseRedirect(reverse('created_task', kwargs={'id': id}))
         else:
             print("Не Пошла!")
 
@@ -441,6 +446,8 @@ def email(request):
         form = EmailForm()
     return render(request, 'request_access/sendmail.html', {'form': form})
 
-# @login_required
-# def created_task(request):
-#   return render(request, 'request_access/test_inline.html', {"created_task": saved_data})
+
+#@login_required
+#def created_task(request, id):
+#    created_task = id
+#    return render(request, 'request_access/test_inline.html', {'created_task': created_task})

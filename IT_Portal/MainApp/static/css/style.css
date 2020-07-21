@@ -861,7 +861,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .site-footer {
   background-color: #343a40;
-  position:relative;
+  position:absolute;
+  height:100px;
   width:100%;
   bottom: 0;
 }

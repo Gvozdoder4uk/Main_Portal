@@ -3,48 +3,11 @@
 {% include "Include_Templates/header.html" %}
 {% load static %}
 <script src="{% static 'lib/jquery/custom-jquery.js'%}"></script>
-<script>
-    function func2(){
-    if(document.getElementById('service_choicer').value == 1) {
-        //document.getElementById('ASUVP').style.display = 'block';
-        document.getElementById('Description').value ="Прошу предоставить доступ к системе АСУ ВП ";
-    }
-    if(document.getElementById('service_choicer').value != "АСУ ВП") {
-        //document.getElementById('ASUVP').style.display = 'none';
-        if(document.getElementById('Description').value != ""){
-          document.getElementById('Description').value == "";
-        }
-        }
-    if(document.getElementById('service_choicer').value == 2) {
-        //document.getElementById('1C').style.display = 'block';
-        document.getElementById('Description').value ="Прошу предоставить доступ к системе 1С Русагротранс";
-        }
-    if(document.getElementById('service_choicer').value != 2) {
-        //document.getElementById('1C').style.display = 'none';
-        if(document.getElementById('Description').value != ""){
-          document.getElementById('Description').value == "";
-        }
-        }
-     if(document.getElementById('service_choicer').value == 4) {
-        //document.getElementById('File').style.display = 'block';
-        document.getElementById('Description').value ="Прошу предоставить доступ к файловому хранилищу Русагротранс (G:) \\\n";
-        }
-      if(document.getElementById('service_choicer').value != 4) {
-        //document.getElementById('File').style.display = 'none';
-        if(document.getElementById('Description').value != ""){
-          document.getElementById('Description').value == "";
-        }
-        }
-      if(document.getElementById('service_choicer').value == 5) {
-        document.getElementById('Description').value ="Прошу предоставить удаленный доступ к Терминальному серверу Русагротранс";
-        }
-
-     }
-</script>
+<!-- SCRIPT FOR CHECK SELETED SERVICES-->
 <script>
 function CheckServices(event){
 var setter = 0;
-for (let i = 0; i < 5; i++)
+for (let i = 0; i < 7; i++)
 {
     if(document.getElementById('id_Cool_Story_'+i).checked){
         ++setter;
@@ -63,11 +26,8 @@ else
 console.log(result);
 return result;
 }
-
-
-
 </script>
-<!-- SCRIPT FOR ACCESS PAGE-->
+
 
 <script>
 function func3(){
@@ -75,7 +35,6 @@ function func3(){
   //newDiv.style.background = "#000";
   document.getElementById('ServiceChoice').appendChild(newDiv);
 }
-
 </script>
 
 <script>
@@ -94,16 +53,6 @@ function func3(){
     function func7(){
         document.getElementById('Description').value +="Папка департамента : "+document.getElementById('FILE_CHOICER').value +"\\\n";
     }
-
-
-
-
-
-
-
-
-
-
 </script>
 
 {% include "Include_Templates/requests_sidebar.html"%}
@@ -164,9 +113,9 @@ function func3(){
                         <p><b>Дополнительные опции сервиса 1C</b></p>
                         <hr class="my-1" style="border-top: 1px solid black">
                     </div>
-                    <div class="row" style="display:none;" id="ASU_TK">
+                    <div class="row" style="display:none;" id="ASU_MR">
                         <hr class="my-2" style="border-top: 1px solid black">
-                        <p><b>Дополнительные опции сервиса АСУ ТК</b></p>
+                        <p><b>Дополнительные опции сервиса АСУ МР</b></p>
                         <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="File_ADD">
@@ -226,8 +175,10 @@ function func3(){
 
             </div>
         </div>
-
+    </div>
 </section>
+
+
 {% endblock %}
 
 

@@ -6,7 +6,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 SERVICES = (
     (1, "АСУ ВП"),
     (2, "1С Русагротранс"),
-    (3, "АСУ ТК"),
+    (3, "АСУ МР"),
     (4, "Файловое Хранилище"),
     (5, "Удаленный доступ"),
     (6, "Русагротранс Онлайн"),
@@ -44,6 +44,7 @@ class AccessForm(forms.ModelForm):
             self.fields['user_otdel'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['id'] = 'Description'
+            self.fields['comments'].widget.attrs['class'] = 'form-control'
 
 
 from .models import Mails

@@ -115,7 +115,7 @@
             {% if request.user.is_authenticated %}
             {% url 'all_requests' as url_index3 %}
             {% url 'my_requests' as url_index2 %}
-            {% url 'main' as url_index1 %}
+            {% url 'req_index' as url_index1 %}
             {% url 'request_actions' as url_index4 %}
             <li>
                 <a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}"

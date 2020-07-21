@@ -6,10 +6,8 @@
 <H3 class="text-center">Заявки на согласование: {{user.userprofile.user_last_name}}
     {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{request_for_accept.count}}</b>
     </p></H3>
-{% if requests.count != 0 %}
-<style>
+{% if request_for_accept.count != 0 %}
 
-</style>
 <div style="font-size:13px;" class="container-fluid">
     <div class="table-responsive">
         <table class="table table-bordered text-center">

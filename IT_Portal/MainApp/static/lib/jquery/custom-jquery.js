@@ -6,10 +6,10 @@
                 document.getElementById('ASU_VP').style.display = 'block';
                     var Desc = document.getElementById('Description');
                     if(Desc.value == ""){
-                        document.getElementById('Description').value += "Прошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ";
+                        document.getElementById('Description').value += "Прошу предоставить доступ к системе АСУ ВП.\n";
                         }
                     else{
-                        document.getElementById('Description').value += "\nПрошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ";
+                        document.getElementById('Description').value += "\nПрошу предоставить доступ к системе АСУ ВП.\n";
                         }
             } else {
                 console.log("УШЛА");
@@ -18,15 +18,14 @@
                     if(Desc.value == ""){
                         }
                     else{
-                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ','');
-                        Desc.value = Desc.value.replace('Прошу предоставить доступ к системе АСУ ВП.\nПринадлежность к компании: ','');
+                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к системе АСУ ВП.\n','');
+                        Desc.value = Desc.value.replace('Прошу предоставить доступ к системе АСУ ВП.\n','');
                         }
                     }
     });
     $('#id_Cool_Story_1').change(function() {
           var checkBox = document.getElementById('id_Cool_Story_1');
           if (checkBox.checked == true){
-                 console.log("ПОШЛА");
                 document.getElementById('1C_ADD').style.display = 'block';
                 var Desc = document.getElementById('Description');
                 if(Desc.value == ""){
@@ -50,11 +49,24 @@
     $('#id_Cool_Story_2').change(function() {
           var checkBox = document.getElementById('id_Cool_Story_2');
           if (checkBox.checked == true){
-                 console.log("ПОШЛА");
-                document.getElementById('ASU_TK').style.display = 'block';
+                document.getElementById('ASU_MR').style.display = 'block';
+                var Desc = document.getElementById('Description');
+                if(Desc.value == ""){
+                        document.getElementById('Description').value += "Прошу предоставить доступ к системе АСУ МР Русагротранс\n";
+                        }
+                    else{
+                        document.getElementById('Description').value += "\nПрошу предоставить доступ к системе АСУ МР Русагротранс\n";
+                        }
             } else {
-                console.log("УШЛА");
-                document.getElementById('ASU_TK').style.display = 'none';
+                // Реализация процесса очистки доп опций.
+                document.getElementById('ASU_MR').style.display = 'none';
+                var Desc = document.getElementById('Description');
+                    if(Desc.value == ""){
+                        }
+                    else{
+                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к системе АСУ МР Русагротранс\n','');
+                        Desc.value = Desc.value.replace('Прошу предоставить доступ к системе АСУ МР Русагротранс\n','');
+                        }
                     }
     });
    $('#id_Cool_Story_3').change(function() {

@@ -44,14 +44,14 @@ class UserProfile(models.Model):
         self.user_full_name = full_name
         super(UserProfile, self).save()
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
+    #@receiver(post_save, sender=User)
+    #def create_user_profile(sender, instance, created, **kwargs):
+    #    if created:
+    #        UserProfile.objects.create(user=instance)
 
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.userprofile.save()
+    #@receiver(post_save, sender=User)
+    #def save_user_profile(sender, instance, **kwargs):
+    #    instance.userprofile.save()
 
 
 # Модель сотрудника информационной безопасности. И установка его активным согласующим.
@@ -119,6 +119,7 @@ class ApproveList(models.Model):
 
 
 # Main table for Access Request. On This table based ModelForm and Forms.
+# Основная таблица хранения заявки.
 class Access(models.Model):
     approve_list = models.ForeignKey(ApproveList, on_delete=models.CASCADE, verbose_name="Лист Согласования", null=True,
                                      blank=True)
@@ -133,6 +134,8 @@ class Access(models.Model):
     request_desc = models.TextField(verbose_name="Описание Запроса")
     creator = models.ForeignKey(User, related_name="Creator", verbose_name="Создатель заявки", on_delete=models.CASCADE,
                                 null=True, blank=True)
+    comments = models.TextField(max_length=2000, verbose_name="Комментарий к заявке",blank=True, null=True)
+    task_flow_history = models.TextField(max_length=5000, verbose_name="История хода заявки", null=True, blank=True)
 
     class Meta:
         verbose_name = 'Реестр запросов'
@@ -143,6 +146,7 @@ class Access(models.Model):
 
 
 # Проектная модель листа согласования
+# Утвержденная модель листа согласования сервисной заявки
 class List_of_Accept(models.Model):
     # Модель создания множественных листов согласования по каждому сервису.
     Access_ID = models.ForeignKey(Access, verbose_name="Номер Заявки", on_delete=models.CASCADE, null=True, blank=True,
@@ -157,7 +161,7 @@ class List_of_Accept(models.Model):
     def __str__(self):
         return "id: %s Номер заявок: %s Согласующее лицо: %s" % (str(self.id), self.Access_ID, self.Accepted_Service)
 
-
+# Тестовая таблица для запросов, на текущий момент не используется.
 class Requests(models.Model):
     create_date = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
     name = models.CharField(max_length=500, verbose_name='Название запроса')

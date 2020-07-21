@@ -3,3 +3,5 @@ IT_Portal/IT_Portal/__pycache__/
 /venv/*
 
 *.pyc
+
+.idea/
