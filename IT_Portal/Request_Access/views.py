@@ -164,7 +164,11 @@ def RequestActionDetail(request, id):
         service_approve = List_of_Accept.objects.filter(Access_ID=id) & List_of_Accept.objects.filter(
             Accepter_FIO=request.user.userprofile.user_full_name)
         print(f" Пользователь {request.user.userprofile.user_full_name}")
+<<<<<<< HEAD
         if request.user.userprofile.user_full_name == task.user_boss and task.approve_status_boss != "Согласовано":
+=======
+        if request.user.userprofile.user_full_name == task.user_boss and task.approve_status_boss!="Согласовано":
+>>>>>>> master
             print(f"{task.user_boss} BOSS")
             task.approve_status_boss = request.POST.get('approve_choicer')
             if request.POST.get('approve_choicer') == "Не согласовано":
