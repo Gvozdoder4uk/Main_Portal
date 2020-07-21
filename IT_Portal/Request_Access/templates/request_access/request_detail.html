@@ -4,15 +4,56 @@
 {% if request.user.is_authenticated %}
 {% include "Include_Templates/requests_sidebar.html"%}
 {% load static %}
+<script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+
+<script>
+$(document).ready(function() {
+        $(".export-pdf").click(function() {
+        console.log("ПОшли")
+        // Convert the DOM element to a drawing using kendo.drawing.drawDOM
+        kendo.drawing.drawDOM($(".content-wrapper"))
+        .then(function(group) {
+            // Render the result as a PDF file
+            return kendo.drawing.exportPDF(group, {
+                paperSize: "auto",
+                margin: { left: "0cm", top: "0cm", right: "0cm", bottom: "0cm" }
+            });
+        })
+        .done(function(data) {
+            // Save the PDF file
+            var Element =  $("#id_task").text();
+            console.log(Element)
+            kendo.saveAs({
+                dataURI: data,
+                fileName: Element + ".pdf",
+
+            });
+        });
+    });
+    });
+</script>
+<script>
+    // Import DejaVu Sans font for embedding
+
+    // NOTE: Only required if the Kendo UI stylesheets are loaded
+    // from a different origin, e.g. cdn.kendostatic.com
+    kendo.pdf.defineFont({
+        "DejaVu Sans"             : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "WebComponentsIcons"      : "https://kendo.cdn.telerik.com/2017.1.223/styles/fonts/glyphs/WebComponentsIcons.ttf"
+    });
+</script>
+
 <div class="container">
     <div style="background-color:#343a40;outline:12px;border-radius:20px;padding:10px 10px 10px 10px;"
          class="container text-center"
          id="Serv">
         <img style="background:#343a40;padding:20px 0px 15px 0px;width:300px" src="{% static 'images/Rat_Logos.png'%}">
-
-        <div class="jumbotron" style="margin-bottom:3px; padding:3px;background-color:white;">
-            <h3 class="text-center" style="font-family:Arial;">Заявка на доступ №{{get_request.id}} от
-                {{get_request.create_date|date:'d.m.Y'}}</h3>
+        <input type="image" class="export-pdf" src="{% static 'images/pdf.png' %}">
+        <div class="jumbotron content-wrapper" id="content-wrapper" style="margin-bottom:3px; padding:3px;background-color:white;">
+            <h3 id="id_task" class="text-center" style="font-family:Arial;">Заявка на доступ №{{get_request.id}} от {{get_request.create_date|date:'d.m.Y'}}</h3>
             <b>Заявитель</b> <a class="form-control" style="font-size:24px">{{ get_request.author.userprofile }}</a>
             <hr>
             <div class="row">
@@ -168,6 +209,13 @@
                     {% if get_request.approve_list.approve_status_ib in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
                     {{ get_request.approve_list.approve_status_ib}}
                 </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    <h3>Раздел комментариев</h3>
+                    <a class="form-control"><textarea readonly style="text-align: center;overflow:hidden;border: none;height:150px;display:inline-block;resize: none;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;width:100%;">{{ get_request.comments}}</textarea></a>
                 </div>
             </div>
 

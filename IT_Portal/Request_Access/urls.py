@@ -6,7 +6,7 @@ from .models import *
 from django.core.paginator import Paginator
 
 urlpatterns = [
-    path('', views.m_access, name='index'),
+    path('', views.m_access, name='req_index'),
     path('multi/', views.m_access, name='multi'),
     path('cabinet/', views.cabinet,
          name='all_requests'),

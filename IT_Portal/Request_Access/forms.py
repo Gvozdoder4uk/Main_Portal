@@ -44,6 +44,7 @@ class AccessForm(forms.ModelForm):
             self.fields['user_otdel'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['class'] = 'form-control'
             self.fields['request_desc'].widget.attrs['id'] = 'Description'
+            self.fields['comments'].widget.attrs['class'] = 'form-control'
 
 
 from .models import Mails
