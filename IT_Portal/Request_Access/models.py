@@ -13,6 +13,22 @@ STATUS_CHOICES = (
     ('Пипос', 'Пипос'),
 )
 
+# Таблица хранения данных о компаниях.
+class Companys(models.Model):
+    company_full_name = models.CharField(max_length=1000, verbose_name="Полное имя компании")
+    company_short_name = models.CharField(max_length=1000, verbose_name="Короткое имя компании")
+    company_address = models.CharField(max_length=2000, verbose_name="Юридический адрес Компании")
+    company_post_address = models.CharField(max_length=2000, verbose_name="Почтовый адрес Компании")
+    company_telephone = models.CharField(max_length=100, verbose_name="Телефон компании", blank=True, null=True)
+    company_order = models.CharField(max_length=1000, verbose_name="Номер договора с компанией", blank=True, null=True)
+    company_activator = models.BooleanField(verbose_name="Владелец портала", blank=True, null=True, help_text="Установка триггера владельца портала", default=False)
+
+    class Meta:
+        verbose_name = 'Компания'
+        verbose_name_plural = 'Компании'
+
+    def __str__(self):
+        return self.company_short_name
 
 # Определение модели пользователя.
 # Связка один к одному к модели Пользователь Django
@@ -31,6 +47,7 @@ class UserProfile(models.Model):
     user_boss = models.ForeignKey(User, related_name="boss", on_delete=models.CASCADE,
                                   help_text="Руководитель пользователя",
                                   verbose_name="Руководитель пользователя", blank=True, null=True)
+    user_company = models.ForeignKey(Companys, verbose_name="Компания пользователя", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Профиль Пользователя'
@@ -44,13 +61,13 @@ class UserProfile(models.Model):
         self.user_full_name = full_name
         super(UserProfile, self).save()
 
-    #@receiver(post_save, sender=User)
-    #def create_user_profile(sender, instance, created, **kwargs):
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
     #    if created:
     #        UserProfile.objects.create(user=instance)
 
-    #@receiver(post_save, sender=User)
-    #def save_user_profile(sender, instance, **kwargs):
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
     #    instance.userprofile.save()
 
 
@@ -114,6 +131,10 @@ class ApproveList(models.Model):
                                            default="Ожидание согласования руководителя")
     change_date = models.DateTimeField(verbose_name="Дата изменения", blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'Лист согласования ИБ и Руководителя'
+        verbose_name_plural = 'Листы согласования ИБ и Руководителя'
+
     def __str__(self):
         return 'Номер листа:%s Статус заявки: %s' % (self.id, self.full_status_request)
 
@@ -134,12 +155,12 @@ class Access(models.Model):
     request_desc = models.TextField(verbose_name="Описание Запроса")
     creator = models.ForeignKey(User, related_name="Creator", verbose_name="Создатель заявки", on_delete=models.CASCADE,
                                 null=True, blank=True)
-    comments = models.TextField(max_length=2000, verbose_name="Комментарий к заявке",blank=True, null=True)
+    comments = models.TextField(max_length=2000, verbose_name="Комментарий к заявке", blank=True, null=True)
     task_flow_history = models.TextField(max_length=5000, verbose_name="История хода заявки", null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Реестр запросов'
-        verbose_name_plural = 'Реестр запросов'
+        verbose_name = 'Заявка на доступ'
+        verbose_name_plural = 'Запросы на доступ'
 
     def __str__(self):
         return "%s %s " % (str(self.id), self.author)
@@ -158,8 +179,13 @@ class List_of_Accept(models.Model):
     Accepter_Status = models.CharField(max_length=200, verbose_name="Статус согласования Сервис",
                                        default="Ожидание")
 
+    class Meta:
+        verbose_name = 'Лист согласования сервисов'
+        verbose_name_plural = 'Листы согласования сервисов'
+
     def __str__(self):
         return "id: %s Номер заявок: %s Согласующее лицо: %s" % (str(self.id), self.Access_ID, self.Accepted_Service)
+
 
 # Тестовая таблица для запросов, на текущий момент не используется.
 class Requests(models.Model):
@@ -170,8 +196,8 @@ class Requests(models.Model):
     end_date = models.DateTimeField(verbose_name='Дата закрытия заявки', null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Запрос'
-        verbose_name_plural = 'Запросы'
+        verbose_name = 'Тестовый Запрос'
+        verbose_name_plural = 'Тестовые Запросы'
 
     def __str__(self):
         return str(self.name)
@@ -183,8 +209,15 @@ class Mails(models.Model):
     subject = models.CharField(max_length=1000, verbose_name="Тема письма")
     message = models.CharField(max_length=20000, verbose_name="Сообщение")
 
+    class Meta:
+        verbose_name = 'Почтовое сообщение'
+        verbose_name_plural = 'Почтовые сообщения'
+
     def __str__(self):
         return self.email
+
+
+
 
 
 # TEST BLOCK

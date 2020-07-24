@@ -2,7 +2,7 @@
 {% block content %}
 {% include "Include_Templates/header.html" %}
 {% load static %}
-<script src="{% static 'lib/jquery/custom-jquery.js'%}"></script>
+<script src="{% static 'lib/jquery/custom-jquery-outer.js'%}"></script>
 <!-- SCRIPT FOR CHECK SELETED SERVICES-->
 <script>
 function CheckServices(event){
@@ -64,7 +64,8 @@ function func3(){
         <div class="jumbotron" style="margin-bottom:3px; padding:3px;background-color:white;">
 
             <h2 class="text-center" style="padding-top:10px;margin-top:0px;margin-bottom:5px;">Заявка на доступ к
-                Информационным Ресурсам</h2>
+                Информационным Ресурсам Компании Русагротранс</h2>
+            <h5>Раздел для внешних пользователей</h5>
             <p id="date"></p>
             <img style="width:100%;padding:1px 0px 10px;" src="{% static 'images/line.png'%}">
 
@@ -72,6 +73,8 @@ function func3(){
                 <form id="send_request" class="mt-3" method="post">{% csrf_token %}
                     <!--{{form_request}}-->
                     <!--{{form_approve.as_p}}-->
+                    <h6><b>Компания заявителя</b></h6>
+                    <b>{{form_request.user_company}}</b>
                     <h6><b>Ф.И.О Заявителя</b></h6>
                     {{form_request.user_name}}
                     <div class="row">
@@ -84,6 +87,8 @@ function func3(){
                             {{form_request.user_otdel}}
                         </div>
                     </div>
+                    <h6><b>Должность заявителя</b></h6>
+                    {{form_request.user_position}}
                     <hr class="my-3" style="border-top: 1px solid black">
                     <div class="container-fluid">
                     <div class="row">
@@ -122,7 +127,12 @@ function func3(){
                         <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса Файловое хранилище</b></p>
                         <h5>Выберите Корневую папку:</h5>
-                        {{file_deps}}
+                        <div class="container" style="display:inline-grid;text-align:left;margin-top:auto;">
+                                {% for item in file_deps %}
+                                {{ item }}
+                                {% endfor %}
+                            </div>
+
                         <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="Remote_ADD">
@@ -131,8 +141,6 @@ function func3(){
                         <div class="container-fluid">
                             <div class="form-control">
                                 <label for="RDP_TERMINAL" style="display:table-cell;"><input checked type="checkbox" id="RDP_TERMINAL" name="RDP_TERMINAL"> Терминальный сервер</label></div>
-                            <div class="form-control">
-                                <label for="RDP_PC" style="display:table-cell;"><input type="checkbox" id="RDP_PC" name="RDP_PC"> Рабочий ПК<br></label><label id='computername' for="compname" style="display:none;padding-left: 150px;">Имя вашего ПК:<input id='compname' name='compname' placeholder="w00-*" style="height: 22px;" value="{{name_pc}}"></label></div>
                                 </div>
                         <hr class="my-3" style="border-top: 1px solid black">
                     </div>

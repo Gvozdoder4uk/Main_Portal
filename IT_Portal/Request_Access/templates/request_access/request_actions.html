@@ -3,6 +3,7 @@
 {% include "Include_Templates/header.html" %}
 {% if request.user.is_authenticated %}
 {% include "Include_Templates/requests_sidebar.html"%}
+<div style="position: relative;min-height: 67.2vh;">
 <H3 class="text-center">Заявки на согласование: {{user.userprofile.user_last_name}}
     {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{request_for_accept.count}}</b>
     </p></H3>
@@ -84,10 +85,14 @@
         </table>
     </div>
 </div>
+</div>
 {% else %}
 <hr class="my-1">
+<div style="position: relative;
+  min-height: 67.2vh;">
 <div class="container">
     <h3>На данный момент нет заявок для согласования.</h3>
+</div>
 </div>
 {% endif %}
 {% endif %}

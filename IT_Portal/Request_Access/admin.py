@@ -9,7 +9,7 @@ admin.site.register(Requests)
 admin.site.register(Mails)
 admin.site.register(InformationSecurity)
 admin.site.register(ApproveList)
-
+admin.site.register(Companys)
 admin.site.register(Address)
 admin.site.register(Store)
 admin.site.register(Service_Group)

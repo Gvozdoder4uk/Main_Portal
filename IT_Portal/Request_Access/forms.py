@@ -16,12 +16,42 @@ SERVICES = (
 
 STATUS_SELECTOR = (
     ("Согласовано", "Согласовано"),
+    #("Согласовано с ограничениями", "Согласовано с ограничениями"),
     ("Не согласовано", "Не согласовано")
 )
 
 
 class ApproveChanger(forms.Form):
     approve_choicer = forms.ChoiceField(choices=STATUS_SELECTOR)
+
+
+class Outer_Access_Form(forms.ModelForm):
+    user_name = forms.CharField(max_length=200)
+    user_company = forms.CharField(max_length=1000)
+    user_position = forms.CharField(max_length=1000)
+
+    class Meta:
+        model = Access
+        exclude = ('number_task',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields['request_statuser'].widget = forms.HiddenInput()
+            self.fields['creator'].widget = forms.HiddenInput()
+            self.fields['approve_list'].widget = forms.HiddenInput()
+            self.fields['author'].widget = forms.HiddenInput()
+            self.fields['user_name'].widget.attrs['class'] = 'form-control'
+            self.fields['user_name'].widget.attrs['id'] = 'userfield'
+            self.fields['user_dep'].widget.attrs['class'] = 'form-control'
+            self.fields['user_otdel'].widget.attrs['class'] = 'form-control'
+            self.fields['request_desc'].widget.attrs['class'] = 'form-control'
+            self.fields['request_desc'].widget.attrs['id'] = 'Description'
+            self.fields['comments'].widget.attrs['class'] = 'form-control'
+            self.fields['user_company'].widget.attrs['class'] = 'form-control'
+            self.fields['user_company'].widget.attrs['readonly'] = True
+            self.fields['user_position'].widget.attrs['class'] = 'form-control'
+            self.fields['user_position'].widget.attrs['readonly'] = True
 
 
 class AccessForm(forms.ModelForm):
@@ -135,10 +165,9 @@ class Additional_Service(forms.Form):
 
 class File_Deps_Form(forms.Form):
     FILE_DEPS = (
-        (1, "Выберите корневую папку"),
-        ("Департамент анализа эффективности перевозок", "Департамент анализа эффективности перевозок"),
-        ("Департамент безопасности", "Департамент безопасности"),
-        ("Департамент вагонного хозяйства", "Департамент вагонного хозяйства"),
+        (1, "Департамент анализа эффективности перевозок"),
+        (2, "Департамент безопасности"),
+        (3, "Департамент вагонного хозяйства"),
         (4, "Департамент взаиморасчетов"),
         (5, "Департамент внешних связей"),
         (6, "Департамент информационных технологий"),

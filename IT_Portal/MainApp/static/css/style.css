@@ -862,9 +862,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 .site-footer {
   background-color: #343a40;
   position:absolute;
-  height:100px;
+  height:70px;
   width:100%;
-  bottom: 0;
+
 }
 
 .site-footer h2,
@@ -1084,7 +1084,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 ul {
-    margin-top:100px;
+   /* margin-top:100px; */
 }
 #footer-menu{
     margin-top:15px;

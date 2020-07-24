@@ -3,6 +3,7 @@
     {% url 'req_index' as url_index %}
     {% url 'multi' as url_index1 %}
   <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path or url_index1 == request.path %} active {% endif %}" href="/requests/">Создание запроса</a>
+    {% if request.user.userprofile.user_company.company_activator == True %}
         {% for group in request.user.groups.all %}
     {% if group.name == 'Admin Reestr' %}
     {% url 'all_requests' as url_index %}
@@ -13,6 +14,7 @@
   <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/request_actions/">Заявки на исполнение</a>
     {% url 'accepted_requests' as url_index %}
   <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/accepted_requests/">Выполненные заявки</a>
+    {% endif %}
     {% url 'my_requests' as url_index %}
   <a style="border: 1px outset #343a40;" class="nav-item nav-link {% if url_index == request.path %} active {% endif %}" href="/requests/personal_cabinet/">Мои заявки</a>
 

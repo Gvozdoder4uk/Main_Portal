@@ -5,7 +5,23 @@
 {% include "Include_Templates/requests_sidebar.html"%}
 {% load static %}
 <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+<script>
 
+
+function ModalOpen() {
+  var modal = document.getElementById("comment_add");
+  console.log("Открываем модальное окно");
+  modal.style.display = "block";
+}
+function ModalClose() {
+  var modal = document.getElementById("comment_add");
+  console.log("Открываем модальное окно");
+  modal.style.display = "none";
+}
+function SubmittComment() {
+    document.getElementById("modal_comment").submit();
+}
+</script>
 <script>
 $(document).ready(function() {
         $(".export-pdf").click(function() {
@@ -45,6 +61,7 @@ $(document).ready(function() {
         "WebComponentsIcons"      : "https://kendo.cdn.telerik.com/2017.1.223/styles/fonts/glyphs/WebComponentsIcons.ttf"
     });
 </script>
+{% if request.user.userprofile.user_full_name == get_request.author.userprofile.user_full_name or request.user.userprofile.user_full_name == get_request.creator.userprofile.user_full_name or request.user.userprofile.user_full_name == get_request.approve_list.user_boss or access_checker == True or request.user.userprofile.user_full_name == get_request.approve_list.ib_spec.specialist_ib.userprofile.user_full_name  %}
 
 <div class="container">
     <div style="background-color:#343a40;outline:12px;border-radius:20px;padding:10px 10px 10px 10px;"
@@ -89,7 +106,7 @@ $(document).ready(function() {
                     {{ get_request.approve_list.user_boss }}</b>
                     {% if get_request.approve_list.user_boss in user.userprofile.user_full_name and get_request.approve_list.approve_status_boss == "Ожидание согласования" %} |
                         {{approver.approve_choicer}}
-                    <button form="approver_boss" formmethod="POST" class="btn-success" type="submit" value="Accepted">
+                    <button form="approver_boss" formmethod="POST" class="btn-success" type="submit" value="Accepted" style="border-radius:7px;">
                         <b>Отправить</b></button>
                         {% endif %}
                     </a>
@@ -194,7 +211,7 @@ $(document).ready(function() {
                     {% if get_request.approve_list.ib_spec.specialist_ib.userprofile == user.userprofile and get_request.approve_list.approve_status_ib == "Ожидание согласования" %} |
                     {{approver.approve_choicer}}
 
-                     <button form="approver_ib" formmethod="POST" type="submit" class="btn-success" ><b>Отправить</b></button>
+                     <button form="approver_ib" formmethod="POST" type="submit" class="btn-success" style="border-radius:7px;"><b>Отправить</b></button>
                     {% endif %}
                 </a>
                         </form>
@@ -212,16 +229,68 @@ $(document).ready(function() {
 
             <div class="row">
                 <div class="container">
-                    <h3>Раздел комментариев</h3>
+                    <h3>Раздел комментариев</h3><button onclick="ModalOpen()"  type="button" class="btn-success" style="border-radius:7px;">Добавить комментарий</button>
+                    <hr>
+                    {% if get_request.comments == '' or get_request.comments == Null %}
+                    {% else%}
                     <a class="form-control"><textarea readonly style="text-align: center;overflow:hidden;border: none;height:150px;display:inline-block;resize: none;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;width:100%;">{{ get_request.comments}}</textarea></a>
+                    {% endif %}
                 </div>
             </div>
+
 
             <p></p>
         </div>
     </div>
 </div>
 
-
+{% else %}
+<div class="jumbotron" style="min-height:68vh">
+    <div class="container">
+        <h2>Отказано в доступе к заявке</h2>
+        <button class="btn btn-primary" type="button"><a href="/">Вернуться на главную страницу</a></button>
+        </div>
+    </div>
 {% endif %}
+{% endif %}
+<style>
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+    </style>
+<div style="display:none;" class="modal" role="dialog" id="comment_add">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="container txt-box">
+                <form id="modal_comment" role="form" method="post">
+                    {% csrf_token %}
+                    <h5>Укажите комментарий или замечаниe</h5>
+                    <textarea name="comment_text" style="margin-top: 0px;margin-bottom: 0px;width: 100%;height: 200px;"></textarea>
+                    <button class="btn" name="modal_comment_btn" type="submit"  formmethod="POST">
+                        Отправить
+                    </button>
+                    <button value="modal_comment_reset" onclick="ModalClose()" style="background-color:red;" class="btn" type="reset" formmethod="POST">
+                        Отмена
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock %}
+
+
+
