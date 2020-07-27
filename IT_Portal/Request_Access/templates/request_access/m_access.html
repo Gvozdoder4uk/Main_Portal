@@ -84,6 +84,12 @@ function func3(){
                             {{form_request.user_otdel}}
                         </div>
                     </div>
+                    <div class="row" style="display:none;">
+                        <label style="margin-left:15px;" for="outer_user">Заявка оформляется для внешнего пользователя</label>
+                        <input style="margin-left:10px;position: inherit;" type="checkbox" placeholder="Для внешнего пользователя" title="Для внешнего пользователя" name="outer_user" id="outer_user">
+
+                    </div>
+                    <hr>
                     <hr class="my-3" style="border-top: 1px solid black">
                     <div class="container-fluid">
                     <div class="row">
@@ -122,7 +128,7 @@ function func3(){
                         <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса Файловое хранилище</b></p>
                         <h5>Выберите Корневую папку:</h5>
-                        {{file_deps}}
+                        <div class="text-left">{{file_deps}}</div>
                         <hr class="my-1" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="Remote_ADD">

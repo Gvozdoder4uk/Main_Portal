@@ -159,6 +159,11 @@ def RequestActionDetail(request, id):
     boss_requests = ApproveList.objects.filter(
         user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     access_checker = False
+    # Чекаем размещение комментов
+    checker_comments = checker_services(id)
+    checker_approve = checker_approve_list(id)
+    print(checker_comments)
+    print(checker_approve)
     for accepter in services_request:
         print(f'{accepter.Accepter_FIO} = {request.user.userprofile.user_full_name}')
         if accepter.Accepter_FIO == request.user.userprofile.user_full_name:
@@ -173,6 +178,8 @@ def RequestActionDetail(request, id):
         'user_requests': user_requests,
         'services_request': services_request,
         'boss_requests': boss_requests,
+        'checker_comments': checker_comments,
+        'checker_approve': checker_approve,
     }
     template = 'request_access/request_detail.html'
     print(request.method)
@@ -571,7 +578,63 @@ def email(request):
         form = EmailForm()
     return render(request, 'request_access/sendmail.html', {'form': form})
 
+
+# Раздел страницы менеджера для создания внешних пользователей и добавления компаний.
+def manager_page(request):
+    companys = Companys.objects.all()
+    form_user = UserForm()
+    company_form = CompanyRegister()
+    outer_user = UserProfile.objects.exclude(user_company=1)
+    context = {
+        'companys': companys,
+        'form_user': form_user,
+        'company_form': company_form,
+        'outer_user': outer_user
+
+    }
+    if request.method == 'POST':
+        if 'modal_company_btn' in request.POST:
+            model_company = CompanyRegister(request.POST)
+            if model_company.is_valid:
+                print("Сохраняем компанию")
+                model_company.save()
+            return HttpResponseRedirect(reverse('manager'))
+    return render(request, 'request_access/manager_page.html', context)
+
+
 # @login_required
 # def created_task(request, id):
 #    created_task = id
 #    return render(request, 'request_access/test_inline.html', {'created_task': created_task})
+
+# Проерка согласования сервисов
+def checker_services(id):
+    all_services_on_task = List_of_Accept.objects.filter(Access_ID=id)
+    count_services = all_services_on_task.count()
+    accepted = 0
+    declined = 0
+    for serv in all_services_on_task:
+        if serv.Accepter_Status == "Согласовано":
+            accepted += 1
+        if serv.Accepter_Status == "Не согласовано":
+            declined += 1
+    if accepted + declined == count_services and declined == count_services:
+        # print("Круг согласования сервисов завершен, отмена заявки")
+        checker_comments = True
+    elif accepted + declined == count_services and declined != count_services or accepted == count_services:
+        # print("Круг согласования сервисов завершен, передача в ИБ")
+        checker_comments = True
+    else:
+        # print("Круг согласования сервисов не завершен.")
+        checker_comments = False
+    return checker_comments
+
+
+def checker_approve_list(id):
+    approve_list = Access.objects.get(id=id).approve_list
+    if (approve_list.approve_status_ib == "Согласовано" or approve_list.approve_status_ib == "Не согласовано") and (
+            approve_list.approve_status_boss == "Согласовано" or approve_list.approve_status_boss == "Не согласовано"):
+        checker_approve = True
+    else:
+        checker_approve = False
+    return checker_approve

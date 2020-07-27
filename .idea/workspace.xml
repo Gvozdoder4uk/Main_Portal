@@ -20,25 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2babc1a-0cb5-4723-a841-cc5c5a1616ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/lib/jquery/custom-jquery-outer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0076_auto_20200722_1424.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0077_auto_20200722_1431.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/outer_access.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/migrations/0078_auto_20200724_0921.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/manager_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/w3.css" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/css/w3.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Include_Templates/requests_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/main_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/templates/Main_Templates/main_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/m_access.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/personal_request.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_actions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/request_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/db.sqlite3" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +83,18 @@
       <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\templates\Main_Templates" />
       <recent name="C:\Projects\PythoN4ik\Django_Main\IT_Portal\MainApp\templates" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Python.manage">
     <configuration name="GET_AD" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -155,12 +163,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

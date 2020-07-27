@@ -5,7 +5,7 @@
 {% include "Include_Templates/requests_sidebar.html"%}
 <div style="position: relative;min-height: 67.2vh;">
 <H3 class="text-center">Заявки на согласование: {{user.userprofile.user_last_name}}
-    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{request_for_accept.count}}</b>
+    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количество заявок: <b>{{request_for_accept.count}}</b>
     </p></H3>
 {% if request_for_accept.count != 0 %}
 

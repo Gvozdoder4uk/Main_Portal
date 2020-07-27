@@ -17,6 +17,7 @@ urlpatterns = [
     path('account/', ListView.as_view(queryset=Access.objects.all(), template_name="request_access/account.html")),
     path('test_cabinet/',
          ListView.as_view(queryset=Access.objects.all(), template_name="request_access/Test_Access.html")),
+    path('manager_page/', views.manager_page , name="manager"),
     # path('test_requests/', views.requests),
     #path('created_task/<int:id>', views.created_task, name="created_task"),
     path('test_requests/', views.RequestListView.as_view(), name="request"),

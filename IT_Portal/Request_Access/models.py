@@ -17,6 +17,8 @@ STATUS_CHOICES = (
 class Companys(models.Model):
     company_full_name = models.CharField(max_length=1000, verbose_name="Полное имя компании")
     company_short_name = models.CharField(max_length=1000, verbose_name="Короткое имя компании")
+    company_inn = models.CharField(max_length=30, verbose_name="ИНН")
+    company_kpp = models.CharField(max_length=1000, verbose_name="КПП")
     company_address = models.CharField(max_length=2000, verbose_name="Юридический адрес Компании")
     company_post_address = models.CharField(max_length=2000, verbose_name="Почтовый адрес Компании")
     company_telephone = models.CharField(max_length=100, verbose_name="Телефон компании", blank=True, null=True)

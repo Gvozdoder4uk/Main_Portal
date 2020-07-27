@@ -4,7 +4,7 @@
 {% if request.user.is_authenticated %}
 {% include "Include_Templates/requests_sidebar.html"%}
 <H3 class="text-center">Заявки на доступ пользователя: {{user.userprofile.user_last_name}}
-    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количестко заявок: <b>{{user_requests.count}}</b>
+    {{user.userprofile.user_first_name}} {{user.userprofile.user_second_name}} <p>Общее количество заявок: <b>{{user_requests.count}}</b>
     </p></H3>
 {% if user_requests.count != 0 %}
 

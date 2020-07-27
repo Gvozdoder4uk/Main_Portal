@@ -16,7 +16,7 @@ SERVICES = (
 
 STATUS_SELECTOR = (
     ("Согласовано", "Согласовано"),
-    #("Согласовано с ограничениями", "Согласовано с ограничениями"),
+    # ("Согласовано с ограничениями", "Согласовано с ограничениями"),
     ("Не согласовано", "Не согласовано")
 )
 
@@ -184,3 +184,34 @@ class File_Deps_Form(forms.Form):
     )
     selector_deps = forms.ChoiceField(choices=FILE_DEPS, required=False, label='Выбор корневой папки',
                                       widget=forms.CheckboxSelectMultiple())
+
+
+# Раздел для портала Менеджера
+from django.contrib.auth.forms import UserCreationForm
+
+
+class UserForm(UserCreationForm):
+    email = forms.EmailField(max_length=200, help_text='email')
+    secondname = forms.CharField(label="Фамилия")
+    name = forms.CharField(label="Имя")
+    last_name = forms.CharField(label="Отчество")
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+
+class CompanyRegister(forms.ModelForm):
+
+    class Meta:
+        model = Companys
+        fields = '__all__'
+        #exclude = ('company_activator',)
+        widgets = {
+            'company_activator': forms.HiddenInput,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control text-left'

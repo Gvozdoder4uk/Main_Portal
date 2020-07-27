@@ -1,0 +1,145 @@
+{% extends "Main_Templates/main_template.html"%}
+{% block content %}
+{% include "Include_Templates/header.html" %}
+{% if request.user.is_authenticated %}
+<style xmlns="http://www.w3.org/1999/html">
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.5fr 2.1fr 0.4fr;
+  grid-template-rows: 1fr;
+  gap: 1px 1px;
+  grid-template-areas: ". . .";
+}
+.contenter-wrapper {
+    border:1px gray solid;
+    border-radius: 1px;
+    min-height:67vh;
+    max-height:67vh;
+    overflow-y: auto;
+    margin:0px 0px 0px 0px;
+    padding: 5px 2px 2px 5px;
+}
+.contenter {
+    border:1px gray solid;
+    min-height:10vh;
+    margin:0px 0px 0px 0px;
+    opacity:0.4;
+}
+.opacity_text {
+    opacity:0.8;
+    color:gray;
+    margin-top:0px;
+    padding: none;
+    font-size:11px;
+    font-family: Arial;
+}
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+</style>
+<script>
+    function ModalOpen(value) {
+  var modal = document.getElementById(value);
+  console.log("Открываем модальное окно");
+  modal.style.display = "block";
+}
+function ModalClose(value) {
+  var modal = document.getElementById(value);
+  console.log("Закрываем модальное окно");
+  modal.style.display = "none";
+}
+</script>
+<H3 class="text-center">Раздел менеджера: {{request.user.userprofile.user_full_name}}</H3>
+<h5 class="text-center">Данный раздел позволяет создать пользователя и данные по компании.</h5>
+<hr>
+<div class="grid-container" style="min-height:67vh;">
+  <div class="inform text-center">
+      <h4><div class="form-control"><b>Внешние пользователи</b></div></h4>
+      <div class="contenter-wrapper text-left">
+          <button class="btn-success" onclick="ModalOpen('user_add')"  style="width:100%;border-radius:7px;">Добавить пользователя</button>
+          <hr class="my-1">
+          {% for user in outer_user %}
+          <div class="form-control">
+              <b style="font-size:13px;">{{user}}</b>
+          <p class="opacity_text">{{user.user_company}}</p>
+          </div>
+          {% endfor %}
+      </div>
+      </div>
+  <div class="main-content text-center">
+      <h4><div class="form-control"><b>Рабочая область</b></div></h4>
+      <div class="contenter-wrapper">
+      </div>
+  </div>
+  <div class="inform2 text-center">
+      <h4><div class="form-control"><b>Компании</b></div></h4>
+      <div class="contenter-wrapper text-left">
+          <button class="btn-success" onclick="ModalOpen('company_add')"  style="width:100%;border-radius:7px;">Добавить компанию</button>
+          <hr class="my-1">
+          {% for company in companys %}
+          <div class="form-control">
+          <h6><b>{{company}}</b></h6>
+          <p class="opacity_text">ИНН: {{company.company_inn}} КПП: {{company.company_kpp}}</p>
+              </div>
+          {% endfor %}
+      </div>
+  </div>
+</div>
+<div class="contenter">
+      </div>
+
+<div style="display:none;" class="modal" role="dialog" id="company_add">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="container txt-box">
+                <form id="modal_company" role="form" method="post">
+                    {% csrf_token %}
+                    <h5><b>Форма добавления Компании</b></h5>
+                    {{company_form}}
+                    <hr>
+                    <button class="btn-success" name="modal_company_btn" type="submit"  style="border-radius:7px;width:100%;" formmethod="POST">
+                        Отправить
+                    </button>
+                    <button value="modal_company_reset" onclick='ModalClose("company_add")' style="background-color:red;border-radius:7px;width:100%;border-color:red;" class="btn-success" type="reset" formmethod="POST">
+                        Отмена
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div style="display:none;" class="modal" role="dialog" id="user_add">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="container txt-box">
+                <form id="modal_user_add" role="form" method="post">
+                    {% csrf_token %}
+                    <h5><b>Форма добавления Пользователя</b></h5>
+                    <hr>
+                    <button class="btn-success" name="modal_user_btn" type="submit"  style="border-radius:7px;width:100%;" formmethod="POST">
+                        Отправить
+                    </button>
+                    <button value="modal_user_reset" onclick='ModalClose("user_add")' style="background-color:red;border-radius:7px;width:100%;border-color:red;" class="btn-success" type="reset" formmethod="POST">
+                        Отмена
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}

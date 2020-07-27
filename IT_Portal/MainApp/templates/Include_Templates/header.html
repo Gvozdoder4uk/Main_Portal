@@ -117,9 +117,11 @@
             {% url 'my_requests' as url_index2 %}
             {% url 'req_index' as url_index1 %}
             {% url 'request_actions' as url_index4 %}
+            {% url 'manager' as url_manager %}
             <li>
                 <a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}"
                    href="/requests/">[ Запрос на доступ ]</a></li>
+            <li><a class="{% if url_manager == request.path %} active_nav_menu {% endif %}" href="/requests/manager_page">[ Раздел менеджера ]</a></li>
             {% endif %}
             <li><a href="/#team">[ Система Управления Знаниями ]</a></li>
             <li class="menu-has-children" id="choice"><a href="#choice">[ ИТ инструменты ]</a>
@@ -153,8 +155,8 @@
                 {{ user.userprofile.user_last_name }} {{ user.userprofile.user_first_name }}</a>
                 <ul>
                     <li><a href="/requests/account">Личный кабинет</a></li>
+                    <li><a href="/requests/manager_page">Раздел менеджера</a></li>
                     <li><a href="/requests/personal_cabinet">Мои заявки</a></li>
-
                     <li><a href="/requests/">Запрос на доступ</a></li>
                     <li><a href="/requests/cabinet">Реестр заявок</a></li>
                     <li><a href="/requests/test_requests/">Тестовые заявки</a></li>
