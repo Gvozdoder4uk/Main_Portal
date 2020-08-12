@@ -7,7 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import *
-from IT_Portal import settings
 from datetime import *
 import platform
 from django.shortcuts import redirect
@@ -182,7 +181,8 @@ def RequestActionDetail(request, id):
             'access_company': access_company
         }
     else:
-        boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
+        boss_requests = ApproveList.objects.filter(
+            user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
         context = {
             'access_checker': access_checker,
             'approver': approver,
@@ -327,16 +327,24 @@ def m_access(request):
                 else:
                     print('Триггер не установлен обработка заявки как обычной заявки')
                 if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
-                    creator_boss = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
-                    model_ap.user_boss = creator_boss.userprofile.user_boss.userprofile.user_full_name
-                    model_ap.email_boss = creator_boss.userprofile.user_boss.userprofile.user_email
+                    creator_boss = User.objects.filter(userprofile__user_full_name=request.POST.get('user_name'))
+                    for boss in creator_boss:
+                        if boss == request.user:
+                            checked_boss = boss.userprofile.user_boss.userprofile.user_full_name
+                            checked_boss_email = boss.userprofile.user_boss.userprofile.user_email
+                            model_ap.user_boss = checked_boss
+                            model_ap.email_boss = checked_boss_email
+                        print(f"Выводим тестовый параметр{request.user} и его босс {boss}")
                 else:
                     model_ap.user_boss = request.user.userprofile.user_boss.userprofile.user_full_name
                     model_ap.email_boss = request.user.userprofile.user_boss.userprofile.user_email
                 model_ap.save()
                 model_mn = form_mn.save(commit=False)
                 if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
-                    model_mn.author = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
+                    checker_author = User.objects.filter(userprofile__user_full_name=request.POST.get('user_name'))
+                    for author in checker_author:
+                        if author == request.user:
+                            model_mn.author = User.objects.get(userprofile__user_full_name=author.userprofile.user_boss.userprofile.user_full_name)
                 else:
                     model_mn.author = request.user
                 model_mn.creator = request.user
@@ -377,7 +385,8 @@ def m_access(request):
         form_approve = AccepterForm()
         # Инициализация формы Отправки письма.
         form_sendmail = EmailForm(
-            initial={'email': request.user.userprofile.user_email, 'subject': f"Запрос на доступ №{id}", 'message': '1'})
+            initial={'email': request.user.userprofile.user_email, 'subject': f"Запрос на доступ №{id}",
+                     'message': '1'})
         form_request = AccessForm(initial={
             'user_name': request.user.userprofile.user_full_name,
             'user_dep': request.user.userprofile.user_dep,
@@ -421,7 +430,7 @@ def m_access(request):
                 model_ap = form_ap.save(commit=False)
                 model_ap.user_boss = 'Чаленко Анатолий Юрьевич'
                 model_ap.email_boss = 'chalenko_ay@rusagrotrans.ru'
-                #model_ap.approve_status_boss = "Согласовано"
+                # model_ap.approve_status_boss = "Согласовано"
                 model_ap.save()
                 model_mn = form_mn.save(commit=False)
                 if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
