@@ -129,6 +129,7 @@ function ModalClose(value) {
                     {% csrf_token %}
                     <h5><b>Форма добавления Пользователя</b></h5>
                     <hr>
+                    {{form_userprofile}}
                     <button class="btn-success" name="modal_user_btn" type="submit"  style="border-radius:7px;width:100%;" formmethod="POST">
                         Отправить
                     </button>

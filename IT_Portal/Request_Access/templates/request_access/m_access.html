@@ -84,13 +84,29 @@ function func3(){
                             {{form_request.user_otdel}}
                         </div>
                     </div>
-                    <div class="row" style="display:none;">
-                        <label style="margin-left:15px;" for="outer_user">Заявка оформляется для внешнего пользователя</label>
-                        <input style="margin-left:10px;position: inherit;" type="checkbox" placeholder="Для внешнего пользователя" title="Для внешнего пользователя" name="outer_user" id="outer_user">
+                    <hr class="my-2" style="border-top: 1px solid black">
 
+                    <div class="row" style="">
+                        <hr class="my-2" style="border-top: 1px solid black">
+                        <div class="container" style="display:inline-grid;text-align:left;">
+                        <label style="display: inline-block;margin-bottom: .5rem;" for="new_user" id="new_user_label">Для нового сотрудника
+                        <input  type="checkbox" placeholder="Новый сотрудник" title="Для нового сотрудника" name="new_user" id="new_user"></label>
+                        <label style="display: inline-block;margin-bottom: .5rem;" for="outer_user">Для внешнего пользователя
+                        <input  type="checkbox" placeholder="Для внешнего пользователя" title="Для внешнего пользователя" name="outer_user" id="outer_user"></label>
+                        </div>
                     </div>
-                    <hr>
-                    <hr class="my-3" style="border-top: 1px solid black">
+                    <div class="row" style="display:none;" id="outer_user_selector">
+                        <hr class="my-2" style="border-top: 1px solid black">
+                        <h5><b>Укажите внешнего пользователя для которого создается заявка</b></h5>
+                        <select class="form-control text-center">
+                            <option>Выберите пользователя</option>
+                            {% for outer in outer_users %}
+                            <option>{{outer}}</option>
+                            {% endfor %}
+                        </select>
+                        <hr class="my-1" style="border-top: 1px solid black">
+                    </div>
+                    <hr class="my-2" style="border-top: 1px solid black">
                     <div class="container-fluid">
                     <div class="row">
                         <b class="form-control"><h5><b>Раздел выбора сервиса</b></h5></b>

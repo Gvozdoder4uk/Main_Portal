@@ -193,6 +193,29 @@
                         }
                     }
     });
+   //outer_user
+    $('#outer_user').change(function() {
+          var checkBox = document.getElementById('outer_user');
+          if (checkBox.checked == true){
+                document.getElementById('outer_user_selector').style.display = 'block';
+                document.getElementById('new_user').disabled = true;
+            } else {
+                document.getElementById('outer_user_selector').style.display = 'none';
+                document.getElementById('new_user').disabled = false;
+                }
+    });
+    //new_user
+        $('#new_user').change(function() {
+          var checkBox = document.getElementById('new_user');
+          if (checkBox.checked == true){
+                //document.getElementById('outer_user_selector').style.display = 'block';
+                document.getElementById('outer_user').disabled = true;
+            } else {
+                //document.getElementById('outer_user_selector').style.display = 'none';
+                document.getElementById('outer_user').disabled = false;
+                }
+    });
+   // Option selector RDP
     $('#RDP_TERMINAL').change(function() {
           var checkBox = document.getElementById('RDP_TERMINAL');
           if (checkBox.checked == true){

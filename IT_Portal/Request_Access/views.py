@@ -156,9 +156,8 @@ def RequestActionDetail(request, id):
     get_request = Access.objects.get(id=id)
     user_requests = Access.objects.filter(author=request.user)
     services_request = List_of_Accept.objects.filter(Access_ID=id)
-    boss_requests = ApproveList.objects.filter(
-        user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
     access_checker = False
+    access_company = Access.objects.get(id=id).author.userprofile.user_company
     # Чекаем размещение комментов
     checker_comments = checker_services(id)
     checker_approve = checker_approve_list(id)
@@ -171,16 +170,30 @@ def RequestActionDetail(request, id):
         else:
             pass
     print(f'{access_checker} = {request.user.userprofile.user_full_name}')
-    context = {
-        'access_checker': access_checker,
-        'approver': approver,
-        'get_request': get_request,
-        'user_requests': user_requests,
-        'services_request': services_request,
-        'boss_requests': boss_requests,
-        'checker_comments': checker_comments,
-        'checker_approve': checker_approve,
-    }
+    if ApproveList.objects.filter(user_boss='Чаленко Анатолий Юрьевич'):
+        context = {
+            'access_checker': access_checker,
+            'approver': approver,
+            'get_request': get_request,
+            'user_requests': user_requests,
+            'services_request': services_request,
+            'checker_comments': checker_comments,
+            'checker_approve': checker_approve,
+            'access_company': access_company
+        }
+    else:
+        boss_requests = ApproveList.objects.filter(user_boss__contains=request.user.userprofile.user_boss.userprofile.user_full_name)
+        context = {
+            'access_checker': access_checker,
+            'approver': approver,
+            'get_request': get_request,
+            'user_requests': user_requests,
+            'services_request': services_request,
+            'boss_requests': boss_requests,
+            'checker_comments': checker_comments,
+            'checker_approve': checker_approve,
+            'access_company': access_company
+        }
     template = 'request_access/request_detail.html'
     print(request.method)
     if request.method == 'POST':
@@ -263,7 +276,7 @@ def RequestActionDetail(request, id):
                     print("Круг согласования сервисов завершен, отмена заявки")
                     task.approve_status_ib = "Не согласовано"
                     task.save(update_fields=["approve_status_ib"])
-                    main_access_task.request_statuser = "Не согласовано"
+                    main_access_task.request_statuser = "Не согласовано ответсветнными за Сервис"
                     main_access_task.save(update_fields=["request_statuser"])
                 elif accepted + declined == count_services and declined != count_services or accepted == count_services:
                     print("Круг согласования сервисов завершен, передача в ИБ")
@@ -279,7 +292,9 @@ def RequestActionDetail(request, id):
                     task.approve_status_ib = request.POST.get('approve_choicer')
                     if request.POST.get('approve_choicer') == "Не согласовано":
                         task.approve_status_boss = request.POST.get('approve_choicer')
-                        # task.approve_status_owner = request.POST.get('approve_choicer')
+                        for service in all_services_on_task:
+                            service.Accepter_Status = request.POST.get('approve_choicer')
+                            service.save(update_fields=["Accepter_Status"])
                         main_access_task.request_statuser = "Не согласовано отделом ИБ"
                         task.save(update_fields=["approve_status_boss", "approve_status_ib"])
                         main_access_task.save(update_fields=["request_statuser"])
@@ -306,6 +321,11 @@ def m_access(request):
             form_ap = ApproveForm(request.POST)
             if form_cs.is_valid() and form_mn.is_valid() and form_ap.is_valid():  # and form_cs.is_valid():
                 model_ap = form_ap.save(commit=False)
+                if request.POST.get('outer_user', False):
+                    outer = request.POST['outer_user']
+                    print(f'Внешний триггер установлен {outer} обработка заявки для внешнего пользователя начата:')
+                else:
+                    print('Триггер не установлен обработка заявки как обычной заявки')
                 if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
                     creator_boss = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
                     model_ap.user_boss = creator_boss.userprofile.user_boss.userprofile.user_full_name
@@ -351,18 +371,13 @@ def m_access(request):
                 # return HttpResponseRedirect(reverse('created_task', kwargs={'id': id}))
             else:
                 print("Не Пошла!")
-
-            context = {}
-
-            # Form2
+        # Обработка GET запроса для внутренних и внешних пользователей.
         services_bd = Service.objects.all()
         # Инициализация формы Форма Согласования
-        form_approve = AccepterForm(
-
-        )
+        form_approve = AccepterForm()
         # Инициализация формы Отправки письма.
         form_sendmail = EmailForm(
-            initial={'email': request.user.userprofile.user_email, 'subject': "Запрос на доступ №", 'message': '1'})
+            initial={'email': request.user.userprofile.user_email, 'subject': f"Запрос на доступ №{id}", 'message': '1'})
         form_request = AccessForm(initial={
             'user_name': request.user.userprofile.user_full_name,
             'user_dep': request.user.userprofile.user_dep,
@@ -381,7 +396,9 @@ def m_access(request):
         )
         advanced_form = Additional_Service()
         file_deps = File_Deps_Form()
+        outer_users = UserProfile.objects.exclude(user_company=1)
         context = {
+            'outer_users': outer_users,
             'name_pc': name_pc,
             'form_approve': form_approve,
             'form_sendmail': form_sendmail,
@@ -402,13 +419,9 @@ def m_access(request):
             form_ap = ApproveForm(request.POST)
             if form_cs.is_valid() and form_mn.is_valid() and form_ap.is_valid():  # and form_cs.is_valid():
                 model_ap = form_ap.save(commit=False)
-                if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
-                    creator_boss = User.objects.get(userprofile__user_full_name=request.POST.get('user_name'))
-                    model_ap.user_boss = creator_boss.userprofile.user_boss.userprofile.user_full_name
-                    model_ap.email_boss = creator_boss.userprofile.user_boss.userprofile.user_email
-                else:
-                    model_ap.user_boss = request.user.userprofile.user_boss.userprofile.user_full_name
-                    model_ap.email_boss = request.user.userprofile.user_boss.userprofile.user_email
+                model_ap.user_boss = 'Чаленко Анатолий Юрьевич'
+                model_ap.email_boss = 'chalenko_ay@rusagrotrans.ru'
+                #model_ap.approve_status_boss = "Согласовано"
                 model_ap.save()
                 model_mn = form_mn.save(commit=False)
                 if User.objects.filter(userprofile__user_full_name=request.POST.get('user_name')).exists():
@@ -436,6 +449,7 @@ def m_access(request):
                     model_cs.Access_ID = model_mn
                     model_cs.Accepter_FIO = service.service_group.group_sowner.userprofile.user_full_name
                     model_cs.Accepted_Service = service
+                    model_cs.Accepter_Status = "Ожидание согласования"
                     model_cs.Email_Accepter = service.service_group.group_sowner.userprofile.user_email
                     model_cs.pk = None
                     model_cs.save()
@@ -449,49 +463,49 @@ def m_access(request):
                 print("Не Пошла!")
 
             context = {}
-
-            # Form2
-        # Загрузка данных по сервисам
-        services_bd = Service.objects.all()
-        # Инициализация формы Форма Согласования
-        form_approve = AccepterForm()
-        # Инициализация формы Отправки письма.
-        form_sendmail = EmailForm(
-            initial={'email': request.user.userprofile.user_email, 'subject': "Запрос на доступ №", 'message': '1'})
-        # Инициализация формы создания запроса, начальными данными
-        form_request = Outer_Access_Form(initial={
-            'user_name': request.user.userprofile.user_full_name,
-            'user_dep': request.user.userprofile.user_dep,
-            'user_otdel': request.user.userprofile.user_otdel,
-            'approve_list': ApproveList.objects.get(id=60),
-            'user_company': request.user.userprofile.user_company,
-            'user_position': request.user.userprofile.user_position
-        })
-        # Инициализация листа согласования для внешних пользователей.
-        form_bosslist = ApproveForm(
-            initial={
-                'email_ib': InformationSecurity.objects.get(active=True).specialist_ib_email,
-                'number_task': '',
-                'ib_spec': InformationSecurity.objects.get(active=True),
-                # 'user_boss': request.user.userprofile.user_boss.userprofile.user_full_name,
-                # 'email_boss': request.user.userprofile.user_boss.userprofile.user_email,
-                'change_date': datetime.now(),
+        # Обработка GET запроса
+        else:
+            # Загрузка данных по сервисам
+            services_bd = Service.objects.all()
+            # Инициализация формы Форма Согласования
+            form_approve = AccepterForm()
+            # Инициализация формы Отправки письма.
+            form_sendmail = EmailForm(
+                initial={'email': request.user.userprofile.user_email, 'subject': "Запрос на доступ №", 'message': '1'})
+            # Инициализация формы создания запроса, начальными данными
+            form_request = Outer_Access_Form(initial={
+                'user_name': request.user.userprofile.user_full_name,
+                'user_dep': request.user.userprofile.user_dep,
+                'user_otdel': request.user.userprofile.user_otdel,
+                'approve_list': ApproveList.objects.get(id=60),
+                'user_company': request.user.userprofile.user_company,
+                'user_position': request.user.userprofile.user_position
+            })
+            # Инициализация листа согласования для внешних пользователей.
+            form_bosslist = ApproveForm(
+                initial={
+                    'email_ib': InformationSecurity.objects.get(active=True).specialist_ib_email,
+                    'number_task': '',
+                    'ib_spec': InformationSecurity.objects.get(active=True),
+                    # 'user_boss': request.user.userprofile.user_boss.userprofile.user_full_name,
+                    # 'email_boss': request.user.userprofile.user_boss.userprofile.user_email,
+                    'change_date': datetime.now(),
+                }
+            )
+            advanced_form = Additional_Service()
+            file_deps = File_Deps_Form()
+            context = {
+                'name_pc': name_pc,
+                'form_approve': form_approve,
+                'form_sendmail': form_sendmail,
+                'form_request': form_request,
+                'form_bosslist': form_bosslist,
+                'services_bd': services_bd,
+                'rangered': range(2),
+                'advanced_form': advanced_form,
+                'file_deps': file_deps
             }
-        )
-        advanced_form = Additional_Service()
-        file_deps = File_Deps_Form()
-        context = {
-            'name_pc': name_pc,
-            'form_approve': form_approve,
-            'form_sendmail': form_sendmail,
-            'form_request': form_request,
-            'form_bosslist': form_bosslist,
-            'services_bd': services_bd,
-            'rangered': range(2),
-            'advanced_form': advanced_form,
-            'file_deps': file_deps
-        }
-        return render(request, template, context)
+            return render(request, template, context)
 
 
 # Представление Главной страницы оформления заявки на доступ.
@@ -583,13 +597,15 @@ def email(request):
 def manager_page(request):
     companys = Companys.objects.all()
     form_user = UserForm()
+    form_userprofile = UserProfileForm()
     company_form = CompanyRegister()
     outer_user = UserProfile.objects.exclude(user_company=1)
     context = {
         'companys': companys,
         'form_user': form_user,
         'company_form': company_form,
-        'outer_user': outer_user
+        'outer_user': outer_user,
+        'form_userprofile': form_userprofile,
 
     }
     if request.method == 'POST':

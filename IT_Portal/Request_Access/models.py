@@ -13,6 +13,7 @@ STATUS_CHOICES = (
     ('Пипос', 'Пипос'),
 )
 
+
 # Таблица хранения данных о компаниях.
 class Companys(models.Model):
     company_full_name = models.CharField(max_length=1000, verbose_name="Полное имя компании")
@@ -23,7 +24,8 @@ class Companys(models.Model):
     company_post_address = models.CharField(max_length=2000, verbose_name="Почтовый адрес Компании")
     company_telephone = models.CharField(max_length=100, verbose_name="Телефон компании", blank=True, null=True)
     company_order = models.CharField(max_length=1000, verbose_name="Номер договора с компанией", blank=True, null=True)
-    company_activator = models.BooleanField(verbose_name="Владелец портала", blank=True, null=True, help_text="Установка триггера владельца портала", default=False)
+    company_activator = models.BooleanField(verbose_name="Владелец портала", blank=True, null=True,
+                                            help_text="Установка триггера владельца портала", default=False)
 
     class Meta:
         verbose_name = 'Компания'
@@ -31,6 +33,7 @@ class Companys(models.Model):
 
     def __str__(self):
         return self.company_short_name
+
 
 # Определение модели пользователя.
 # Связка один к одному к модели Пользователь Django
@@ -121,10 +124,10 @@ class Service(models.Model):
 
 # Модель согласования текущая с учетом 1го сервиса.
 class ApproveList(models.Model):
-    user_boss = models.CharField(max_length=200, verbose_name="Руководитель пользователя", null=True)
-    email_boss = models.EmailField(verbose_name="Почта руководителя")
+    user_boss = models.CharField(max_length=200, verbose_name="Руководитель пользователя", null=True, blank=True)
+    email_boss = models.EmailField(verbose_name="Почта руководителя", blank=True, null=True)
     approve_status_boss = models.CharField(max_length=200, verbose_name="Статус согласования руководителя",
-                                           default="Ожидание согласования")
+                                           default="Ожидание согласования", blank=True, null=True)
     ib_spec = models.ForeignKey(InformationSecurity, on_delete=models.CASCADE, verbose_name="Специалист ИБ")
     email_ib = models.EmailField(verbose_name="Почта специалиста IB")
     approve_status_ib = models.CharField(max_length=200, verbose_name="Статус согласования руководителя",
@@ -206,8 +209,10 @@ class Requests(models.Model):
 
 
 # Таблица хранения отправленных писем.
+# При отправке сообщения
 class Mails(models.Model):
     email_address = models.EmailField(verbose_name="Получатель")
+    email_cc = models.EmailField(verbose_name="Копии получателей", null=True, blank=True)
     subject = models.CharField(max_length=1000, verbose_name="Тема письма")
     message = models.CharField(max_length=20000, verbose_name="Сообщение")
 
@@ -217,9 +222,6 @@ class Mails(models.Model):
 
     def __str__(self):
         return self.email
-
-
-
 
 
 # TEST BLOCK
@@ -241,3 +243,22 @@ class Store(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+# Тестовый лист согласования для внешнего пользователи и нового сотрудника
+class OuterApproveList(models.Model):
+    ib_spec = models.ForeignKey(InformationSecurity, on_delete=models.CASCADE, verbose_name="Специалист ИБ")
+    email_ib = models.EmailField(verbose_name="Почта специалиста IB")
+    approve_status_ib = models.CharField(max_length=200, verbose_name="Статус согласования руководителя",
+                                         default="Ожидание")
+    full_status_request = models.CharField(max_length=200, verbose_name="Статус согласования",
+                                           default="Ожидание согласования руководителя")
+    change_date = models.DateTimeField(verbose_name="Дата изменения", blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Лист согласования ИБ и Руководителя'
+        verbose_name_plural = 'Листы согласования ИБ и Руководителя'
+
+    def __str__(self):
+        return 'Номер листа:%s Статус заявки: %s' % (self.id, self.full_status_request)
+

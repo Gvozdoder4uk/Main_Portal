@@ -191,22 +191,62 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class UserForm(UserCreationForm):
-    email = forms.EmailField(max_length=200, help_text='email')
-    secondname = forms.CharField(label="Фамилия")
-    name = forms.CharField(label="Имя")
-    last_name = forms.CharField(label="Отчество")
+    last_name = forms.CharField(label="Фамилия")
+    firts_name = forms.CharField(label="Имя")
+    secondname = forms.CharField(label="Отчество")
+    email = forms.EmailField(max_length=200, help_text='Почта')
+    company = forms.ChoiceField(label='Компания пользователя')
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = '__all__'
+        widgets = {
+            'password1': forms.HiddenInput,
+            'password': forms.HiddenInput,
+            'username': forms.HiddenInput,
+            'email': forms.HiddenInput,
+            'Accepter_Status': forms.HiddenInput,
+        }
+
+    def save(self, commit=True):
+        user = super(UserForm, self).save(commit=False)
+        first_name, last_name = self.cleaned_data["fullname"].split()
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+        widgets = {
+            'password1': forms.HiddenInput,
+            'password': forms.HiddenInput,
+            'username': forms.HiddenInput,
+            'email': forms.HiddenInput,
+            'Accepter_Status': forms.HiddenInput,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
 
 
 class CompanyRegister(forms.ModelForm):
-
     class Meta:
         model = Companys
         fields = '__all__'
-        #exclude = ('company_activator',)
+        # exclude = ('company_activator',)
         widgets = {
             'company_activator': forms.HiddenInput,
         }

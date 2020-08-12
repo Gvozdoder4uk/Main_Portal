@@ -1,6 +1,6 @@
 {% load static %}
 <!-- Header -->
-
+{% load custom_filters %}
 <style>
     .buttoner {
 	display: inline-block;
@@ -121,7 +121,9 @@
             <li>
                 <a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}"
                    href="/requests/">[ Запрос на доступ ]</a></li>
+            {% if request.user|has_group:"Manager"  %}
             <li><a class="{% if url_manager == request.path %} active_nav_menu {% endif %}" href="/requests/manager_page">[ Раздел менеджера ]</a></li>
+            {% endif %}
             {% endif %}
             <li><a href="/#team">[ Система Управления Знаниями ]</a></li>
             <li class="menu-has-children" id="choice"><a href="#choice">[ ИТ инструменты ]</a>
@@ -130,7 +132,6 @@
                     <li><a href="/inventory">Инвентаризация</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="/requests/">Запрос на доступ</a></li>
-                    <li><a href="/requests/cabinet">Реестр заявок</a></li>
                     {% endif %}
                     <li><a href="/admin">Админка</a></li>
                     <li><a href="/relax_portal/panels">ИнфоПанель</a></li>

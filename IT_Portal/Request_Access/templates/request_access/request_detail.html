@@ -72,6 +72,9 @@ $(document).ready(function() {
             <b>Заявитель</b> <a class="form-control" style="font-size:24px">{{ get_request.author.userprofile }}</a>
             <hr>
             <div class="row">
+                <div class="container-fluid">
+                    <b>Компания</b> <a class="form-control">{{ access_company }}</a>
+                </div>
                 <div class="col-8 my-2">
                     <b>Департамент</b> <a class="form-control">{{ get_request.author.userprofile.user_dep }}</a>
                     <b>Отдел</b> <a class="form-control">{{ get_request.author.userprofile.user_otdel }}</a>
@@ -96,6 +99,7 @@ $(document).ready(function() {
             </div>
             <hr>
             <h3>Раздел согласования</h3>
+            {% if access_company.id == 1 %}
             <div class="row">
                 <div class="col-8 my-2">
                     <b>Руководитель заявителя</b>
@@ -109,8 +113,6 @@ $(document).ready(function() {
                         {% endif %}
                     </a>
                     </form>
-
-
                 </div>
                 <div class="col-4 my-2">
                     <b>Статус</b> <a class="form-control"
@@ -121,6 +123,31 @@ $(document).ready(function() {
                 </a>
                 </div>
             </div>
+            {% else %}
+            <div class="row">
+            <div class="col-8 my-2">
+                    <b>Директор ДИТ</b>
+                    <form name="approver_boss" id="approver_boss">{% csrf_token %}
+                    <a class="form-control"><b>
+                    {{ get_request.approve_list.user_boss }}</b>
+                    {% if get_request.approve_list.user_boss in user.userprofile.user_full_name and get_request.approve_list.approve_status_boss == "Ожидание согласования" %} |
+                        {{approver.approve_choicer}}
+                    <button form="approver_boss" formmethod="POST" class="btn-success" type="submit" value="Accepted" style="border-radius:7px;">
+                        <b>Отправить</b></button>
+                        {% endif %}
+                    </a>
+                    </form>
+                </div>
+                <div class="col-4 my-2">
+                    <b>Статус</b> <a class="form-control"
+                    style="{% if get_request.approve_list.approve_status_boss in 'Согласовано' %} color:green; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_boss in 'Не согласовано' %} color:Red; font-weight:bold; {% endif %}
+                    {% if get_request.approve_list.approve_status_boss in 'Ожидание согласования'%} color:#e56607; font-weight:bold; {% endif %}">
+                    {{ get_request.approve_list.approve_status_boss }}
+                </a>
+                </div>
+            </div>
+            {% endif %}
             <!--<div class="row">
                 <div class="col-8 my-2">
                     <b>Владелец сервиса</b>
@@ -232,7 +259,7 @@ $(document).ready(function() {
                     <hr>
                     {% if get_request.comments == '' or get_request.comments == Null %}
                     {% else%}
-                    <h3>Раздел комментариев</h3>
+                    <!--<h3>Раздел комментариев</h3>-->
                     <a class="form-control"><textarea readonly style="text-align:left;overflow:hidden;border: none;height:150px;display:inline-block;resize: none;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;width:100%;">{{ get_request.comments}}</textarea></a>
                     {% endif %}
                     {% else %}
