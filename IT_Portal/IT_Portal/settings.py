@@ -55,8 +55,8 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-     'django.contrib.auth.backends.RemoteUserBackend',
-     'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'IT_Portal.urls'
@@ -136,10 +136,38 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/#about'
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'gvozdoder.18@gmail.com'
 EMAIL_HOST_PASSWORD = 'Asdasd310310'
 EMAIL_PORT = 587
+
+LDAP_AUTH_URL = "ldap://10.10.100.78:389"
+LDAP_AUTH_USE_TLS = None
+LDAP_AUTH_SEARCH_BASE = "DC=rusagrotrans,DC=ru"
+
+LDAP_AUTH_OBJECT_CLASS = "organizationalPerson"
+
+LDAP_AUTH_USER_FIELDS = {
+    "username": "sAMAccountName",
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail",
+    "otdel": "department",
+    "dep": "distinguishedName",
+    "company": "company",
+    "position": "title"
+}
+
+LDAP_AUTH_USER_LOOKUP_FIELDS = ("username",)
+
+LDAP_AUTH_CLEAN_USER_DATA = "django_python3_ldap.utils.clean_user_data"
+
+LDAP_AUTH_SYNC_USER_RELATIONS = "django_python3_ldap.utils.sync_user_relations"
+
+LDAP_AUTH_FORMAT_SEARCH_FILTERS = "django_python3_ldap.utils.format_search_filters"
+
+LDAP_AUTH_FORMAT_USERNAME = "django_python3_ldap.utils.format_username_active_directory"
+LDAP_AUTH_CONNECTION_USERNAME = 'fokin_ok'
+LDAP_AUTH_CONNECTION_PASSWORD = 'Asdasd310310'
