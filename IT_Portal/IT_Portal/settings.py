@@ -49,8 +49,14 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+     'django.contrib.auth.backends.RemoteUserBackend',
+     'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'IT_Portal.urls'
@@ -119,6 +125,11 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    '/home/Projects/Main_Portal/IT_Portal/MainApp/static',
+    '/home/pyvenv/main_env/lib/python3.8/site-packages/django/contrib/admin/static',
+    '/home/pyvenv/main_env/lib/python3.8/site-packages/',
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
