@@ -123,12 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
+STATIC_ROOT = '/home/Projects/Main_Portal/IT_Portal/MainApp'  # os.path.join(BASE_DIR, 'static/')
+STATIC_DIRS = [
     '/home/Projects/Main_Portal/IT_Portal/MainApp/static',
-    '/home/pyvenv/main_env/lib/python3.8/site-packages/django/contrib/admin/static',
     '/home/pyvenv/main_env/lib/python3.8/site-packages/',
+    '/home/pyvenv/main_env/',
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -140,8 +140,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'gvozdoder.18@gmail.com'
-EMAIL_HOST_PASSWORD = 'Asdasd310310'
+EMAIL_HOST_PASSWORD = '*********'
 EMAIL_PORT = 587
+
+# Block FOR CSRF TOKENS
+# CSRF_TRUSTED_ORIGINS = ["portal-test.rusagrotrans.ru:8000"]
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = False
+# CSRF_USE_SESSIONS = True
+
 
 LDAP_AUTH_URL = "ldap://10.10.100.78:389"
 LDAP_AUTH_USE_TLS = None
@@ -170,4 +178,4 @@ LDAP_AUTH_FORMAT_SEARCH_FILTERS = "django_python3_ldap.utils.format_search_filte
 
 LDAP_AUTH_FORMAT_USERNAME = "django_python3_ldap.utils.format_username_active_directory"
 LDAP_AUTH_CONNECTION_USERNAME = 'fokin_ok'
-LDAP_AUTH_CONNECTION_PASSWORD = 'Asdasd310310'
+LDAP_AUTH_CONNECTION_PASSWORD = '*********'

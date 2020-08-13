@@ -2,10 +2,9 @@
 {% block content %}
 {% include "Include_Templates/header.html" %}
 {% if request.user.is_authenticated %}
-<div class="container">
+<div class="container" style="min-height: 82vh">
     <H2>Вы успешно создали заявку на доступ {{created_task.id}}</H2>
-    <h5 style="color:blue;">Отслеживание заявки доступно по следующей ссылке:
-        <button><a href="/requests/detail/{{created_task.id}}">Заявка на доступ {{created_task.id}}</a></button>
+    <h5 style="color:blue;">Отслеживание заявки доступно по следующей ссылке:<a href="/requests/detail/{{created_task.id}}"><b>Заявка на доступ {{created_task.id}}</b></a>
     </h5>
 </div>
 {% endif %}
