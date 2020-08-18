@@ -3,18 +3,12 @@
 {% include "Include_Templates/header.html" %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/search.css'%}">
-   <div class="search">
-      <input type="text" class="searchTerm" placeholder="Поиск">
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="min-height:77vh;">
     <table class="table table-bordered text-center">
         <thead class="thead-dark">
         <tr>
-            <th scope="row">Фото</th>
+            <!--<th scope="row">Фото</th>-->
             <th scope="row">Ф.И.О</th>
             <th scope="row">Департамент</th>
             <th scope="row">Отдел</th>
@@ -23,17 +17,28 @@
             <th scope="row">Email</th>
         </tr>
         </thead>
+        <div class="search">
+            <input id="userinput" type="search" class="searchTerm" laceholder="Поиск" onkeyup="SearchTable('userinput','Table1')">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+        <tbody id="Table1" style="font-size:12px;text-align:left;">
         {% for keys in object_list %}
-        <tbody id="Table1">
         <tr>
-            <td style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;"><div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron"><img style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;" src="{{MEDIA_URL}}{{keys.user_photo.url}}"></div></td>
-            <td><div class="container"><b><a href="/inventory/users/{{keys.id}}">{{keys.user_lastname}} {{keys.user_firstname}} {{keys.user_secondname}}</a></b></div></td>
+            <!--<td style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;"><div style="width:130px;padding:0px 0px 0px 0px;margin:5px 5px 5px 5px;" class="jumbotron"><img style="width:120px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px;" src="{{MEDIA_URL}}{{keys.user_photo.url}}"></div></td>-->
+            <td>
+                <div class="container" style="padding:2px 2px 2px 2px;background:#D3D3D3;border-radius:5px;margin:0px 0px 0px 0px;"><b><a href="">{{ keys.user_full_name }}</a></b></div>
+            </td>
             <td><b>{{keys.user_dep}}</b></td>
             <td><b>{{keys.user_otdel}}</b></td>
-            <td><b>{{keys.user_professional}}</b></td>
+            <td><b>{{keys.user_position}}</b></td>
+            {% if keys.user_telephone == Null %}
             <td></td>
-            <td><b><a href="mailto:{{keys.user_email}}">{{keys.user_email}} <i class="fa fa-envelope"></i></a></b></td>
-
+            {% else %}
+            <td>{{ keys.user_telephone }}</td>
+            {% endif %}
+            <td style="text-align:left;width:20%"><b><a href="mailto:{{keys.user_email}}">{{keys.user_email}} <i class="fa fa-envelope"></i></a></b></td>
         </tr>
         {% endfor %}
         </tbody>

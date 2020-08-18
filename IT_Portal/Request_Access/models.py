@@ -262,3 +262,30 @@ class OuterApproveList(models.Model):
     def __str__(self):
         return 'Номер листа:%s Статус заявки: %s' % (self.id, self.full_status_request)
 
+
+class bases_1C(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Название Базы данных")
+    description = models.CharField(max_length=140, blank=True, verbose_name="Описание и назначение базы данных")
+    company_attach = models.ForeignKey(Companys, null=True, on_delete=models.CASCADE,
+                                       verbose_name="Принадлежность к компании")
+
+    class Meta:
+        verbose_name = 'База 1С'
+        verbose_name_plural = 'Базы Данных 1С'
+
+    def __str__(self):
+        return str(self.name)
+
+
+class RootFilepath(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Департамент или название корневой папки")
+    description = models.CharField(max_length=140, blank=True, verbose_name="Описание и назначение")
+    owner_filepather = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE,
+                                         verbose_name="Ответственный")
+
+    class Meta:
+        verbose_name = 'Корневая папка файловой шары'
+        verbose_name_plural = 'Корневые папки файловой шары'
+
+    def __str__(self):
+        return str(self.name)
