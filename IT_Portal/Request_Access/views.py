@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 from datetime import *
 import platform
@@ -27,7 +28,17 @@ def is_member(user):
 def cabinet(request):
     if request.user.groups.filter(name='Admin Reestr').exists():
         service_requests = List_of_Accept.objects.all()
-        all_requests = Access.objects.all().order_by('-create_date')
+        all_requests_pag = Access.objects.all().order_by('-create_date')
+        paginator = Paginator(all_requests_pag, 25)
+        page = request.GET.get('page')
+        try:
+            all_requests = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            all_requests = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            all_requests = paginator.page(paginator.num_pages)
         context = {
             'all_requests': all_requests,
             'service_requests': service_requests

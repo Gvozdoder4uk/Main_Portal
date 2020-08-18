@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2babc1a-0cb5-4723-a841-cc5c5a1616ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/test_inline.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/test_inline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/MainApp/static/js/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/MainApp/static/js/Search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/Request_Access/templates/request_access/cabinet.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IT_Portal/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/IT_Portal/inventory/templates/inventory/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,18 +124,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -151,13 +142,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -195,6 +185,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593713386803" />
+    <state x="1228" y="111" width="585" height="801" key="find.popup" timestamp="1597741100446">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1228" y="111" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597741100446" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594711369949">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
