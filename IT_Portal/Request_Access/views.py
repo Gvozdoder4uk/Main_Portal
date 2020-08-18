@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
-from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 from datetime import *
 import platform
+from .models import *
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -27,7 +28,17 @@ def is_member(user):
 def cabinet(request):
     if request.user.groups.filter(name='Admin Reestr').exists():
         service_requests = List_of_Accept.objects.all()
-        all_requests = Access.objects.all().order_by('-create_date')
+        all_requests_pag = Access.objects.all().order_by('-create_date')
+        paginator = Paginator(all_requests_pag, 25)
+        page = request.GET.get('page')
+        try:
+            all_requests = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            all_requests = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            all_requests = paginator.page(paginator.num_pages)
         context = {
             'all_requests': all_requests,
             'service_requests': service_requests
@@ -344,7 +355,8 @@ def m_access(request):
                     checker_author = User.objects.filter(userprofile__user_full_name=request.POST.get('user_name'))
                     for author in checker_author:
                         if author == request.user:
-                            model_mn.author = User.objects.get(userprofile__user_full_name=author.userprofile.user_boss.userprofile.user_full_name)
+                            model_mn.author = User.objects.get(
+                                userprofile__user_full_name=author.userprofile.user_boss.userprofile.user_full_name)
                 else:
                     model_mn.author = request.user
                 model_mn.creator = request.user
@@ -381,6 +393,8 @@ def m_access(request):
                 print("Не Пошла!")
         # Обработка GET запроса для внутренних и внешних пользователей.
         services_bd = Service.objects.all()
+        # Запрос списка доп опций сервиса 1С
+        bases_1c_choice = bases_1C.objects.all()
         # Инициализация формы Форма Согласования
         form_approve = AccepterForm()
         # Инициализация формы Отправки письма.
@@ -391,7 +405,7 @@ def m_access(request):
             'user_name': request.user.userprofile.user_full_name,
             'user_dep': request.user.userprofile.user_dep,
             'user_otdel': request.user.userprofile.user_otdel,
-            'approve_list': ApproveList.objects.get(id=60)
+            'approve_list': ApproveList.objects.get(id=60),
         })
         form_bosslist = ApproveForm(
             initial={
@@ -404,7 +418,8 @@ def m_access(request):
             }
         )
         advanced_form = Additional_Service()
-        file_deps = File_Deps_Form()
+        # file_deps = File_Deps_Form()
+        file_dop_choicer = RootFilepath.objects.all()
         outer_users = UserProfile.objects.exclude(user_company=1)
         context = {
             'outer_users': outer_users,
@@ -416,7 +431,9 @@ def m_access(request):
             'services_bd': services_bd,
             'rangered': range(2),
             'advanced_form': advanced_form,
-            'file_deps': file_deps
+            # 'file_deps': file_deps,
+            'bases_1c_choice': bases_1c_choice,
+            'file_dop_choicer': file_dop_choicer
         }
         return render(request, template, context)
     else:
@@ -502,7 +519,7 @@ def m_access(request):
                 }
             )
             advanced_form = Additional_Service()
-            file_deps = File_Deps_Form()
+            file_dop_choicer = RootFilepath.objects.all()
             context = {
                 'name_pc': name_pc,
                 'form_approve': form_approve,
@@ -512,7 +529,7 @@ def m_access(request):
                 'services_bd': services_bd,
                 'rangered': range(2),
                 'advanced_form': advanced_form,
-                'file_deps': file_deps
+                'file_dop_choicer': file_dop_choicer
             }
             return render(request, template, context)
 

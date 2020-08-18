@@ -3,6 +3,7 @@
 {% include "Include_Templates/header.html" %}
 {% load static %}
 <script src="{% static 'lib/jquery/custom-jquery-outer.js'%}"></script>
+
 <!-- SCRIPT FOR CHECK SELETED SERVICES-->
 <script>
 function CheckServices(event){
@@ -26,6 +27,7 @@ else
 console.log(result);
 return result;
 }
+
 </script>
 
 
@@ -35,6 +37,7 @@ function func3(){
   //newDiv.style.background = "#000";
   document.getElementById('ServiceChoice').appendChild(newDiv);
 }
+
 </script>
 
 <script>
@@ -53,6 +56,7 @@ function func3(){
     function func7(){
         document.getElementById('Description').value +="Папка департамента : "+document.getElementById('FILE_CHOICER').value +"\\\n";
     }
+
 </script>
 
 {% include "Include_Templates/requests_sidebar.html"%}
@@ -91,23 +95,23 @@ function func3(){
                     {{form_request.user_position}}
                     <hr class="my-3" style="border-top: 1px solid black">
                     <div class="container-fluid">
-                    <div class="row">
-                        <b class="form-control"><h5><b>Раздел выбора сервиса</b></h5></b>
-                        <div class="col-md-4">
-                            <div class="container" style="display:inline-grid;text-align:left;">
-                                {% for item in form_approve.Cool_Story %}
-                                {{ item }}
-                                {% endfor %}
+                        <div class="row">
+                            <b class="form-control"><h5><b>Раздел выбора сервиса</b></h5></b>
+                            <div class="col-md-4">
+                                <div class="container" style="display:inline-grid;text-align:left;">
+                                    {% for item in form_approve.Cool_Story %}
+                                    {{ item }}
+                                    {% endfor %}
+                                </div>
+                                {{form_approve.Access_ID}}
+                                {{form_approve.Accepter_FIO}}
+                                {{form_approve.Accepted_Service}}
+                                {{form_approve.Email_Accepter}}
+                                {{form_approve.Accepter_Status}}
+                                {{form_bosslist}}
                             </div>
-                            {{form_approve.Access_ID}}
-                            {{form_approve.Accepter_FIO}}
-                            {{form_approve.Accepted_Service}}
-                            {{form_approve.Email_Accepter}}
-                            {{form_approve.Accepter_Status}}
-                            {{form_bosslist}}
                         </div>
                     </div>
-                        </div>
                     <div class="row" style="display:none;" id="ASU_VP">
                         <hr class="my-2" style="border-top: 1px solid black">
                         <p><b>Дополнительные опции сервиса АСУ ВП</b></p>
@@ -128,10 +132,10 @@ function func3(){
                         <p><b>Дополнительные опции сервиса Файловое хранилище</b></p>
                         <h5>Выберите Корневую папку:</h5>
                         <div class="container" style="display:inline-grid;text-align:left;margin-top:auto;">
-                                {% for item in file_deps %}
-                                {{ item }}
-                                {% endfor %}
-                            </div>
+                            {% for item in file_deps %}
+                            {{ item }}
+                            {% endfor %}
+                        </div>
 
                         <hr class="my-1" style="border-top: 1px solid black">
                     </div>
@@ -140,8 +144,11 @@ function func3(){
                         <p><b>Дополнительные опции сервиса Удаленный Доступ</b></p>
                         <div class="container-fluid">
                             <div class="form-control">
-                                <label for="RDP_TERMINAL" style="display:table-cell;"><input checked type="checkbox" id="RDP_TERMINAL" name="RDP_TERMINAL"> Терминальный сервер</label></div>
-                                </div>
+                                <label for="RDP_TERMINAL" style="display:table-cell;"><input checked type="checkbox"
+                                                                                             id="RDP_TERMINAL"
+                                                                                             name="RDP_TERMINAL">
+                                    Терминальный сервер</label></div>
+                        </div>
                         <hr class="my-3" style="border-top: 1px solid black">
                     </div>
                     <div class="row" style="display:none;" id="RAT_Online_ADD">
@@ -177,6 +184,7 @@ function func3(){
                 let currDate =
                 new Date().toLocaleDateString('ru-RU');
                     document.getElementById("date").innerHTML = currDate;
+
 
                 </script>
                 </form>

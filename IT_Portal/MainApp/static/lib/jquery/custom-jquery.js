@@ -148,10 +148,10 @@
           if (checkBox.checked == true){
                 var Desc = document.getElementById('Description');
                 if(Desc.value == ""){
-                        document.getElementById('Description').value += "Прошу предоставить доступ к Порталу Русагротранс \n";
+                        document.getElementById('Description').value += "Прошу предоставить доступ к интранет Порталу Русагротранс \n";
                         }
                     else{
-                        document.getElementById('Description').value += "\nПрошу предоставить доступ к Порталу Русагротранс \n";
+                        document.getElementById('Description').value += "\nПрошу предоставить доступ к интранет Порталу Русагротранс \n";
 
                         }
             } else {
@@ -160,8 +160,8 @@
                 if(Desc.value == ""){
                         }
                     else{
-                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к Порталу Русагротранс \n','');
-                        Desc.value = Desc.value.replace('Прошу предоставить доступ к Порталу Русагротранс \n','');
+                        Desc.value = Desc.value.replace('\nПрошу предоставить доступ к интранет Порталу Русагротранс \n','');
+                        Desc.value = Desc.value.replace('Прошу предоставить доступ к интранет Порталу Русагротранс \n','');
                         }
                     }
     });

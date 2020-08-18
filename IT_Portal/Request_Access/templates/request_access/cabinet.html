@@ -5,8 +5,102 @@
 {% for group in request.user.groups.all %}
 {% endfor %}
 {% include "Include_Templates/requests_sidebar.html"%}
+{% load static %}
+<script src="{% static 'js/Search.js' %}"></script>
+<style>
+.pagination {
+  display: inline-block;
+  background:white;
+  margin: 5px 2px 1px 3px;
+
+}
+
+.pagination li {
+  color: black;
+  float: left;
+  border-radius:2px;
+  padding: 5px 13px;
+  text-decoration: none;
+  border: 2px solid #ddd; /* Gray */
+}
+.pagination li.active {
+  background-color: #e56607;
+  color: white;
+}
+
+.pagination li:hover:not(.active) {background-color: #ddd;}
+
+.search-paginator-zone-up {
+    display:inline-block;
+    background:inherit;
+    margin:0px 0px 0px 0px;
+    width:100%;
+    border-radius:3px;
+    border: 2px solid #212529;
+    border-bottom: none;
+    text-align:right;
+}
+
+.search-paginator-zone-down {
+    display:inline-block;
+    background:inherit;
+    margin:0px 0px 0px 0px;
+    color:#fff;
+    width:100%;
+    border-radius:3px;
+    border: 2px solid #dee2e6;
+    border-top: none;
+    text-align:right;
+}
+
+.search-paginator-zone-up a{
+    width:100%;
+
+}
+
+.search-paginator-zone-down a{
+    width:100%;
+
+}
+
+
+
+</style>
+
 <div class="container-fluid mt-3">
-    <table class="table table-bordered text-center">
+    <div class="search-paginator-zone-up">
+        <div class="row">
+            <div class="col-md-6">
+                <a><input class="form-control" onkeyup="SearchTable('searcher','main_body')" style="margin:5px 2px 1px 2px;text-align:left;" type="search" id="searcher" placeholder="Поиск заявки">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a>{% if all_requests.has_other_pages %}
+                    <ul class="pagination">
+                        {% if all_requests.has_previous %}
+                        <li><a href="?page={{ all_requests.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in all_requests.paginator.page_range %}
+                        {% if all_requests.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if all_requests.has_next %}
+                        <li><a href="?page={{ all_requests.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-bordered text-center" style="margin-bottom:0px;">
         <thead class="thead-dark">
         <tr>
             <th>Номер заявки</th>
@@ -17,11 +111,10 @@
             <th scope="row">Описание запроса</th>
         </tr>
         </thead>
-
+        <tbody id="main_body" style="font-size:14px;">
         {% for ITEM in all_requests %}
-        <tbody id="Table1" style="font-size:14px;">
-        <tr>
-            <td style="vertical-align: inherit;padding:0px 0px 0px 0px;width:120px; font-size:13px; font-weight:bold; border:2px">
+        <tr style="display:table-row;">
+            <td style="vertical-align: inherit;padding:0px 0px 0px 0px;width:120px; font-size:13px; font-weight:bold;">
                 <div style="width:130px;margin:2px 2px 2px 2px;padding:0px 0px;" class="jumbotron">
                     <a href="/requests/detail/{{ITEM.id}}"># {{ITEM.id}}</a>
                 </div>
@@ -29,28 +122,52 @@
             <td style="vertical-align: inherit;">
                 <a href="/requests/detail/{{ITEM.id}}">{{ITEM.create_date|date:"d.m.Y"}}</a></b>
             </td>
-            <td style="vertical-align: inherit; padding:0px 0px; width:15%;">
+            <td class="text-left" style="vertical-align: inherit; padding:0px 10px; width:20%;">
                 <b><a>{{ITEM.author.userprofile.user_full_name}}</a></b>
             </td>
-            <td style="vertical-align: inherit;">
+            <td class="text-left" style="vertical-align: inherit;">
                 <b>{{ITEM.request_statuser}}</b>
             </td>
-            <td style="vertical-align: inherit; padding:2px 2px; width:15%;">
+            <td class="text-left" style="vertical-align: inherit; padding:2px 2px; width:12%;">
                 {% for service in service_requests %}
                 {% if service.Access_ID.id == ITEM.id %}
-                <b><a>{{service.Accepted_Service}}</a></b><br>
+                <b><a>• {{service.Accepted_Service}}</a></b><br>
                 {% endif %}
                 {% endfor %}
 
             </td>
-            <td style="vertical-align: inherit;">
+            <td class="text-left" style="vertical-align: inherit;">
                 <b>{{ITEM.request_desc}}</b>
             </td>
         </tr>
         {% endfor %}
         </tbody>
 
+
     </table>
+    <div class="search-paginator-zone-down">
+        {% if all_requests.has_other_pages %}
+        <ul class="pagination">
+            {% if all_requests.has_previous %}
+            <li><a href="?page={{ all_requests.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in all_requests.paginator.page_range %}
+            {% if all_requests.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if all_requests.has_next %}
+            <li><a href="?page={{ all_requests.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
 </div>
 {% else %}
 <div class="container mt-4">
@@ -59,6 +176,4 @@
     <p><a href="/">Вернуться на главную страницу</a></p>
 </div>
 {% endif %}
-
-
 {% endblock %}
