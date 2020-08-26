@@ -7,7 +7,7 @@
 <script>
 function CheckServices(event){
 var setter = 0;
-for (let i = 0; i < 7; i++)
+for (let i = 0; i < 8; i++)
 {
     if(document.getElementById('id_Cool_Story_'+i).checked){
         ++setter;
@@ -117,7 +117,7 @@ function func3(){
                     <div class="container-fluid">
                         <div class="row">
                             <b class="form-control"><h5><b>Раздел выбора сервиса</b></h5></b>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="container" style="display:inline-grid;text-align:left;">
                                     {% for item in form_approve.Cool_Story %}
                                     {{ item }}

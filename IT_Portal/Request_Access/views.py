@@ -355,8 +355,7 @@ def m_access(request):
                     checker_author = User.objects.filter(userprofile__user_full_name=request.POST.get('user_name'))
                     for author in checker_author:
                         if author == request.user:
-                            model_mn.author = User.objects.get(
-                                userprofile__user_full_name=author.userprofile.user_boss.userprofile.user_full_name)
+                            model_mn.author = request.user
                 else:
                     model_mn.author = request.user
                 model_mn.creator = request.user

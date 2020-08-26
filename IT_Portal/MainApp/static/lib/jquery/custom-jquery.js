@@ -165,6 +165,28 @@
                         }
                     }
     });
+    $('#id_Cool_Story_7').change(function() {
+          var checkBox = document.getElementById('id_Cool_Story_7');
+          if (checkBox.checked == true){
+                var Desc = document.getElementById('Description');
+                if(Desc.value == ""){
+                        document.getElementById('Description').value += "Прошу создать учетную запись в домене Русагротранс \n";
+                        }
+                    else{
+                        document.getElementById('Description').value += "\nПрошу создать учетную запись в домене Русагротранс \n";
+
+                        }
+            } else {
+                //document.getElementById('RAT_Online_ADD').style.display = 'none';
+                var Desc = document.getElementById('Description');
+                if(Desc.value == ""){
+                        }
+                    else{
+                        Desc.value = Desc.value.replace('\nПрошу создать учетную запись в домене Русагротранс \n','');
+                        Desc.value = Desc.value.replace('Прошу создать учетную запись в домене Русагротранс \n','');
+                        }
+                    }
+    });
     $('#RDP_PC').change(function() {
           var checkBox = document.getElementById('RDP_PC');
           if (checkBox.checked == true){
