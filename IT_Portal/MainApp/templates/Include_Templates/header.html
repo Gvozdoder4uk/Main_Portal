@@ -99,6 +99,7 @@
 
 
 
+
 </style>
 <header id="header">
 
@@ -121,8 +122,9 @@
             <li>
                 <a class="{% if url_index1 == request.path or url_index2 == request.path or url_index3 == request.path or url_index4 == request.path or 'detail' in request.path %} active_nav_menu {% endif %}"
                    href="/requests/">[ Запрос на доступ ]</a></li>
-            {% if request.user|has_group:"Manager"  %}
-            <li><a class="{% if url_manager == request.path %} active_nav_menu {% endif %}" href="/requests/manager_page">[ Раздел менеджера ]</a></li>
+            {% if request.user|has_group:"Manager" %}
+            <li><a class="{% if url_manager == request.path %} active_nav_menu {% endif %}"
+                   href="/requests/manager_page">[ Раздел менеджера ]</a></li>
             {% endif %}
             {% endif %}
             <li><a href="/#team">[ Система Управления Знаниями ]</a></li>
@@ -134,36 +136,27 @@
                     <li><a href="/requests/">Запрос на доступ</a></li>
                     {% endif %}
                     <li><a href="/admin">Админка</a></li>
-                    <li><a href="/relax_portal/panels">ИнфоПанель</a></li>
-                    <li><a href="/tester/">ИнфоПанель</a></li>
-                    <ul>
-                        <li><a href="#">Тестовое меню 1</a></li>
-                        <li><a href="#">Deep Drop Down 2</a></li>
-                        <li><a href="#">Deep Drop Down 3</a></li>
-                        <li><a href="#">Deep Drop Down 4</a></li>
-                        <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
+                    <!--<li><a href="/relax_portal/panels">ИнфоПанель</a></li>-->
                     </li>
                 </ul>
             </li>
             {% url 'relax' as url_index %}
-            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">Полезные
-                ресурсы</a></li>
+            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">[ Полезные
+                ресурсы ]</a></li>
             {% if request.user.is_authenticated %}
-            <li style="float:right;"><a href="/logout"> Выход</a></li>
-            <li class="menu-has-children" style="float:right;" id="lkmenu"><a id="LK"
-                                                                              style="font-weight:bold;color:white;">
-                {{ user.userprofile.user_last_name }} {{ user.userprofile.user_first_name }}</a>
-                <ul>
-                    <li><a href="/requests/account">Личный кабинет</a></li>
-                    <li><a href="/requests/manager_page">Раздел менеджера</a></li>
-                    <li><a href="/requests/personal_cabinet">Мои заявки</a></li>
-                    <li><a href="/requests/">Запрос на доступ</a></li>
-                    <li><a href="/requests/cabinet">Реестр заявок</a></li>
-                    <li><a href="/requests/test_requests/">Тестовые заявки</a></li>
-                    <li><a href="/admin">Админка</a></li>
-                </ul>
-            </li>
+                <li class="menu-has-children" style="float:right;font-weight:bold;color:white;margin-right:100px;" id="lkmenu"><a id="LK">
+                    {{ user.userprofile.user_last_name }} {{ user.userprofile.user_first_name }}</a>
+                    <ul>
+                        <li><a href="/requests/account">Личный кабинет</a></li>
+                        <li><a href="/requests/manager_page">Раздел менеджера</a></li>
+                        <li><a href="/requests/personal_cabinet">Мои заявки</a></li>
+                        <li><a href="/requests/">Запрос на доступ</a></li>
+                        <li><a href="/requests/cabinet">Реестр заявок</a></li>
+                        <li><a href="/requests/test_requests/">Тестовые заявки</a></li>
+                        <li><a href="/admin">Админка</a></li>
+                        <li style="float:right;"><a href="/logout"> Выход</a></li>
+                    </ul>
+                </li>
 
 
             {% else %}
@@ -182,44 +175,50 @@
 
 </header>
 </div>
-    <div id="myModalBox" class="modal fade" style="width:1800px;">
-        <div class="modal-dialog">
-            <div class="modal-content">
+<div id="myModalBox" class="modal fade" style="width:1800px;">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background:#343a40;">
 
-                <div class="modal-header">
-                    <img src="{% static 'images/icon_rat.png' %}"><h4 class="mr-4" id="myModalLabel" style=""><b>Вход в ИТ портал Русагротранс</b></h4>
-                    <button type="button" class="close float-right ml-0"
-                     data-dismiss="modal"><span aria-hidden="true">×
+            <div class="modal-header">
+                <img src="{% static 'images/icon_rat.png' %}"><h4 class="mr-4" id="myModalLabel" style="color:white;">
+                <b>Вход в ИТ портал Русагротранс</b></h4>
+                <button type="button" class="close float-right ml-0"
+                        data-dismiss="modal" style="color:white;"><span aria-hidden="true">×
                         </span></button>
-                </div>
+            </div>
 
-                            <div class="col-xs-6" >
+            <div class="col-xs-6">
 
-                                <form id="loginForm" method="POST" action="{% url 'loginpage' %}" style=""
-                                      novalidate="novalidate">{% csrf_token %}
-                                    <ul class="button-group" style="margin-left:auto; margin-right:auto;width:100%;">
-                                        <h6><b>Имя пользователя</b></h6>
-                                        <input type="text" class="form-control" id="username" name="username" value=""
-                                               required="" title="Пожалуйста введите имя пользователя" placeholder="Введите имя пользователя">
-                                        <h6><b>Пароль</b></h6>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                               value="" required="" title="Введите пароль">
-                                        <span class="help-block"></span>
+                <form id="loginForm" method="POST" action="{% url 'loginpage' %}" style=""
+                      novalidate="novalidate">{% csrf_token %}
+                    <ul class="button-group" style="margin-left:auto; margin-right:auto;width:100%;color:white;">
+                        <h6 style="text-align:center;"><b>Имя пользователя</b></h6>
+                        <input type="text" class="form-control" id="username" name="username" value=""
+                               required="" title="Пожалуйста введите имя пользователя"
+                               placeholder="Введите имя пользователя">
+                        <h6 style="text-align:center;"><b>Пароль</b></h6>
+                        <input type="password" class="form-control" id="password" name="password"
+                               value="" required="" title="Введите пароль">
+                        <span class="help-block"></span>
 
-                                    </ul>
-                                    <hr class="my-1">
-                                    <ul class="button-group" style="width:100%;text-align:center;padding:2px 2px 2px 2px;">
-                                        <li><button type="submit" class="green button">Войти в систему</button></li>
-                                        <li><button class="button"><a href="/forgot/">Забыли пароль?</a></button></li>
-                                    </ul>
-                                </form>
-
-                            </div>
-
+                    </ul>
+                    <hr class="my-1">
+                    <ul class="button-group" style="width:100%;text-align:center;padding:2px 2px 2px 2px;">
+                        <li>
+                            <button type="submit" class="green button">Войти в систему</button>
+                        </li>
+                        <li>
+                            <button class="button"><a href="/forgot/">Забыли пароль?</a></button>
+                        </li>
+                    </ul>
+                </form>
 
             </div>
+
+
         </div>
     </div>
+</div>
 
 
 <script>
@@ -230,4 +229,5 @@
     $("#myModalBox").modal('show');
   });
 });
+
 </script>

@@ -927,6 +927,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* ==================================================
   Responsive Styling
   ================================================== */
+
 @media (max-width: 1400px) {
 .hero{display:none;}
         #header {
@@ -954,6 +955,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 
   #mobile-nav-toggle {
     display: inline-block;
+  }
+  #lkmenu {
+    position: inherit;
   }
 }
 @media (max-width: 700px) {
