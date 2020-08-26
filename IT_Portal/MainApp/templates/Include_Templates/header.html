@@ -134,21 +134,13 @@
                     <li><a href="/requests/">Запрос на доступ</a></li>
                     {% endif %}
                     <li><a href="/admin">Админка</a></li>
-                    <li><a href="/relax_portal/panels">ИнфоПанель</a></li>
-                    <li><a href="/tester/">ИнфоПанель</a></li>
-                    <ul>
-                        <li><a href="#">Тестовое меню 1</a></li>
-                        <li><a href="#">Deep Drop Down 2</a></li>
-                        <li><a href="#">Deep Drop Down 3</a></li>
-                        <li><a href="#">Deep Drop Down 4</a></li>
-                        <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
-                    </li>
+                    <!--<li><a href="/relax_portal/panels">ИнфоПанель</a></li>
+                    <li><a href="/tester/">ИнфоПанель</a></li>-->
                 </ul>
             </li>
             {% url 'relax' as url_index %}
-            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">Полезные
-                ресурсы</a></li>
+            <li><a class="{% if url_index == request.path %} active_nav_menu {% endif %}" href="/relax_portal">[ Полезные
+                ресурсы ]</a></li>
             {% if request.user.is_authenticated %}
             <li style="float:right;"><a href="/logout"> Выход</a></li>
             <li class="menu-has-children" style="float:right;" id="lkmenu"><a id="LK"
@@ -182,19 +174,17 @@
 
 </header>
 </div>
-    <div id="myModalBox" class="modal fade" style="width:1800px;">
+    <div id="myModalBox" class="modal fade" style="width:1800px;color:white;">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="background:#343a40;">
 
                 <div class="modal-header">
                     <img src="{% static 'images/icon_rat.png' %}"><h4 class="mr-4" id="myModalLabel" style=""><b>Вход в ИТ портал Русагротранс</b></h4>
                     <button type="button" class="close float-right ml-0"
-                     data-dismiss="modal"><span aria-hidden="true">×
+                     data-dismiss="modal" style="color:white;"><span aria-hidden="true">×
                         </span></button>
                 </div>
-
                             <div class="col-xs-6" >
-
                                 <form id="loginForm" method="POST" action="{% url 'loginpage' %}" style=""
                                       novalidate="novalidate">{% csrf_token %}
                                     <ul class="button-group" style="margin-left:auto; margin-right:auto;width:100%;">
