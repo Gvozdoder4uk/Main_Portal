@@ -11,7 +11,6 @@
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Rusagrotrans')">Сайт Русагротранс</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Rusagrotrans_Portal')">Портал Русагротранс</button>
     <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Rusagrotrans_GOS')">Портал Госуслуг</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'IT_Instructions')">Инструкции Портала ИТ</button>
     <img style="width:100%" src="{% static 'images/line.png'%}">
     <input style="margin-left:15px;" type="search" id="Input1" onkeyup="SearchTable()" placeholder="Поиск" autofocus>
 </div>
@@ -19,7 +18,7 @@
     <div class="w3-container city w3-animate-left" id="Zoom">
        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af5d81582538451b7e09769af7e82966f504b1f96a5711120eb7803ad51775416&amp;width=100%25&amp;height=720&amp;lang=ru_RU&amp;scroll=true"></script>
     </div>
-    <div class="w3-container city w3-animate-left" id="Rusagrotrans" style="display:none;min-height:77vh;">
+    <div class="w3-container city w3-animate-left" id="Rusagrotrans" style="display:none;">
     <iframe src="https://rusagrotrans.ru" width="98%" height="1360"></iframe>
     </div>
 
@@ -28,13 +27,6 @@
     </div>
     <div class="w3-container city w3-animate-left" id="Rusagrotrans_GOS" style="display:none;overflow: hidden;">
     <iframe scrolling="no" src="https://gosuslugi.ru" width="100%" height="1360"></iframe>
-    </div>
-    <div class="w3-container city w3-animate-left" id="IT_Instructions" style="display:none;overflow: hidden;">
-        <div class="container">
-            <h4>Страница в стадии разработки</h4>
-            {% block footer %}
-            {% endblock %}
-        </div>
     </div>
 </div>
 
