@@ -185,20 +185,19 @@
     <div id="myModalBox" class="modal fade" style="width:1800px;">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Заголовок модального окна -->
+
                 <div class="modal-header">
-                    <h4 class="mr-4" id="myModalLabel" style="padding-left:100px;"><b>Вход в ИТ портал Русагротранс</b></h4>
+                    <img src="{% static 'images/icon_rat.png' %}"><h4 class="mr-4" id="myModalLabel" style=""><b>Вход в ИТ портал Русагротранс</b></h4>
                     <button type="button" class="close float-right ml-0"
                      data-dismiss="modal"><span aria-hidden="true">×
                         </span></button>
                 </div>
-                <!-- Основное содержимое модального окна -->
 
-                            <div class="col-xs-6">
+                            <div class="col-xs-6" >
 
-                                <form id="loginForm" method="POST" action="{% url 'loginpage' %}" style="margin-left:110px;"
+                                <form id="loginForm" method="POST" action="{% url 'loginpage' %}" style=""
                                       novalidate="novalidate">{% csrf_token %}
-                                    <ul class="button-group" style="margin-left:auto; margin-right:auto;">
+                                    <ul class="button-group" style="margin-left:auto; margin-right:auto;width:100%;">
                                         <h6><b>Имя пользователя</b></h6>
                                         <input type="text" class="form-control" id="username" name="username" value=""
                                                required="" title="Пожалуйста введите имя пользователя" placeholder="Введите имя пользователя">
@@ -209,7 +208,7 @@
 
                                     </ul>
                                     <hr class="my-1">
-                                    <ul class="button-group" style="margin-left:-15px;">
+                                    <ul class="button-group" style="width:100%;text-align:center;padding:2px 2px 2px 2px;">
                                         <li><button type="submit" class="green button">Войти в систему</button></li>
                                         <li><button class="button"><a href="/forgot/">Забыли пароль?</a></button></li>
                                     </ul>
@@ -223,7 +222,6 @@
     </div>
 
 
-<!-- Скрипт, вызывающий модальное окно после загрузки страницы -->
 <script>
     $(document).ready(function(){
 
@@ -232,11 +230,4 @@
     $("#myModalBox").modal('show');
   });
 });
-
-
-
-
-
 </script>
-
-<!-- #header -->
