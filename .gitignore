@@ -5,3 +5,5 @@ IT_Portal/IT_Portal/__pycache__/
 *.pyc
 
 .idea/
+
+IT_Portal/db.sqlite3
